@@ -1,0 +1,2 @@
+app/lib/*.js
+static/**/*.js
