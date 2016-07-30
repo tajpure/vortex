@@ -2,11 +2,16 @@ import { app, BrowserWindow } from 'electron'
 import path from 'path'
 
 let mainWindow
-
 app.on('ready', () => {
+  const iconName = path.join(__dirname, '../static', 'images', 'test')
+
+  const iconPath = (process.platform === 'win32')
+    ? iconName + '.ico'
+    : iconName + '.png'
+
   mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 768
+    title: 'vortex',
+    icon: iconPath
   })
 
   const mainURL = process.env.HOT

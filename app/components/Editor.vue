@@ -1,4 +1,5 @@
 <template>
+  <toolbar></toolbar>
   <textarea id='editor'>
   </textarea>
 </template>
@@ -7,6 +8,8 @@
   import CodeMirror from '../../static/codemirror/lib/codemirror.js'
   import '../../static/codemirror/mode/markdown/markdown.js'
   import marked from '../../node_modules/marked/lib/marked.js'
+  import toolbar from './ToolBar'
+
   const renderer = new marked.Renderer()
   renderer.link = (href, title, text) => {
     return '<a target="_blank" href="' + href + '" title="' + title + '">' + text + '</a>'
@@ -27,6 +30,9 @@
         },
         deep: true
       }
+    },
+    components: {
+      toolbar
     },
     data () {
       return {
@@ -59,9 +65,9 @@
 
 <style>
 .CodeMirror {
-  height: 100%;
-  line-height: 24px;
-  font-size: 15px;
+  height: calc(100% - 27px);
+  line-height: 1.5em;
+  font-size: 1em;
 }
 .cm-link {
   text-decoration: none;

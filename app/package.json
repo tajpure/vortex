@@ -1,0 +1,8 @@
+{
+  "name": "vortex",
+  "productName": "vortex",
+  "version": "0.1.0",
+  "description": "A presentation editor.",
+  "author": "tajpure <tajpure@gmail.com>",
+  "main": "background.js"
+}
