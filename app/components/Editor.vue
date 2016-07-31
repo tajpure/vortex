@@ -7,26 +7,14 @@
 <script>
   import CodeMirror from '../../static/codemirror/lib/codemirror.js'
   import '../../static/codemirror/mode/markdown/markdown.js'
-  import marked from '../../node_modules/marked/lib/marked.js'
   import toolbar from './ToolBar'
-
-  const renderer = new marked.Renderer()
-  renderer.link = (href, title, text) => {
-    return '<a target="_blank" href="' + href + '" title="' + title + '">' + text + '</a>'
-  }
-  marked.setOptions({renderer: renderer})
 
   export default {
     watch: {
       'editor': {
         handler: function (val, oldVal) {
           const value = this.editor.getValue()
-          const slideArray = (value === null) ? [] : value.split('\n---')
-          let slides = []
-          for (let i in slideArray) {
-            slides.push(marked(slideArray[i]))
-          }
-          this.$dispatch('transferTo', 'updateSlides', slides)
+          this.$dispatch('update', value)
         },
         deep: true
       }
@@ -65,9 +53,10 @@
 
 <style>
 .CodeMirror {
+  font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   height: calc(100% - 27px);
   line-height: 1.5em;
-  font-size: 1em;
+  font-size: 0.9em;
 }
 .cm-link {
   text-decoration: none;

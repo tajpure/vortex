@@ -42,7 +42,7 @@
     <li>
       <i class='material-icons'>visibility_off</i>
     </li>
-    <li>
+    <li v-on:click='showSlide'>
       <i class='material-icons'>slideshow</i>
     </li>
   </ul>
@@ -50,6 +50,11 @@
 
 <script>
   export default {
+    methods: {
+      showSlide () {
+        this.$dispatch('showSlide')
+      }
+    }
   }
 </script>
 

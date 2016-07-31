@@ -7,6 +7,13 @@
 
 <script>
   import Slide from './Slide'
+  import marked from '../../node_modules/marked/lib/marked.js'
+
+  const renderer = new marked.Renderer()
+  renderer.link = (href, title, text) => {
+    return '<a target="_blank" href="' + href + '" title="' + title + '">' + text + '</a>'
+  }
+  marked.setOptions({renderer: renderer})
 
   export default {
     data () {
@@ -24,7 +31,12 @@
       Slide
     },
     events: {
-      updateSlides: function (slides) {
+      updateSlides: function (value) {
+        const slideArray = (value === null) ? [] : value.split('\n---')
+        let slides = []
+        for (let i in slideArray) {
+          slides.push(marked(slideArray[i]))
+        }
         this.slides = slides
       },
       scrollChanged: function (scrollInfo) {

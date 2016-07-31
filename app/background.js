@@ -20,6 +20,7 @@ app.on('ready', () => {
 
   mainWindow.maximize()
   mainWindow.loadURL(mainURL)
+  // mainWindow.setMenu(null)
 
   if (process.env.NODE_ENV !== 'production') {
     mainWindow.openDevTools()

@@ -1,26 +1,45 @@
 <template>
   <div class="row">
-    <div class="col editor">
+    <div class="editor">
       <editor></editor>
     </div>
-    <div class="col preview">
-      <preview></preview>
+    <div class="preview">
+      <textpreview v-show='!isSlideMode'></textpreview>
+      <slidepreview v-show='isSlideMode'></slidepreview>
     </div>
   </div>
 </template>
 
 <script>
   import Editor from './components/Editor'
-  import Preview from './components/Preview'
+  import slidepreview from './components/SlidePreview'
+  import textpreview from './components/TextPreview'
 
   export default {
+    data () {
+      return {
+        isSlideMode: true
+      }
+    },
     components: {
       Editor,
-      Preview
+      slidepreview,
+      textpreview
     },
     events: {
+      'update': function (data) {
+        if (this.isSlideMode) {
+          this.$broadcast('updateSlides', data)
+        } else {
+          this.$broadcast('updateHtml', data)
+        }
+      },
       'transferTo': function (action, data) {
         this.$broadcast(action, data)
+      },
+      'showSlide': function () {
+        this.isSlidesShowed = true
+        console.log(this.isSlidesShowed)
       }
     }
   }
@@ -68,10 +87,8 @@
     flex-direction: row;
     height: 100%;
 
-    .col {
-      width: 50%;
-    }
     .editor {
+      width: 50%;
       ::-webkit-scrollbar-track {
         background-color: #f5f5f5;
       }
@@ -84,9 +101,14 @@
       }
     }
     .preview {
+      width: 50%;
       height: 100%;
-      overflow: hidden;
       background-color: #E0E0E0;
+      overflow: hidden;
+    }
+
+    .full-screen {
+      width: 100%;
     }
   }
 </style>
