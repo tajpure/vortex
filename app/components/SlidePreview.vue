@@ -20,7 +20,6 @@
       return {
         slides: ['# Vortex'],
         revert: false,
-        scrollTop: 0,
         index: 0
       }
     },
@@ -35,16 +34,22 @@
         const slideArray = (value === null) ? [] : value.split('\n---')
         let slides = []
         for (let i in slideArray) {
-          slides.push(marked(slideArray[i]))
+          slides.push({content: marked(slideArray[i]), isShowed: false})
         }
         this.slides = slides
-      },
-      scrollChanged: function (scrollInfo) {
-        const slides = document.getElementsByClassName('slides')
-        slides.scrollTop = scrollInfo.top
+        this.show(this.index)
       }
     },
     methods: {
+      hiddenAll () {
+        this.slides.forEach((slide) => {
+          slide.isShowed = false
+        })
+      },
+      show (index) {
+        this.hiddenAll()
+        this.slides[index].isShowed = true
+      },
       keyup (e) {
         if (window.isEditorOnFocus) {
           return
@@ -59,13 +64,13 @@
         if (this.index < this.slides.length - 1) {
           this.index++
         }
-        window.location.hash = this.index
+        this.show(this.index)
       },
       previous () {
         if (this.index > 0) {
           this.index--
         }
-        window.location.hash = this.index
+        this.show(this.index)
       },
       isPrevious (code) {
         const codes = ['ArrowLeft', 'ArrowUp']

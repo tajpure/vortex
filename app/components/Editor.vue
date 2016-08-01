@@ -54,7 +54,7 @@
 <style>
 .CodeMirror {
   font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  height: calc(100% - 27px);
+  height: calc(100% - 34px);
   line-height: 1.5em;
   font-size: 0.9em;
 }
