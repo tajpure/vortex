@@ -1,7 +1,6 @@
 <template>
   <toolbar></toolbar>
-  <textarea id='editor'>
-  </textarea>
+  <textarea id='editor'></textarea>
 </template>
 
 <script>

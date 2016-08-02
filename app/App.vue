@@ -1,9 +1,9 @@
 <template>
   <div class="row">
-    <div class="editor">
+    <div class="editor" v-show="isEditorMode">
       <editor></editor>
     </div>
-    <div class="preview">
+    <div class="preview" v-bind:class="{ 'full-screen': !isEditorMode}">
       <textpreview v-show='!isSlideMode'></textpreview>
       <slidepreview v-show='isSlideMode'></slidepreview>
     </div>
@@ -18,7 +18,8 @@
   export default {
     data () {
       return {
-        isSlideMode: true
+        isSlideMode: true,
+        isEditorMode: true
       }
     },
     components: {
@@ -38,8 +39,12 @@
         this.$broadcast(action, data)
       },
       'showSlide': function () {
-        this.isSlidesShowed = true
-        console.log(this.isSlidesShowed)
+        this.isEditorMode = false
+        this.$broadcast('showSlide')
+      },
+      'exitSlide': function () {
+        this.isEditorMode = true
+        this.$broadcast('exitSlide')
       }
     }
   }
@@ -103,7 +108,7 @@
     .preview {
       width: 50%;
       height: 100%;
-      background-color: #E0E0E0;
+      background-color: #EEEEEE;
       overflow: hidden;
     }
 

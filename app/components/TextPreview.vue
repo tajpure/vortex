@@ -34,7 +34,6 @@
 
 <style lang="scss">
 .text {
-  background-color: white;
   height: 100%;
   overflow-y: scroll;
   overflow: hidden;
@@ -46,6 +45,8 @@
 
     hr {
       height: 1px;
+      color: #616161;
+      border-bottom-color: #616161;
     }
   }
 }
