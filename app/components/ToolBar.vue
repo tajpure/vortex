@@ -1,15 +1,14 @@
 <template>
   <ul class='menu'>
-    <li class='yellow'>
-      <i class='material-icons'>flag</i>
+    <li v-on:click='switchMode' class='yellow'>
+      <i class='material-icons' v-show='isSlideMode'>computer</i>
+      <i class='material-icons' v-show='!isSlideMode'>mode_edit</i>
     </li>
-    <li>
-      <i class='material-icons'>search</i>
+    <li v-on:click='switchPreview' class='purple'>
+      <i class='material-icons' v-show='!visibility'>visibility_off</i>
+      <i class='material-icons' v-show='visibility'>visibility</i>
     </li>
-    <li class='purple'>
-      <i class='material-icons'>visibility_off</i>
-    </li>
-    <li v-on:click='showSlide' class='blue'>
+    <li v-on:click='enterPreviewFullScreen' class='blue'>
       <i class='material-icons'>slideshow</i>
     </li>
   </ul>
@@ -17,9 +16,35 @@
 
 <script>
   export default {
+    data () {
+      return {
+        visibility: true,
+        isSlideMode: true
+      }
+    },
     methods: {
-      showSlide () {
-        this.$dispatch('showSlide')
+      enterPreviewFullScreen () {
+        this.visibility = true
+        this.$dispatch('openPreview')
+        this.$dispatch('enterPreviewFullScreen')
+      },
+      switchPreview () {
+        if (this.visibility) {
+          this.visibility = false
+          this.$dispatch('closePreview')
+        } else {
+          this.visibility = true
+          this.$dispatch('openPreview')
+        }
+      },
+      switchMode () {
+        if (this.isSlideMode) {
+          this.isSlideMode = false
+          this.$dispatch('openTextMode')
+        } else {
+          this.isSlideMode = true
+          this.$dispatch('openSlideMode')
+        }
       }
     }
   }

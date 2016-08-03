@@ -1,5 +1,5 @@
 <template>
-  <section class="step slide fade" v-show="slide.isShowed">
+  <section class="step slide fade" v-show="slide.current">
     <div v-html="slide.content" class="markdown-body"
     v-bind:class="[mode]">
     <div>
@@ -15,10 +15,10 @@
       }
     },
     events: {
-      'showSlide': function () {
+      'enterFullScreen': function () {
         this.mode = 'full-screen'
       },
-      'exitSlide': function () {
+      'exitFullScreen': function () {
         this.mode = 'not-full-screen'
       }
     }

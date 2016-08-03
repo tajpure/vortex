@@ -1,9 +1,11 @@
 <template>
   <div class="row">
-    <div class="editor" v-show="isEditorMode">
+    <div class="editor" v-show="!isPreviewFullScreen"
+     v-bind:class="{ 'full-screen': isEditorFullScreen}">
       <editor></editor>
     </div>
-    <div class="preview" v-bind:class="{ 'full-screen': !isEditorMode}">
+    <div class="preview" v-show="!isEditorFullScreen"
+    v-bind:class="{ 'full-screen': isPreviewFullScreen}">
       <textpreview v-show='!isSlideMode'></textpreview>
       <slidepreview v-show='isSlideMode'></slidepreview>
     </div>
@@ -19,7 +21,8 @@
     data () {
       return {
         isSlideMode: true,
-        isEditorMode: true
+        isPreviewFullScreen: false,
+        isEditorFullScreen: false
       }
     },
     components: {
@@ -28,23 +31,35 @@
       textpreview
     },
     events: {
-      'update': function (data) {
+      update: function (data) {
         if (this.isSlideMode) {
           this.$broadcast('updateSlides', data)
         } else {
           this.$broadcast('updateHtml', data)
         }
       },
-      'transferTo': function (action, data) {
+      transferTo: function (action, data) {
         this.$broadcast(action, data)
       },
-      'showSlide': function () {
-        this.isEditorMode = false
-        this.$broadcast('showSlide')
+      enterPreviewFullScreen: function () {
+        this.isPreviewFullScreen = true
+        this.$broadcast('enterFullScreen')
       },
-      'exitSlide': function () {
-        this.isEditorMode = true
-        this.$broadcast('exitSlide')
+      exitPreviewFullScreen: function () {
+        this.isPreviewFullScreen = false
+        this.$broadcast('exitFullScreen')
+      },
+      closePreview: function () {
+        this.isEditorFullScreen = true
+      },
+      openPreview: function () {
+        this.isEditorFullScreen = false
+      },
+      openTextMode: function () {
+        this.isSlideMode = false
+      },
+      openSlideMode: function () {
+        this.isSlideMode = true
       }
     }
   }

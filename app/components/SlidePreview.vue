@@ -1,13 +1,15 @@
 <template>
   <div class="slides">
-    <slide id='{{ $index }}' v-for="slide in slides" track-by="$index" :slide="slide">
+    <topbar :pageinfo="pageinfo"></topbar>
+    <slide id='{{ $index }}' track-by="$index" v-for="slide in slides" :slide="slide">
     </slide>
   </div>
 </template>
 
 <script>
-  import Slide from './Slide'
+  import slide from './Slide'
   import marked from '../../node_modules/marked/lib/marked.js'
+  import topbar from './SlidePreviewTopBar'
 
   const renderer = new marked.Renderer()
   renderer.link = (href, title, text) => {
@@ -18,37 +20,39 @@
   export default {
     data () {
       return {
-        slides: ['# Vortex'],
+        slides: [{index: 0, content: '', current: true}],
         revert: false,
-        index: 0
+        pageinfo: {index: 0, total: 0}
       }
     },
     ready () {
       window.addEventListener('keyup', this.keyup)
     },
     components: {
-      Slide
+      slide,
+      topbar
     },
     events: {
       updateSlides: function (value) {
         const slideArray = (value === null) ? [] : value.split('\n---')
         let slides = []
         for (let i in slideArray) {
-          slides.push({content: marked(slideArray[i]), isShowed: false})
+          slides.push({index: i, content: marked(slideArray[i]), current: false})
         }
         this.slides = slides
-        this.show(this.index)
+        this.show(this.pageinfo.index)
+        this.pageinfo.total = slideArray.length
       }
     },
     methods: {
       hiddenAll () {
         this.slides.forEach((slide) => {
-          slide.isShowed = false
+          slide.current = false
         })
       },
       show (index) {
         this.hiddenAll()
-        this.slides[index].isShowed = true
+        this.slides[index].current = true
       },
       keyup (e) {
         if (window.isEditorOnFocus) {
@@ -65,16 +69,16 @@
         }
       },
       next () {
-        if (this.index < this.slides.length - 1) {
-          this.index++
+        if (this.pageinfo.index < this.slides.length - 1) {
+          this.pageinfo.index++
         }
-        this.show(this.index)
+        this.show(this.pageinfo.index)
       },
       previous () {
-        if (this.index > 0) {
-          this.index--
+        if (this.pageinfo.index > 0) {
+          this.pageinfo.index--
         }
-        this.show(this.index)
+        this.show(this.pageinfo.index)
       },
       isPrevious (code) {
         const codes = ['ArrowLeft', 'ArrowUp']
@@ -89,7 +93,7 @@
         return codes.indexOf(code) !== -1
       },
       exit () {
-        this.$dispatch('exitSlide')
+        this.$dispatch('exitPreviewFullScreen')
       }
     }
   }
