@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import Editor from './components/Editor'
+  import editor from './components/Editor'
   import slidepreview from './components/SlidePreview'
   import textpreview from './components/TextPreview'
 
@@ -26,16 +26,19 @@
       }
     },
     components: {
-      Editor,
+      editor,
       slidepreview,
       textpreview
     },
     ready () {
       const storage = require('electron-json-storage')
-      storage.get('foobar', function (error, data) {
+      storage.get('settings', function (error, data) {
         if (error) {
           throw error
         }
+        this.isSlideMode = data.isSlideMode
+        this.isPreviewFullScreen = data.isPreviewFullScreen
+        this.isEditorFullScreen = data.isEditorFullScreen
       })
     },
     events: {
@@ -84,12 +87,9 @@
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
-    src: url(../static/font/MaterialIcons-Regular.eot);
     src: local('Material Icons'),
          local('MaterialIcons-Regular'),
-         url(../static/font/MaterialIcons-Regular.woff2) format('woff2'),
-         url(../static/font/MaterialIcons-Regular.woff) format('woff'),
-         url(../static/font/MaterialIcons-Regular.ttf) format('truetype');
+         url(../static/font/MaterialIcons-Regular.woff) format('woff');
   }
 
   .material-icons {

@@ -1,14 +1,14 @@
 <template>
   <ul class='menu'>
-    <li v-on:click='switchMode' class='yellow'>
+    <li v-on:click='switchMode' title='Mode' class='yellow'>
       <i class='material-icons' v-show='isSlideMode'>computer</i>
       <i class='material-icons' v-show='!isSlideMode'>mode_edit</i>
     </li>
-    <li v-on:click='switchPreview' class='purple'>
+    <li v-on:click='switchPreview' title='Preview' class='purple'>
       <i class='material-icons' v-show='!visibility'>visibility_off</i>
       <i class='material-icons' v-show='visibility'>visibility</i>
     </li>
-    <li v-on:click='enterPreviewFullScreen' class='blue'>
+    <li v-on:click='enterPreviewFullScreen' title='Full Screen' class='blue'>
       <i class='material-icons'>slideshow</i>
     </li>
   </ul>

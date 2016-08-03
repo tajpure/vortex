@@ -17,7 +17,7 @@
     data () {
       return {
         text: '',
-        isScolling: true
+        isScolling: false
       }
     },
     methods: {
