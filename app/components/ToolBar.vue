@@ -40,6 +40,7 @@
       switchMode () {
         if (this.isSlideMode) {
           this.isSlideMode = false
+          this.$dispatch('transferTo', 'focusEditor')
           this.$dispatch('openTextMode')
         } else {
           this.isSlideMode = true
@@ -60,6 +61,7 @@
   border-bottom: 1px solid #E0E0E0;
 
   li {
+    user-select: none;
     margin-right: 8px;
     display: inline;
     color: #616161;

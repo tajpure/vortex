@@ -1,5 +1,5 @@
 <template>
-  <div id='text-preview' class='text'>
+  <div id='text-preview' class='text' @scroll='onscroll'>
     <div class="markdown-body" v-html="text"></div>
   </div>
 </template>
@@ -16,14 +16,29 @@
   export default {
     data () {
       return {
-        text: ''
+        text: '',
+        isScolling: true
+      }
+    },
+    methods: {
+      onscroll () {
+        const dom = document.getElementById('text-preview')
+        const scrollTop = dom.scrollTop
+        const height = dom.scrollHeight
+        const scrollInfo = {top: scrollTop, height: height}
+        this.$dispatch('transferTo', 'previewScrollChanged', scrollInfo)
+        this.isScolling = true
       }
     },
     events: {
-      updateHtml: function (value) {
+      updateMarkdown: function (value) {
         this.text = marked(value)
       },
-      scrollChanged: function (scrollInfo) {
+      editorScrollChanged: function (scrollInfo) {
+        if (this.isScolling) {
+          this.isScolling = false
+          return
+        }
         const dom = document.getElementById('text-preview')
         const height = dom.scrollHeight
         dom.scrollTop = (scrollInfo.top / scrollInfo.height) * height * 1.3
@@ -36,12 +51,26 @@
 .text {
   height: 100%;
   overflow-y: scroll;
-  overflow: hidden;
 
   .markdown-body {
     font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 15px;
     padding: 24px 32px;
+
+    ::-webkit-scrollbar {
+        display: block;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: #f5f5f5;
+    }
+    ::-webkit-scrollbar {
+      width: 12px;
+      background-color: #f5f5f5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #616161;
+    }
 
     hr {
       height: 1px;

@@ -22,7 +22,6 @@
       }
       this.slideIndex = parseInt(this.pageinfo.index) + 1
       this.totalPage = this.pageinfo.total
-      console.log(this.pageinfo)
     }
   }
 </script>

@@ -1,11 +1,11 @@
 <template>
   <div class="row">
     <div class="editor" v-show="!isPreviewFullScreen"
-     v-bind:class="{ 'full-screen': isEditorFullScreen}">
+      v-bind:class="{ 'full-screen': isEditorFullScreen}">
       <editor></editor>
     </div>
     <div class="preview" v-show="!isEditorFullScreen"
-    v-bind:class="{ 'full-screen': isPreviewFullScreen}">
+      v-bind:class="{ 'full-screen': isPreviewFullScreen}">
       <textpreview v-show='!isSlideMode'></textpreview>
       <slidepreview v-show='isSlideMode'></slidepreview>
     </div>
@@ -30,12 +30,20 @@
       slidepreview,
       textpreview
     },
+    ready () {
+      const storage = require('electron-json-storage')
+      storage.get('foobar', function (error, data) {
+        if (error) {
+          throw error
+        }
+      })
+    },
     events: {
       update: function (data) {
         if (this.isSlideMode) {
           this.$broadcast('updateSlides', data)
         } else {
-          this.$broadcast('updateHtml', data)
+          this.$broadcast('updateMarkdown', data)
         }
       },
       transferTo: function (action, data) {
@@ -102,6 +110,7 @@
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: 'liga';
   }
+
   .row {
     display: flex;
     flex-direction: row;
@@ -109,6 +118,7 @@
 
     .editor {
       width: 50%;
+
       ::-webkit-scrollbar-track {
         background-color: #f5f5f5;
       }
@@ -120,11 +130,15 @@
         background-color: #616161;
       }
     }
+
     .preview {
       width: 50%;
       height: 100%;
       background-color: #EEEEEE;
-      overflow: hidden;
+
+      ::-webkit-scrollbar {
+          display: none;
+      }
     }
 
     .full-screen {

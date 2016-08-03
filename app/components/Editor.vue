@@ -23,7 +23,8 @@
     },
     data () {
       return {
-        editor: null
+        editor: null,
+        isScolling: false
       }
     },
     ready () {
@@ -43,9 +44,22 @@
       })
       const self = this
       editor.on('scroll', function () {
+        self.isScolling = true
         const scrollInfo = editor.getScrollInfo()
-        self.$dispatch('transferTo', 'scrollChanged', scrollInfo)
+        self.$dispatch('transferTo', 'editorScrollChanged', scrollInfo)
       })
+    },
+    events: {
+      previewScrollChanged: function (scrollInfo) {
+        if (this.isScolling) {
+          this.isScolling = false
+          return
+        }
+        this.editor.scrollTo(null, scrollInfo.top)
+      },
+      focusEditor: function () {
+        this.editor.focus()
+      }
     }
   }
 </script>
