@@ -1,6 +1,5 @@
-import { app, BrowserWindow, Menu } from 'electron'
+import { app, BrowserWindow, Menu, dialog } from 'electron'
 import path from 'path'
-// import menu from './menu.js'
 
 let mainWindow
 app.on('ready', () => {
@@ -31,20 +30,31 @@ app.on('ready', () => {
         {
           label: 'New',
           accelerator: 'CmdOrCtrl+N',
-          role: 'new'
-        },
-        {
-          type: 'separator'
+          click (item, focusedWindow) {
+            let newWindow = new BrowserWindow({
+              title: 'Untitled',
+              icon: iconPath
+            })
+            newWindow.maximize()
+            newWindow.loadURL(mainURL)
+            newWindow.on('closed', () => {
+              newWindow = null
+            })
+          }
         },
         {
           label: 'Open',
           accelerator: 'Shift+CmdOrCtrl+O',
-          role: 'open'
-        },
-        {
-          label: 'Open Recently',
-          accelerator: 'CmdOrCtrl+X',
-          role: 'open r'
+          click (item, focusedWindow) {
+            dialog.showOpenDialog({
+              filters: [
+                {name: 'Text', extensions: ['md', 'txt']}
+              ],
+              properties: [ 'openFile', 'multiSelections', (fileNames) => {
+                console.log(fileNames)
+              }]
+            })
+          }
         },
         {
           type: 'separator'

@@ -59,6 +59,10 @@
       },
       focusEditor: function () {
         this.editor.focus()
+      },
+      updateCursorPostion () {
+        this.editor.undo()
+        this.editor.redo()
       }
     }
   }
@@ -67,7 +71,7 @@
 <style>
 .CodeMirror {
   font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  height: calc(100% - 34px);
+  height: calc(100% - 31.5px);
   line-height: 1.5em;
   font-size: 0.9em;
 }

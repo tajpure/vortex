@@ -61,6 +61,7 @@
         this.$broadcast('exitFullScreen')
       },
       closePreview: function () {
+        this.$broadcast('updateCursorPostion')
         this.isEditorFullScreen = true
       },
       openPreview: function () {
