@@ -7,6 +7,7 @@
   import CodeMirror from '../../static/codemirror/lib/codemirror.js'
   import '../../static/codemirror/mode/markdown/markdown.js'
   import toolbar from './ToolBar'
+  import {ipcRenderer} from 'electron'
 
   export default {
     watch: {
@@ -48,6 +49,13 @@
         const scrollInfo = editor.getScrollInfo()
         self.$dispatch('transferTo', 'editorScrollChanged', scrollInfo)
       })
+      ipcRenderer.on('open-file', (event, data) => {
+        this.editor.setValue(data)
+      })
+      ipcRenderer.on('trigger-save-file', (event, fileName) => {
+        const content = this.editor.getValue()
+        ipcRenderer.send('save-file', fileName, content)
+      })
     },
     events: {
       previewScrollChanged: function (scrollInfo) {
@@ -59,10 +67,6 @@
       },
       focusEditor: function () {
         this.editor.focus()
-      },
-      updateCursorPostion () {
-        this.editor.undo()
-        this.editor.redo()
       }
     }
   }

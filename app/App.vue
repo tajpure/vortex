@@ -1,11 +1,11 @@
 <template>
   <div class="row">
     <div class="editor" v-show="!isPreviewFullScreen"
-      v-bind:class="{ 'full-screen': isEditorFullScreen}">
+      v-bind:class="{ 'full-screen': isEditorFullScreen }">
       <editor></editor>
     </div>
     <div class="preview" v-show="!isEditorFullScreen"
-      v-bind:class="{ 'full-screen': isPreviewFullScreen}">
+      v-bind:class="{ 'full-screen': isPreviewFullScreen }">
       <textpreview v-show='!isSlideMode'></textpreview>
       <slidepreview v-show='isSlideMode'></slidepreview>
     </div>
@@ -61,7 +61,6 @@
         this.$broadcast('exitFullScreen')
       },
       closePreview: function () {
-        this.$broadcast('updateCursorPostion')
         this.isEditorFullScreen = true
       },
       openPreview: function () {
