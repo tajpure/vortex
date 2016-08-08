@@ -16,7 +16,7 @@ module.exports = (options) => {
         },
         {
           label: 'Open',
-          accelerator: 'Shift+CmdOrCtrl+O',
+          accelerator: 'CmdOrCtrl+O',
           click (item, focusedWindow) {
             dialog.showOpenDialog({
               filters: [
@@ -71,7 +71,7 @@ module.exports = (options) => {
           label: 'Exit',
           accelerator: 'CmdOrCtrl+W',
           click (item, focusedWindow) {
-            options.exit()
+            options.exit(focusedWindow)
           }
         }
       ]

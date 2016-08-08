@@ -45,8 +45,8 @@ app.on('ready', () => {
     exportAs: (fileNames) => {
       console.log(fileNames)
     },
-    exit: () => {
-      console.log('exit')
+    exit: (focusedWindow) => {
+      focusedWindow.close()
     }
   })
 
