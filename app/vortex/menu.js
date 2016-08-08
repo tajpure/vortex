@@ -40,14 +40,13 @@ module.exports = (options) => {
             const fileName = Util.titleToFileName(focusedWindow.getTitle())
             if (!fileName) {
               dialog.showSaveDialog({
-                filters: [
-                  { name: 'Text', extensions: ['txt', 'md'] },
-                  { name: 'All Files', extensions: ['*'] }
-                ],
+                filters: [{ name: 'Markdown', extensions: ['md'] }],
                 defaultPath: 'Untitled.md'
               },
               (fileName) => {
                 options.saveFile(fileName, focusedWindow)
+                const title = Util.fileNameToTitle(fileName)
+                focusedWindow.setTitle(title)
               })
             } else {
               options.saveFile(fileName, focusedWindow)
@@ -59,9 +58,20 @@ module.exports = (options) => {
         },
         {
           label: 'Export as pdf',
-          accelerator: 'CmdOrCtrl+X',
+          accelerator: 'CmdOrCtrl+E',
           click (item, focusedWindow) {
-            options.exportAs('')
+            const fileName = Util.titleToFileName(focusedWindow.getTitle())
+            if (!fileName) {
+              dialog.showSaveDialog({
+                filters: [{ name: 'PDF', extensions: ['pdf'] }],
+                defaultPath: 'Untitled.pdf'
+              },
+              (fileName) => {
+                options.exportPDF(fileName, focusedWindow)
+              })
+            } else {
+              options.exportPDF(fileName, focusedWindow)
+            }
           }
         },
         {

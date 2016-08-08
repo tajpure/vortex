@@ -7,8 +7,6 @@ let mainWindow
 app.on('ready', () => {
   mainWindow = VortexWindow('Untitled')
 
-  mainWindow.maximize()
-
   ipcMain.on('save-file', (event, fileName, data) => {
     fs.writeFile(fileName, data, (err) => {
       if (err) console.error(err)
@@ -18,7 +16,6 @@ app.on('ready', () => {
   VortexMenu({
     newWindow: () => {
       let newWindow = VortexWindow('Untitled')
-      newWindow.maximize()
       newWindow.on('closed', () => {
         newWindow = null
       })
@@ -42,8 +39,19 @@ app.on('ready', () => {
       if (!fileName) return
       focusedWindow.webContents.send('trigger-save-file', fileName)
     },
-    exportAs: (fileNames) => {
-      console.log(fileNames)
+    exportPDF: (fileName, focusedWindow) => {
+      if (!fileName) return
+      focusedWindow.webContents.printToPDF({
+        landscape: true
+      }, (err, data) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        fs.writeFile(fileName, data, (err) => {
+          if (err) console.error(err)
+        })
+      })
     },
     exit: (focusedWindow) => {
       focusedWindow.close()

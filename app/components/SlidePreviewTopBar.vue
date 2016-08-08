@@ -1,12 +1,20 @@
 <template>
   <div class="slide-index">
-    <!-- {{ slideIndex }}/{{ totalPage }} -->
+    {{ slideIndex }}/{{ totalPage }}
   </div>
 </template>
 
 <script>
   export default {
     props: ['pageinfo'],
+    watch: {
+      'pageinfo': {
+        handler: function (val, oldVal) {
+          this.updateIndex()
+        },
+        deep: true
+      }
+    },
     data () {
       return {
         slideIndex: 0,
@@ -14,14 +22,19 @@
       }
     },
     ready () {
-      if (!this.pageinfo.index) {
-        this.pageinfo.index = '0'
+      this.updateIndex()
+    },
+    methods: {
+      updateIndex () {
+        if (!this.pageinfo.index) {
+          this.pageinfo.index = '0'
+        }
+        if (!this.pageinfo.total) {
+          this.pageinfo.total = '1'
+        }
+        this.slideIndex = parseInt(this.pageinfo.index) + 1
+        this.totalPage = this.pageinfo.total
       }
-      if (!this.pageinfo.total) {
-        this.pageinfo.total = '1'
-      }
-      this.slideIndex = parseInt(this.pageinfo.index) + 1
-      this.totalPage = this.pageinfo.total
     }
   }
 </script>
@@ -30,6 +43,8 @@
 .slide-index {
   float: right;
   margin-right: 10px;
-  margin-top: 5px;
+  margin-top: 10px;
+  color: #9E9E9E;
+  font-size: 20px;
 }
 </style>
