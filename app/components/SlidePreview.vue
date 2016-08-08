@@ -1,6 +1,5 @@
 <template>
   <div class="slides">
-    <topbar :pageinfo="pageinfo"></topbar>
     <slide id='{{ $index }}' track-by="$index" v-for="slide in slides" :slide="slide">
     </slide>
   </div>
@@ -42,6 +41,17 @@
         this.slides = slides
         this.show(this.pageinfo.index)
         this.pageinfo.total = slideArray.length
+      },
+      startExportMode: function () {
+        this.slides.forEach((slide) => {
+          slide.current = true
+        })
+        this.$broadcast('startExportMode')
+      },
+      endExportMode: function () {
+        this.hiddenAll()
+        this.show(this.pageinfo.index)
+        this.$broadcast('endExportMode')
       }
     },
     methods: {

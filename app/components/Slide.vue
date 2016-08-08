@@ -1,5 +1,7 @@
 <template>
-  <section class="step slide fade" v-show="slide.current">
+  <!-- <topbar :pageinfo="pageinfo"></topbar> -->
+  <section class="step slide" v-show="slide.current"
+  v-bind:class="{ 'fade': !exportMode}">
     <div v-html="slide.content" class="markdown-body"
     v-bind:class="[mode]">
     <div>
@@ -11,15 +13,22 @@
     props: ['slide'],
     data () {
       return {
-        mode: 'not-full-screen'
+        mode: 'not-full-screen',
+        exportMode: false
       }
     },
     events: {
-      'enterFullScreen': function () {
+      enterFullScreen: function () {
         this.mode = 'full-screen'
       },
-      'exitFullScreen': function () {
+      exitFullScreen: function () {
         this.mode = 'not-full-screen'
+      },
+      startExportMode: function () {
+        this.exportMode = true
+      },
+      endExportMode: function () {
+        this.exportMode = false
       }
     }
   }
@@ -29,27 +38,30 @@
 .slide {
   height: 100%;
   width: 100%;
+  display: table;
+  background-color: #EEEEEE;
 
   .markdown-body {
-    padding-top: 50%;
+    display: table-cell;
+    vertical-align: middle;
+
+    ::-webkit-scrollbar {
+      display: block;
+    }
   }
 
   .not-full-screen {
     width: 80%;
-    font-size:  18px;
+    font-size: 18px;
     padding-left: 10%;
     padding-right: 10%;
-    -webkit-transform:translate3d(0, -25%, 0);
-    transform:translate3d(0, -25%, 0);
   }
 
   .full-screen {
-    width: 64%;
-    font-size:  32px;
-    padding-left: 18%;
-    padding-right: 18%;
-    -webkit-transform:translate3d(0, -50%, 0);
-    transform:translate3d(0, -50%, 0);
+    width: 80%;
+    font-size: 32px;
+    padding-left: 10%;
+    padding-right: 10%;
   }
 }
 

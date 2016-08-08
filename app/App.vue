@@ -6,7 +6,8 @@
     </div>
     <div class="preview" v-show="!isEditorFullScreen"
       v-bind:class="{ 'full-screen': isPreviewFullScreen }">
-      <textpreview v-show='!isSlideMode'></textpreview>
+      <textpreview v-show='!isSlideMode'
+      v-bind:class="{ 'overflow-y': !isPreviewFullScreen}"></textpreview>
       <slidepreview v-show='isSlideMode'></slidepreview>
     </div>
   </div>
@@ -16,6 +17,7 @@
   import editor from './components/Editor'
   import slidepreview from './components/SlidePreview'
   import textpreview from './components/TextPreview'
+  import {ipcRenderer} from 'electron'
 
   export default {
     data () {
@@ -40,6 +42,39 @@
         this.isPreviewFullScreen = data.isPreviewFullScreen
         this.isEditorFullScreen = data.isEditorFullScreen
       })
+      const self = this
+      ipcRenderer.on('start-export-mode', (event, data) => {
+        self.startExportMode()
+      })
+      ipcRenderer.on('end-export-mode', (event, data) => {
+        self.endExportMode()
+      })
+    },
+    methods: {
+      startExportMode () {
+        this.isPreviewFullScreen = true
+        if (this.isSlideMode) {
+          this.$broadcast('enterFullScreen')
+          this.$broadcast('startExportMode')
+          ipcRenderer.send('export-to-pdf', {
+            marginsType: 1,
+            pageSize: 'Letter',
+            printBackground: true,
+            landscape: true
+          })
+        } else {
+          ipcRenderer.send('export-to-pdf', {})
+        }
+      },
+      endExportMode () {
+        if (this.isSlideMode) {
+          this.$broadcast('endExportMode')
+          this.isPreviewFullScreen = false
+          this.$broadcast('exitFullScreen')
+        } else {
+          this.isPreviewFullScreen = false
+        }
+      }
     },
     events: {
       update: function (data) {
@@ -143,6 +178,10 @@
 
     .full-screen {
       width: 100%;
+    }
+
+    .overflow-y {
+      overflow-y: scroll;
     }
   }
 </style>

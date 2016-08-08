@@ -54,6 +54,20 @@ module.exports = (options) => {
           }
         },
         {
+          label: 'Save as...',
+          click (item, focusedWindow) {
+            dialog.showSaveDialog({
+              filters: [{ name: 'All Files', extensions: ['*'] }],
+              defaultPath: 'Untitled'
+            },
+            (fileName) => {
+              options.saveFile(fileName, focusedWindow)
+              const title = Util.fileNameToTitle(fileName)
+              focusedWindow.setTitle(title)
+            })
+          }
+        },
+        {
           type: 'separator'
         },
         {

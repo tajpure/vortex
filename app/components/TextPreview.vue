@@ -50,7 +50,6 @@
 <style lang="scss">
 .text {
   height: 100%;
-  overflow-y: scroll;
 
   .markdown-body {
     font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
@@ -58,7 +57,7 @@
     padding: 24px 32px;
 
     ::-webkit-scrollbar {
-        display: block;
+      display: block;
     }
 
     ::-webkit-scrollbar-track {

@@ -41,17 +41,19 @@ app.on('ready', () => {
     },
     exportPDF: (fileName, focusedWindow) => {
       if (!fileName) return
-      focusedWindow.webContents.printToPDF({
-        landscape: true
-      }, (err, data) => {
-        if (err) {
-          console.error(err)
-          return
-        }
-        fs.writeFile(fileName, data, (err) => {
-          if (err) console.error(err)
+      ipcMain.once('export-to-pdf', (event, options) => {
+        focusedWindow.webContents.printToPDF(options, (err, data) => {
+          if (err) {
+            console.error(err)
+            return
+          }
+          fs.writeFile(fileName, data, (err) => {
+            if (err) console.error(err)
+          })
         })
+        focusedWindow.webContents.send('end-export-mode')
       })
+      focusedWindow.webContents.send('start-export-mode')
     },
     exit: (focusedWindow) => {
       focusedWindow.close()
