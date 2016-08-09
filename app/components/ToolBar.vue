@@ -8,7 +8,7 @@
       <i class='material-icons' v-show='!visibility'>visibility_off</i>
       <i class='material-icons' v-show='visibility'>visibility</i>
     </li>
-    <li v-on:click='enterPreviewFullScreen' title='Full Screen' class='blue'>
+    <li v-on:click='enterPreviewFullScreen' title='Start' class='blue'>
       <i class='material-icons'>slideshow</i>
     </li>
   </ul>

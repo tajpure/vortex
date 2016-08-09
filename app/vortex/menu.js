@@ -74,18 +74,13 @@ module.exports = (options) => {
           label: 'Export as pdf',
           accelerator: 'CmdOrCtrl+E',
           click (item, focusedWindow) {
-            const fileName = Util.titleToFileName(focusedWindow.getTitle())
-            if (!fileName) {
-              dialog.showSaveDialog({
-                filters: [{ name: 'PDF', extensions: ['pdf'] }],
-                defaultPath: 'Untitled.pdf'
-              },
-              (fileName) => {
-                options.exportPDF(fileName, focusedWindow)
-              })
-            } else {
+            dialog.showSaveDialog({
+              filters: [{ name: 'PDF', extensions: ['pdf'] }],
+              defaultPath: 'Untitled.pdf'
+            },
+            (fileName) => {
               options.exportPDF(fileName, focusedWindow)
-            }
+            })
           }
         },
         {
