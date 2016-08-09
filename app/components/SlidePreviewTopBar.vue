@@ -41,9 +41,9 @@
 
 <style>
 .slide-index {
-  float: right;
-  margin-right: 10px;
-  margin-top: 10px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
   color: #9E9E9E;
   font-size: 20px;
 }

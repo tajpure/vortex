@@ -1,5 +1,6 @@
 <template>
   <div class="slides">
+    <topbar :pageinfo="pageinfo" v-show="!exportMode"></topbar>
     <slide id='{{ $index }}' track-by="$index" v-for="slide in slides" :slide="slide">
     </slide>
   </div>
@@ -21,7 +22,8 @@
       return {
         slides: [{index: 0, content: '', current: true}],
         revert: false,
-        pageinfo: {index: 0, total: 0}
+        pageinfo: {index: 0, total: 0},
+        exportMode: false
       }
     },
     ready () {
@@ -47,11 +49,13 @@
           slide.current = true
         })
         this.$broadcast('startExportMode')
+        this.exportMode = true
       },
       endExportMode: function () {
         this.hiddenAll()
         this.show(this.pageinfo.index)
         this.$broadcast('endExportMode')
+        this.exportMode = false
       }
     },
     methods: {
@@ -74,8 +78,6 @@
           this.previous()
         } else if (this.isExit(e.code)) {
           this.exit()
-        } else {
-          console.log(e)
         }
       },
       next () {

@@ -1,9 +1,7 @@
 <template>
-  <!-- <topbar :pageinfo="pageinfo"></topbar> -->
-  <section class="step slide" v-show="slide.current"
-  v-bind:class="{ 'fade': !exportMode}">
+  <section class="step slide" v-show="slide.current">
     <div v-html="slide.content" class="markdown-body"
-    v-bind:class="[mode]">
+    v-bind:class="{ 'fade': !exportMode, 'not-full-screen': !isFullScreen, 'full-screen': isFullScreen}">
     <div>
   </section>
 </template>
@@ -13,16 +11,16 @@
     props: ['slide'],
     data () {
       return {
-        mode: 'not-full-screen',
+        isFullScreen: false,
         exportMode: false
       }
     },
     events: {
       enterFullScreen: function () {
-        this.mode = 'full-screen'
+        this.isFullScreen = true
       },
       exitFullScreen: function () {
-        this.mode = 'not-full-screen'
+        this.isFullScreen = false
       },
       startExportMode: function () {
         this.exportMode = true
