@@ -3,9 +3,8 @@ import fs from 'fs'
 import VortexMenu from './vortex/menu.js'
 import VortexWindow from './vortex/window.js'
 
-let mainWindow
 app.on('ready', () => {
-  mainWindow = VortexWindow('Untitled')
+  VortexWindow('Untitled')
 
   ipcMain.on('save-file', (event, fileName, data) => {
     fs.writeFile(fileName, data, (err) => {
@@ -15,19 +14,12 @@ app.on('ready', () => {
 
   VortexMenu({
     newWindow: () => {
-      let newWindow = VortexWindow('Untitled')
-      newWindow.on('closed', () => {
-        newWindow = null
-      })
+      VortexWindow('Untitled')
     },
     openFile: (fileNames, window) => {
       if (fileNames === undefined) return
       const fileName = fileNames[0]
       let newWindow = VortexWindow(fileName)
-      newWindow.maximize()
-      newWindow.on('closed', () => {
-        newWindow = null
-      })
       newWindow.webContents.on('did-finish-load', () => {
         fs.readFile(fileName, 'utf-8', (err, data) => {
           if (err) console.error(err)
@@ -58,10 +50,6 @@ app.on('ready', () => {
     exit: (focusedWindow) => {
       focusedWindow.close()
     }
-  })
-
-  mainWindow.on('closed', () => {
-    mainWindow = null
   })
 })
 

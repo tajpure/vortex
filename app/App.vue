@@ -33,15 +33,6 @@
       textpreview
     },
     ready () {
-      const storage = require('electron-json-storage')
-      storage.get('settings', function (error, data) {
-        if (error) {
-          throw error
-        }
-        this.isSlideMode = data.isSlideMode
-        this.isPreviewFullScreen = data.isPreviewFullScreen
-        this.isEditorFullScreen = data.isEditorFullScreen
-      })
       const self = this
       ipcRenderer.on('start-export-mode', (event, data) => {
         self.startExportMode()
