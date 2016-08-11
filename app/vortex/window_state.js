@@ -31,6 +31,8 @@ module.exports = (name, defaults) => {
     get width () { return state.width },
     get height () { return state.height },
     get isMaximized () { return state.isMaximized },
+    get isSlideMode () { return state.isSlideMode },
+    set isSlideMode (val) { state.isSlideMode = val },
     saveState: saveState,
     get isSaved () { return isSaved }
   }

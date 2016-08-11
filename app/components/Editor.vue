@@ -58,6 +58,7 @@
       })
       ipcRenderer.on('open-file', (event, data) => {
         this.editor.setValue(data)
+        ipcRenderer.send('content-saved', self.winId)
       })
       ipcRenderer.on('trigger-save-file', (event, fileName) => {
         const content = this.editor.getValue()

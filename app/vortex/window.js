@@ -58,8 +58,16 @@ module.exports = (fileName) => {
     }
   })
 
+  ipcMain.on('update-slide-mode', (e, winId, isSlideMode) => {
+    if (!curWindow) return
+    if (curWindow.id === winId) {
+      state.isSlideMode = isSlideMode
+    }
+  })
+
   curWindow.webContents.on('did-finish-load', () => {
     curWindow.webContents.send('set-window-id', curWindow.id)
+    curWindow.webContents.send('set-slide-mode', state.isSlideMode)
   })
 
   curWindow.on('close', (event) => {

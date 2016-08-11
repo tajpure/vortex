@@ -15,11 +15,30 @@
 </template>
 
 <script>
+  import { ipcRenderer } from 'electron'
+
   export default {
+    watch: {
+      'isSlideMode': {
+        handler: function (val, oldVal) {
+          ipcRenderer.send('update-slide-mode', this.winId, val)
+        }
+      }
+    },
+    ready () {
+      const self = this
+      ipcRenderer.once('set-slide-mode', (event, isSlideMode) => {
+        self.isSlideMode = isSlideMode
+      })
+      ipcRenderer.on('set-window-id', (event, id) => {
+        this.winId = id
+      })
+    },
     data () {
       return {
         visibility: true,
-        isSlideMode: true
+        isSlideMode: true,
+        winId: null
       }
     },
     methods: {

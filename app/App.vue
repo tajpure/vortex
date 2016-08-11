@@ -17,9 +17,16 @@
   import editor from './components/Editor'
   import slidepreview from './components/SlidePreview'
   import textpreview from './components/TextPreview'
-  import {ipcRenderer} from 'electron'
+  import { ipcRenderer } from 'electron'
 
   export default {
+    watch: {
+      'isSlideMode': {
+        handler: function (val, oldVal) {
+          ipcRenderer.send('update-slide-mode', this.winId, val)
+        }
+      }
+    },
     data () {
       return {
         isSlideMode: true,
@@ -30,7 +37,8 @@
     components: {
       editor,
       slidepreview,
-      textpreview
+      textpreview,
+      winId: null
     },
     ready () {
       const self = this
@@ -39,6 +47,12 @@
       })
       ipcRenderer.on('end-export-mode', (event, data) => {
         self.endExportMode()
+      })
+      ipcRenderer.once('set-slide-mode', (event, isSlideMode) => {
+        self.isSlideMode = isSlideMode
+      })
+      ipcRenderer.on('set-window-id', (event, id) => {
+        this.winId = id
       })
     },
     methods: {
