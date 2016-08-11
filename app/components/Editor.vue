@@ -25,7 +25,8 @@
     data () {
       return {
         editor: null,
-        isScolling: false
+        isScolling: false,
+        winId: null
       }
     },
     ready () {
@@ -43,14 +44,17 @@
       editor.on('blur', () => {
         window.isEditorOnFocus = false
       })
-      editor.on('change', () => {
-        ipcRenderer.send('content-changed')
-      })
       const self = this
+      editor.on('change', () => {
+        ipcRenderer.send('content-changed', self.winId)
+      })
       editor.on('scroll', function () {
         self.isScolling = true
         const scrollInfo = editor.getScrollInfo()
         self.$dispatch('transferTo', 'editorScrollChanged', scrollInfo)
+      })
+      ipcRenderer.on('set-window-id', (event, id) => {
+        this.winId = id
       })
       ipcRenderer.on('open-file', (event, data) => {
         this.editor.setValue(data)
@@ -58,7 +62,7 @@
       ipcRenderer.on('trigger-save-file', (event, fileName) => {
         const content = this.editor.getValue()
         ipcRenderer.send('save-file', fileName, content)
-        ipcRenderer.send('content-saved', fileName)
+        ipcRenderer.send('content-saved', self.winId)
       })
     },
     events: {

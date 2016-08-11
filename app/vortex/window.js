@@ -40,21 +40,26 @@ module.exports = (fileName) => {
     shell.openExternal(url)
   })
 
-  ipcMain.on('content-changed', (e) => {
+  ipcMain.on('content-changed', (e, winId) => {
     if (!curWindow) return
     const title = curWindow.getTitle()
-    curWindow.setTitle(Util.addStarOnTitle(title))
-    contentChanged = true
+    if (curWindow.id === winId) {
+      curWindow.setTitle(Util.addStarOnTitle(title))
+      contentChanged = true
+    }
   })
 
-  ipcMain.on('content-saved', (e, fileName) => {
+  ipcMain.on('content-saved', (e, winId) => {
     if (!curWindow) return
     const title = curWindow.getTitle()
-    const curWindowFileName = Util.titleToFileName(title)
-    if (fileName === curWindowFileName) {
+    if (curWindow.id === winId) {
       curWindow.setTitle(Util.removeStarOnTitle(title))
       contentChanged = false
     }
+  })
+
+  curWindow.webContents.on('did-finish-load', () => {
+    curWindow.webContents.send('set-window-id', curWindow.id)
   })
 
   curWindow.on('close', (event) => {

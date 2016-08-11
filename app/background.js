@@ -35,7 +35,6 @@ app.on('ready', () => {
     },
     saveFile: (fileName, focusedWindow) => {
       if (!fileName || !focusedWindow) return
-      focusedWindow.webContents.send('trigger-content-saved')
       focusedWindow.webContents.send('trigger-save-file', fileName)
     },
     exportPDF: (fileName, focusedWindow) => {
