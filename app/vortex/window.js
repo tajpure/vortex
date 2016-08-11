@@ -1,9 +1,10 @@
-import { BrowserWindow, shell } from 'electron'
+import { BrowserWindow, shell, dialog, ipcMain } from 'electron'
 import path from 'path'
 import Util from './util.js'
 import windowStat from './window_state.js'
 
 module.exports = (fileName) => {
+  let contentChanged = false
   const title = Util.fileNameToTitle(fileName)
 
   const state = windowStat(fileName, {
@@ -39,11 +40,59 @@ module.exports = (fileName) => {
     shell.openExternal(url)
   })
 
+  ipcMain.on('content-changed', (e) => {
+    if (!curWindow) return
+    const title = curWindow.getTitle()
+    curWindow.setTitle(Util.addStarOnTitle(title))
+    contentChanged = true
+  })
+
+  ipcMain.on('content-saved', (e, fileName) => {
+    if (!curWindow) return
+    const title = curWindow.getTitle()
+    const curWindowFileName = Util.titleToFileName(title)
+    if (fileName === curWindowFileName) {
+      curWindow.setTitle(Util.removeStarOnTitle(title))
+      contentChanged = false
+    }
+  })
+
   curWindow.on('close', (event) => {
-    if (!state.isSaved) {
+    if (contentChanged) {
       event.preventDefault()
-      state.saveState(curWindow)
-      curWindow.close()
+      const title = curWindow.getTitle()
+      const fileName = Util.titleToFileBase(title)
+      dialog.showMessageBox({
+        type: 'question',
+        buttons: ['Save', 'Cancel', "Don't Save"],
+        title: 'Save File',
+        message: "'" + fileName + "' has changes, do you want to save them?",
+        detail: 'Your changes will be lost if you close this item without saving.'
+      },
+      (result) => {
+        switch (result) {
+          case 0: {
+            break
+          }
+          case 1: {
+            break
+          }
+          case 2: {
+            if (!state.isSaved) {
+              state.saveState(curWindow)
+            }
+            curWindow.destroy()
+            break
+          }
+          default: break
+        }
+      })
+    } else {
+      if (!state.isSaved) {
+        event.preventDefault()
+        state.saveState(curWindow)
+        curWindow.destroy()
+      }
     }
   })
 

@@ -19,6 +19,7 @@ module.exports = (options) => {
           accelerator: 'CmdOrCtrl+O',
           click (item, focusedWindow) {
             dialog.showOpenDialog({
+              title: 'Open File',
               filters: [
                 { name: 'Text', extensions: ['txt', 'md'] },
                 { name: 'All Files', extensions: ['*'] }
@@ -26,6 +27,7 @@ module.exports = (options) => {
               properties: ['openFile', 'multiSelections']
             },
             (fileNames) => {
+              if (!fileNames) return
               options.openFile(fileNames, focusedWindow)
             })
           }
@@ -40,10 +42,12 @@ module.exports = (options) => {
             const fileName = Util.titleToFileName(focusedWindow.getTitle())
             if (!fileName) {
               dialog.showSaveDialog({
+                title: 'Save File',
                 filters: [{ name: 'Markdown', extensions: ['md'] }],
                 defaultPath: 'Untitled.md'
               },
               (fileName) => {
+                if (!fileName) return
                 options.saveFile(fileName, focusedWindow)
                 const title = Util.fileNameToTitle(fileName)
                 focusedWindow.setTitle(title)
@@ -57,10 +61,12 @@ module.exports = (options) => {
           label: 'Save as...',
           click (item, focusedWindow) {
             dialog.showSaveDialog({
+              title: 'Save File As...',
               filters: [{ name: 'All Files', extensions: ['*'] }],
               defaultPath: 'Untitled'
             },
             (fileName) => {
+              if (!fileName) return
               options.saveFile(fileName, focusedWindow)
               const title = Util.fileNameToTitle(fileName)
               focusedWindow.setTitle(title)
@@ -75,10 +81,12 @@ module.exports = (options) => {
           accelerator: 'CmdOrCtrl+E',
           click (item, focusedWindow) {
             dialog.showSaveDialog({
+              title: 'Export As PDF',
               filters: [{ name: 'PDF', extensions: ['pdf'] }],
               defaultPath: 'Untitled.pdf'
             },
             (fileName) => {
+              if (!fileName) return
               options.exportPDF(fileName, focusedWindow)
             })
           }

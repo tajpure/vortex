@@ -115,6 +115,5 @@
 .slides {
   height: 100%;
   font-size: 32px;
-  font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
 </style>

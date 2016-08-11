@@ -52,7 +52,6 @@
   height: 100%;
 
   .markdown-body {
-    font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 15px;
     padding: 24px 32px;
 

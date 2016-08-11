@@ -42,10 +42,6 @@
   .markdown-body {
     display: table-cell;
     vertical-align: middle;
-
-    ::-webkit-scrollbar {
-      display: block;
-    }
   }
 
   .not-full-screen {

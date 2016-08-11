@@ -1,4 +1,4 @@
-import { app, ipcMain } from 'electron'
+import { app, ipcMain, dialog } from 'electron'
 import fs from 'fs'
 import VortexMenu from './vortex/menu.js'
 import VortexWindow from './vortex/window.js'
@@ -8,7 +8,10 @@ app.on('ready', () => {
 
   ipcMain.on('save-file', (event, fileName, data) => {
     fs.writeFile(fileName, data, (err) => {
-      if (err) console.error(err)
+      if (err) {
+        console.error(err)
+        dialog.showErrorBox('File Save Error', err.message)
+      }
     })
   })
 
@@ -16,19 +19,23 @@ app.on('ready', () => {
     newWindow: () => {
       VortexWindow('Untitled')
     },
-    openFile: (fileNames, window) => {
-      if (fileNames === undefined) return
+    openFile: (fileNames, focusedWindow) => {
+      if (!fileNames || !focusedWindow) return
       const fileName = fileNames[0]
       let newWindow = VortexWindow(fileName)
       newWindow.webContents.on('did-finish-load', () => {
         fs.readFile(fileName, 'utf-8', (err, data) => {
-          if (err) console.error(err)
+          if (err) {
+            console.error(err)
+            dialog.showErrorBox('File Read Error', err.message)
+          }
           newWindow.webContents.send('open-file', data)
         })
       })
     },
     saveFile: (fileName, focusedWindow) => {
-      if (!fileName) return
+      if (!fileName || !focusedWindow) return
+      focusedWindow.webContents.send('trigger-content-saved')
       focusedWindow.webContents.send('trigger-save-file', fileName)
     },
     exportPDF: (fileName, focusedWindow) => {
@@ -40,7 +47,10 @@ app.on('ready', () => {
             return
           }
           fs.writeFile(fileName, data, (err) => {
-            if (err) console.error(err)
+            if (err) {
+              console.error(err)
+              dialog.showErrorBox('File Export Error', err.message)
+            }
           })
         })
         focusedWindow.webContents.send('end-export-mode')
@@ -48,6 +58,7 @@ app.on('ready', () => {
       focusedWindow.webContents.send('start-export-mode')
     },
     exit: (focusedWindow) => {
+      if (!focusedWindow) return
       focusedWindow.close()
     }
   })

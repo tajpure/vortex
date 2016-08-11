@@ -37,11 +37,14 @@
         matchBrackets: true
       })
       this.editor = editor
-      editor.on('focus', function () {
+      editor.on('focus', () => {
         window.isEditorOnFocus = true
       })
-      editor.on('blur', function () {
+      editor.on('blur', () => {
         window.isEditorOnFocus = false
+      })
+      editor.on('change', () => {
+        ipcRenderer.send('content-changed')
       })
       const self = this
       editor.on('scroll', function () {
@@ -55,6 +58,7 @@
       ipcRenderer.on('trigger-save-file', (event, fileName) => {
         const content = this.editor.getValue()
         ipcRenderer.send('save-file', fileName, content)
+        ipcRenderer.send('content-saved', fileName)
       })
     },
     events: {
