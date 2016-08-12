@@ -4,7 +4,7 @@ import jetpack from 'fs-jetpack'
 module.exports = (name, defaults) => {
   let isSaved = false
   let userDataDir = jetpack.cwd(app.getPath('userData'))
-  const stateStoreFile = 'window-state-' + name + '.json'
+  const stateStoreFile = 'window-state.json'
 
   let state = userDataDir.read(stateStoreFile, 'json') || {
     width: defaults.width,
