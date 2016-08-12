@@ -92,6 +92,22 @@ module.exports = (fileName) => {
       (result) => {
         switch (result) {
           case 0: {
+            const fileName = Util.titleToFileName(curWindow.getTitle())
+            if (!fileName) {
+              dialog.showSaveDialog({
+                title: 'Save File',
+                filters: [{ name: 'Markdown', extensions: ['md'] }],
+                defaultPath: 'Untitled.md'
+              },
+              (fileName) => {
+                if (!fileName) return
+                curWindow.webContents.send('trigger-save-file', fileName)
+                const title = Util.fileNameToTitle(fileName)
+                curWindow.setTitle(title)
+              })
+            } else {
+              curWindow.webContents.send('trigger-save-file', fileName)
+            }
             break
           }
           case 1: {
