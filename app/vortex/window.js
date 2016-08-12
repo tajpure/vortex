@@ -64,9 +64,17 @@ module.exports = (fileName) => {
     }
   })
 
+  ipcMain.on('update-visibility', (e, winId, visibility) => {
+    if (!curWindow) return
+    if (curWindow.id === winId) {
+      state.visibility = visibility
+    }
+  })
+
   curWindow.webContents.on('did-finish-load', () => {
     curWindow.webContents.send('set-window-id', curWindow.id)
     curWindow.webContents.send('set-slide-mode', state.isSlideMode)
+    curWindow.webContents.send('set-visibility', state.visibility)
   })
 
   curWindow.on('close', (event) => {

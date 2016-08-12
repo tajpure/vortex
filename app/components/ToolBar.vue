@@ -23,12 +23,20 @@
         handler: function (val, oldVal) {
           ipcRenderer.send('update-slide-mode', this.winId, val)
         }
+      },
+      'visibility': {
+        handler: function (val, oldVal) {
+          ipcRenderer.send('update-visibility', this.winId, val)
+        }
       }
     },
     ready () {
       const self = this
       ipcRenderer.once('set-slide-mode', (event, isSlideMode) => {
         self.isSlideMode = isSlideMode
+      })
+      ipcRenderer.once('set-visibility', (event, visibility) => {
+        self.visibility = visibility
       })
       ipcRenderer.on('set-window-id', (event, id) => {
         this.winId = id

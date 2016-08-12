@@ -20,13 +20,6 @@
   import { ipcRenderer } from 'electron'
 
   export default {
-    watch: {
-      'isSlideMode': {
-        handler: function (val, oldVal) {
-          ipcRenderer.send('update-slide-mode', this.winId, val)
-        }
-      }
-    },
     data () {
       return {
         isSlideMode: true,
@@ -50,6 +43,9 @@
       })
       ipcRenderer.once('set-slide-mode', (event, isSlideMode) => {
         self.isSlideMode = isSlideMode
+      })
+      ipcRenderer.once('set-visibility', (event, visibility) => {
+        self.isEditorFullScreen = !visibility
       })
       ipcRenderer.on('set-window-id', (event, id) => {
         this.winId = id
