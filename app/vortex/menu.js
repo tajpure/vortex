@@ -59,6 +59,7 @@ module.exports = (options) => {
         },
         {
           label: 'Save as...',
+          accelerator: 'CmdOrCtrl+Shift+S',
           click (item, focusedWindow) {
             dialog.showSaveDialog({
               title: 'Save File As...',
