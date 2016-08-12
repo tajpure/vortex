@@ -13,13 +13,6 @@ module.exports = {
   dev: {
     port: 8080,
     proxyTable: {
-      // '/api': {
-      //   target: 'http://jsonplaceholder.typicode.com',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/api': ''
-      //   }
-      // }
     },
     vueDevTools: false
   }
