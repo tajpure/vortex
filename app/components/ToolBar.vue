@@ -63,6 +63,7 @@
           this.$dispatch('openTextMode')
         } else {
           this.isSlideMode = true
+          this.$dispatch('transferTo', 'focusEditor')
           this.$dispatch('openSlideMode')
         }
       }

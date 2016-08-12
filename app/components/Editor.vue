@@ -7,7 +7,7 @@
   import CodeMirror from '../../static/codemirror/lib/codemirror.js'
   import '../../static/codemirror/mode/markdown/markdown.js'
   import toolbar from './ToolBar'
-  import {ipcRenderer} from 'electron'
+  import { ipcRenderer } from 'electron'
 
   export default {
     watch: {

@@ -17,8 +17,7 @@ module.exports = (fileName) => {
     height: state.height,
     width: state.width,
     x: state.x,
-    y: state.y,
-    icon: path.join(__dirname, 'static/images/logo.png')
+    y: state.y
   })
 
   if (state.isMaximized) {
