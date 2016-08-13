@@ -1,5 +1,6 @@
-const Menu = require('electron').Menu
-const dialog = require('electron').dialog
+const electron = require('electron')
+const Menu = electron.Menu
+const dialog = electron.dialog
 const util = require('./util.js')
 
 module.exports = (options) => {

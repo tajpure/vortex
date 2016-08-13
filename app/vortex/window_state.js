@@ -1,14 +1,19 @@
 const app = require('electron').app
-const jetpack = require('fs-jetpack')
+const fs = require('fs')
 
 module.exports = (name, defaults) => {
   let isSaved = false
-  let userDataDir = jetpack.cwd(app.getPath('userData'))
-  const stateStoreFile = 'window-state.json'
-
-  let state = userDataDir.read(stateStoreFile, 'json') || {
+  let userDataDir = app.getPath('userData')
+  const stateStoreFile = userDataDir + '/window-state.json'
+  let state = {
     width: defaults.width,
     height: defaults.height
+  }
+
+  try {
+    state = JSON.parse(fs.readFileSync(stateStoreFile, 'utf8'))
+  } catch (e) {
+    console.log('create ' + stateStoreFile)
   }
 
   const saveState = (win) => {
@@ -22,7 +27,7 @@ module.exports = (name, defaults) => {
       state.height = size[1]
     }
     state.isMaximized = win.isMaximized()
-    userDataDir.write(stateStoreFile, state, { atomic: true })
+    fs.writeFileSync(stateStoreFile, JSON.stringify(state))
   }
 
   return {
