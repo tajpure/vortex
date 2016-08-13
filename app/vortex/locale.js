@@ -1,6 +1,12 @@
 module.exports = {
   lang: 'en',
   langArray: ['en'],
+  get AppName () {
+    const data = {
+      'en': 'Vortex'
+    }
+    return data[this.lang]
+  },
   get Untitled () {
     const data = {
       'en': 'Untitled'

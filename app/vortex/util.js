@@ -3,7 +3,7 @@ const locale = require('./locale.js')
 
 module.exports = {
   fileNameToTitle: (fileName) => {
-    if (!fileName) return
+    if (!fileName) return locale.AppName
     const fileInfo = path.parse(fileName)
     fileName = fileInfo.base
     if (fileInfo.dir) {

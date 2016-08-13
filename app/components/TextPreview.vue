@@ -54,6 +54,7 @@
   .markdown-body {
     font-size: 15px;
     padding: 24px 32px;
+    background-color: #EEEEEE;
 
     ::-webkit-scrollbar {
       display: block;

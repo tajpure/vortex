@@ -7,7 +7,7 @@
     <div class="preview" v-show="!isEditorFullScreen"
       v-bind:class="{ 'full-screen': isPreviewFullScreen }">
       <textpreview v-show='!isSlideMode'
-      v-bind:class="{ 'overflow-y': !isPreviewFullScreen}"></textpreview>
+      v-bind:class="{ 'overflow-y': !isPreviewFullScreen }"></textpreview>
       <slidepreview v-show='isSlideMode'></slidepreview>
     </div>
   </div>
@@ -142,7 +142,6 @@
     .preview {
       width: 50%;
       height: 100%;
-      background-color: #EEEEEE;
 
       ::-webkit-scrollbar {
           display: none;
