@@ -23,6 +23,7 @@ function getElectronVersion () {
 }
 
 var packagerConfig = {
+  asar: false,
   dir: config.build.outputRoot,
   out: config.build.releasesRoot,
   name: appManifest.productName,

@@ -1,5 +1,6 @@
-import { Menu, dialog } from 'electron'
-import Util from './util.js'
+const Menu = require('electron').Menu
+const dialog = require('electron').dialog
+const util = require('./util.js')
 
 module.exports = (options) => {
   let isFullScreen = false
@@ -39,7 +40,7 @@ module.exports = (options) => {
           label: 'Save',
           accelerator: 'CmdOrCtrl+S',
           click (item, focusedWindow) {
-            const fileName = Util.titleToFileName(focusedWindow.getTitle())
+            const fileName = util.titleToFileName(focusedWindow.getTitle())
             if (!fileName) {
               dialog.showSaveDialog({
                 title: 'Save File',
@@ -49,7 +50,7 @@ module.exports = (options) => {
               (fileName) => {
                 if (!fileName) return
                 options.saveFile(fileName, focusedWindow)
-                const title = Util.fileNameToTitle(fileName)
+                const title = util.fileNameToTitle(fileName)
                 focusedWindow.setTitle(title)
               })
             } else {
@@ -69,7 +70,7 @@ module.exports = (options) => {
             (fileName) => {
               if (!fileName) return
               options.saveFile(fileName, focusedWindow)
-              const title = Util.fileNameToTitle(fileName)
+              const title = util.fileNameToTitle(fileName)
               focusedWindow.setTitle(title)
             })
           }

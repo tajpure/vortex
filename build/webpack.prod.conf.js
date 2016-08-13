@@ -10,8 +10,7 @@ var cssLoaders = require('./css-loaders')
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
-    app: './app/main.js',
-    background: './app/background.js'
+    app: './app/main.js'
   },
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
@@ -26,10 +25,13 @@ module.exports = merge(baseWebpackConfig, {
   },
   plugins: [
     new CopyWebpackPlugin([
+      { from: './app/background.js', to: '.' },
       { from: './app/package.json', to: '.' },
-      { from: './static', to: 'static' }
+      { from: './app/vortex', to: 'vortex' },
+      { from: './app/assets', to: 'assets' },
+      { from: './static', to: 'static' },
+      { from: './app/node_modules', to: 'node_modules' }
     ]),
-    // http://vuejs.github.io/vue-loader/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
@@ -41,22 +43,15 @@ module.exports = merge(baseWebpackConfig, {
       }
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
-    // extract css into its own file
     new ExtractTextPlugin(path.join(config.build.assetsSubDirectory, '[name].css')),
-    // generate dist index.html with correct asset hash for caching.
-    // you can customize output by editing /index.html
-    // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'main.html',
       template: './app/main.html',
-      excludeChunks: ['background'],
       inject: true,
       minify: {
         removeComments: true,
         collapseWhitespace: true,
         removeAttributeQuotes: true
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
       }
     })
   ]

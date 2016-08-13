@@ -1,11 +1,6 @@
 {
-  "name": "vortex",
-  "productName": "vortex",
+  "name": "vortexs",
   "version": "0.1.0",
   "description": "A presentation editor.",
-  "author": "tajpure <tajpure@gmail.com>",
-  "main": "background.js",
-  "dependencies": {
-    "fs-jetpack": "^0.9.2"
-  }
+  "main": "background.js"
 }

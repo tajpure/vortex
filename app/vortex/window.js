@@ -1,11 +1,15 @@
-import { BrowserWindow, shell, dialog, ipcMain } from 'electron'
-import path from 'path'
-import Util from './util.js'
-import windowStat from './window_state.js'
+const BrowserWindow = require('electron').BrowserWindow
+const shell = require('electron').shell
+const dialog = require('electron').dialog
+const ipcMain = require('electron').ipcMain
+const path = require('path')
+const util = require('./util.js')
+const windowStat = require('./window_state.js')
+// const locale = require('./locale.js')
 
 module.exports = (fileName) => {
   let contentChanged = false
-  const title = Util.fileNameToTitle(fileName)
+  const title = util.fileNameToTitle(fileName)
 
   const state = windowStat(fileName, {
     height: 600,
@@ -17,7 +21,8 @@ module.exports = (fileName) => {
     height: state.height,
     width: state.width,
     x: state.x,
-    y: state.y
+    y: state.y,
+    icon: path.join(__dirname, '/../assets/icon.png')
   })
 
   if (state.isMaximized) {
@@ -26,13 +31,13 @@ module.exports = (fileName) => {
 
   const mainURL = process.env.HOT
     ? `http://localhost:${process.env.PORT}/main.html`
-    : 'file://' + path.join(__dirname, 'main.html')
+    : 'file://' + path.join(__dirname, '../main.html')
 
   curWindow.loadURL(mainURL)
 
-  if (process.env.NODE_ENV !== 'production') {
-    curWindow.openDevTools()
-  }
+  // if (process.env.NODE_ENV !== 'production') {
+  //   curWindow.openDevTools()
+  // }
 
   curWindow.webContents.on('new-window', (e, url) => {
     e.preventDefault()
@@ -43,7 +48,7 @@ module.exports = (fileName) => {
     if (!curWindow) return
     const title = curWindow.getTitle()
     if (curWindow.id === winId) {
-      curWindow.setTitle(Util.addStarOnTitle(title))
+      curWindow.setTitle(util.addStarOnTitle(title))
       contentChanged = true
     }
   })
@@ -52,7 +57,7 @@ module.exports = (fileName) => {
     if (!curWindow) return
     const title = curWindow.getTitle()
     if (curWindow.id === winId) {
-      curWindow.setTitle(Util.removeStarOnTitle(title))
+      curWindow.setTitle(util.removeStarOnTitle(title))
       contentChanged = false
     }
   })
@@ -81,7 +86,7 @@ module.exports = (fileName) => {
     if (contentChanged) {
       event.preventDefault()
       const title = curWindow.getTitle()
-      const fileName = Util.titleToFileBase(title)
+      const fileName = util.titleToFileBase(title)
       dialog.showMessageBox({
         type: 'question',
         buttons: ['Save', 'Cancel', "Don't Save"],
@@ -92,7 +97,7 @@ module.exports = (fileName) => {
       (result) => {
         switch (result) {
           case 0: {
-            const fileName = Util.titleToFileName(curWindow.getTitle())
+            const fileName = util.titleToFileName(curWindow.getTitle())
             if (!fileName) {
               dialog.showSaveDialog({
                 title: 'Save File',
@@ -102,7 +107,7 @@ module.exports = (fileName) => {
               (fileName) => {
                 if (!fileName) return
                 curWindow.webContents.send('trigger-save-file', fileName)
-                const title = Util.fileNameToTitle(fileName)
+                const title = util.fileNameToTitle(fileName)
                 curWindow.setTitle(title)
               })
             } else {

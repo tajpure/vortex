@@ -1,7 +1,9 @@
-import { app, ipcMain, dialog } from 'electron'
-import fs from 'fs'
-import VortexMenu from './vortex/menu.js'
-import VortexWindow from './vortex/window.js'
+const app = require('electron').app
+const ipcMain = require('electron').ipcMain
+const dialog = require('electron').dialog
+const fs = require('fs')
+const VortexMenu = require('./vortex/menu.js')
+const VortexWindow = require('./vortex/window.js')
 
 app.on('ready', () => {
   VortexWindow('Untitled')

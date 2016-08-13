@@ -1,5 +1,5 @@
-import { app } from 'electron'
-import jetpack from 'fs-jetpack'
+const app = require('electron').app
+const jetpack = require('fs-jetpack')
 
 module.exports = (name, defaults) => {
   let isSaved = false
