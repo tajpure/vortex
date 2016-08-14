@@ -80,6 +80,7 @@
         ipcRenderer.send('save-file', fileName, content)
         ipcRenderer.send('content-saved', self.winId)
       })
+      this.$dispatch('transferTo', 'focusEditor')
     },
     methods: {
       curIndex (value) {

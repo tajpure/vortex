@@ -15,6 +15,7 @@
 
   const renderer = new marked.Renderer()
   util.customizeLink(renderer)
+  util.customizeCode(renderer)
   util.customizeKatex(katex, renderer)
   marked.setOptions({renderer: renderer})
   marked.setOptions({

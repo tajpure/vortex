@@ -40,6 +40,7 @@
   background-color: #EEEEEE;
 
   .markdown-body {
+    height: 100%;
     display: table-cell;
     vertical-align: middle;
 

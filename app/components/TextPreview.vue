@@ -12,6 +12,7 @@
   const renderer = new marked.Renderer()
   util.customizeLink(renderer)
   util.customizeKatex(katex, renderer)
+  util.customizeCode(renderer)
   marked.setOptions({renderer: renderer})
   marked.setOptions({
     highlight: (code, lang) => {
@@ -61,6 +62,7 @@
     font-size: 15px;
     padding: 24px 32px;
     background-color: #EEEEEE;
+    overflow-y: hidden;
 
     ::-webkit-scrollbar {
       display: block;
