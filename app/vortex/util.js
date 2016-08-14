@@ -1,8 +1,7 @@
 const path = require('path')
 const locale = require('./locale.js')
-const katex = require('../../node_modules/katex/katex.js')
 
-function renderMathsExpression (expr) {
+function renderMathsExpression (katex, expr) {
   if (expr[0] === '$' && expr[expr.length - 1] === '$') {
     let displayStyle = false
     expr = expr.substr(1, expr.length - 2)
@@ -77,7 +76,7 @@ module.exports = {
       return '<a target="_blank" href="' + href + '" title="' + title + '">' + text + '</a>'
     }
   },
-  customizeKatex: (renderer) => {
+  customizeKatex: (katex, renderer) => {
     let originParagraph = renderer.paragraph.bind(renderer)
     renderer.paragraph = (text) => {
       const blockRegex = /\$\$[^\$]*\$\$/g
@@ -86,12 +85,12 @@ module.exports = {
       let inlineExprArray = text.match(inlineRegex)
       for (let i in blockExprArray) {
         const expr = blockExprArray[i]
-        const result = renderMathsExpression(expr)
+        const result = renderMathsExpression(katex, expr)
         text = text.replace(expr, result)
       }
       for (let i in inlineExprArray) {
         const expr = inlineExprArray[i]
-        const result = renderMathsExpression(expr)
+        const result = renderMathsExpression(katex, expr)
         text = text.replace(expr, result)
       }
       return originParagraph(text)

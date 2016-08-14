@@ -6,11 +6,12 @@
 
 <script>
   import marked from '../../node_modules/marked/lib/marked.js'
+  import katex from '../../node_modules/katex/katex.js'
   import util from '../vortex/util.js'
 
   const renderer = new marked.Renderer()
   util.customizeLink(renderer)
-  util.customizeKatex(renderer)
+  util.customizeKatex(katex, renderer)
   marked.setOptions({renderer: renderer})
   marked.setOptions({
     highlight: (code, lang) => {
