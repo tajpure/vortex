@@ -142,6 +142,7 @@
     .preview {
       width: 50%;
       height: 100%;
+      background-color: #EEEEEE;
 
       ::-webkit-scrollbar {
           display: none;
