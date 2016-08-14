@@ -44,12 +44,14 @@
         matchBrackets: true
       })
       this.editor = editor
+      const imageType = '.jpg, .jpeg, .png, .bmp'
       editor.on('drop', function (editor, e) {
         const file = e.dataTransfer.files[0]
-        if (file) {
+        const extension = file.name.substring(file.name.lastIndexOf('.'))
+        if (imageType.indexOf(extension) > 0) {
           editor.replaceSelection('![](' + file.path + ')')
+          e.preventDefault()
         }
-        e.preventDefault()
       })
       editor.on('focus', () => {
         window.isEditorOnFocus = true
