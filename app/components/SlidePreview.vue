@@ -39,15 +39,18 @@
       topbar
     },
     events: {
-      updateSlides: function (value) {
+      updateSlides: function (value, index) {
         const slideArray = (value === null) ? [] : value.split('\n---')
         let slides = []
         for (let i in slideArray) {
           slides.push({index: i, content: marked(slideArray[i]), current: false})
         }
         this.slides = slides
-        this.show(this.pageinfo.index)
+        if (typeof index !== 'undefined') {
+          this.pageinfo.index = index
+        }
         this.pageinfo.total = slideArray.length
+        this.show(this.pageinfo.index)
       },
       startExportMode: function () {
         this.slides.forEach((slide) => {

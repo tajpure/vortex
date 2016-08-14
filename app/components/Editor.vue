@@ -19,7 +19,8 @@
       'editor': {
         handler: function (val, oldVal) {
           const value = this.editor.getValue()
-          this.$dispatch('update', value)
+          const index = this.curIndex(value)
+          this.$dispatch('update', value, index)
         },
         deep: true
       }
@@ -70,6 +71,22 @@
         ipcRenderer.send('save-file', fileName, content)
         ipcRenderer.send('content-saved', self.winId)
       })
+    },
+    methods: {
+      curIndex (value) {
+        const curLine = this.editor.getCursor().line
+        const lines = value.split('\n')
+        let index = 0
+        for (let i in lines) {
+          if (curLine < i) {
+            break
+          }
+          if (lines[i].startsWith('---')) {
+            index++
+          }
+        }
+        return index
+      }
     },
     events: {
       previewScrollChanged: function (scrollInfo) {

@@ -78,9 +78,9 @@
       }
     },
     events: {
-      update: function (data) {
+      update: function (data, index) {
         if (this.isSlideMode) {
-          this.$broadcast('updateSlides', data)
+          this.$broadcast('updateSlides', data, index)
         } else {
           this.$broadcast('updateMarkdown', data)
         }
