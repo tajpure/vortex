@@ -1,5 +1,29 @@
 const path = require('path')
 const locale = require('./locale.js')
+const katex = require('../../node_modules/katex/katex.js')
+
+function renderMathsExpression (expr) {
+  if (expr[0] === '$' && expr[expr.length - 1] === '$') {
+    let displayStyle = false
+    expr = expr.substr(1, expr.length - 2)
+    if (expr[0] === '$' && expr[expr.length - 1] === '$') {
+      displayStyle = true
+      expr = expr.substr(1, expr.length - 2)
+    }
+    let html = null
+    try {
+      html = katex.renderToString(expr)
+    } catch (e) {
+      console.err(e)
+    }
+    if (displayStyle && html) {
+      html = html.replace(/class="katex"/g, 'class="katex katex-block" style="display: block;"')
+    }
+    return html
+  } else {
+    return null
+  }
+}
 
 module.exports = {
   fileNameToTitle: (fileName) => {
@@ -47,5 +71,30 @@ module.exports = {
     if (!title || !title.startsWith('* ')) return title
     title = title.substr(2)
     return title
+  },
+  customizeLink: (renderer) => {
+    renderer.link = (href, title, text) => {
+      return '<a target="_blank" href="' + href + '" title="' + title + '">' + text + '</a>'
+    }
+  },
+  customizeKatex: (renderer) => {
+    let originParagraph = renderer.paragraph.bind(renderer)
+    renderer.paragraph = (text) => {
+      const blockRegex = /\$\$[^\$]*\$\$/g
+      const inlineRegex = /\$[^\$]*\$/g
+      let blockExprArray = text.match(blockRegex)
+      let inlineExprArray = text.match(inlineRegex)
+      for (let i in blockExprArray) {
+        const expr = blockExprArray[i]
+        const result = renderMathsExpression(expr)
+        text = text.replace(expr, result)
+      }
+      for (let i in inlineExprArray) {
+        const expr = inlineExprArray[i]
+        const result = renderMathsExpression(expr)
+        text = text.replace(expr, result)
+      }
+      return originParagraph(text)
+    }
   }
 }

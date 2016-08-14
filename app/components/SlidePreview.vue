@@ -10,11 +10,11 @@
   import slide from './Slide'
   import marked from '../../node_modules/marked/lib/marked.js'
   import topbar from './SlidePreviewTopBar'
+  import util from '../vortex/util.js'
 
   const renderer = new marked.Renderer()
-  renderer.link = (href, title, text) => {
-    return '<a target="_blank" href="' + href + '" title="' + title + '">' + text + '</a>'
-  }
+  util.customizeLink(renderer)
+  util.customizeKatex(renderer)
   marked.setOptions({renderer: renderer})
   marked.setOptions({
     highlight: (code, lang) => {

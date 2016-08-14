@@ -6,11 +6,11 @@
 
 <script>
   import marked from '../../node_modules/marked/lib/marked.js'
+  import util from '../vortex/util.js'
 
   const renderer = new marked.Renderer()
-  renderer.link = (href, title, text) => {
-    return '<a target="_blank" href="' + href + '" title="' + title + '">' + text + '</a>'
-  }
+  util.customizeLink(renderer)
+  util.customizeKatex(renderer)
   marked.setOptions({renderer: renderer})
   marked.setOptions({
     highlight: (code, lang) => {
@@ -80,6 +80,10 @@
       height: 1px;
       color: #616161;
       border-bottom-color: #616161;
+    }
+
+    .katex-mathml {
+      display: none;
     }
   }
 }

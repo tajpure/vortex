@@ -42,6 +42,14 @@
   .markdown-body {
     display: table-cell;
     vertical-align: middle;
+
+    .katex {
+      display: inline;
+
+      .katex-mathml {
+        display: none;
+      }
+    }
   }
 
   .not-full-screen {
