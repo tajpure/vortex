@@ -94,7 +94,9 @@
           this.isScolling = false
           return
         }
-        this.editor.scrollTo(null, scrollInfo.top)
+        const height = this.editor.getScrollInfo().height
+        const scrollTop = (scrollInfo.top / scrollInfo.height) * height
+        this.editor.scrollTo(null, scrollTop)
       },
       focusEditor: function () {
         this.editor.focus()

@@ -47,7 +47,7 @@
         }
         const dom = document.getElementById('text-preview')
         const height = dom.scrollHeight
-        dom.scrollTop = (scrollInfo.top / scrollInfo.height) * height * 1.2
+        dom.scrollTop = (scrollInfo.top / scrollInfo.height) * height
       }
     }
   }
