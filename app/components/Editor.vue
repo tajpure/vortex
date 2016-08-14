@@ -44,6 +44,13 @@
         matchBrackets: true
       })
       this.editor = editor
+      editor.on('drop', function (editor, e) {
+        const file = e.dataTransfer.files[0]
+        if (file) {
+          editor.replaceSelection('![](' + file.path + ')')
+        }
+        e.preventDefault()
+      })
       editor.on('focus', () => {
         window.isEditorOnFocus = true
       })
