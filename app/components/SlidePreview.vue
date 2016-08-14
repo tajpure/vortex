@@ -16,6 +16,11 @@
     return '<a target="_blank" href="' + href + '" title="' + title + '">' + text + '</a>'
   }
   marked.setOptions({renderer: renderer})
+  marked.setOptions({
+    highlight: (code, lang) => {
+      return window.hljs.highlightAuto(code, [lang]).value
+    }
+  })
 
   export default {
     data () {

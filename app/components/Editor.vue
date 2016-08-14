@@ -6,6 +6,11 @@
 <script>
   import CodeMirror from '../../static/codemirror/lib/codemirror.js'
   import '../../static/codemirror/mode/markdown/markdown.js'
+  import '../../static/codemirror/addon/search/search.js'
+  import '../../static/codemirror/addon/search/searchcursor.js'
+  import '../../static/codemirror/addon/search/jump-to-line.js'
+  import '../../static/codemirror/addon/search/matchesonscrollbar.js'
+  import '../../static/codemirror/addon/dialog/dialog.js'
   import toolbar from './ToolBar'
   import { ipcRenderer } from 'electron'
 
