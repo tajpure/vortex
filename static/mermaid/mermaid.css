@@ -258,7 +258,7 @@ text.actor {
   font-family: 'trebuchet ms', verdana, arial;
   font-size: 14px;
 }
-div.mermaidTooltip {
+/*div.mermaidTooltip {
   position: absolute;
   text-align: center;
   max-width: 200px;
@@ -270,4 +270,4 @@ div.mermaidTooltip {
   border-radius: 2px;
   pointer-events: none;
   z-index: 100;
-}
+}*/

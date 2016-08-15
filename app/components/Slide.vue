@@ -65,6 +65,10 @@
     font-size: 32px;
     padding-left: 10%;
     padding-right: 10%;
+
+    .mermaid {
+      font-size: 18px;
+    }
   }
 }
 
