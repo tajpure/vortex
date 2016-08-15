@@ -1,7 +1,7 @@
 <template>
   <section class="step slide" v-show="slide.current">
     <div v-html="slide.content" class="markdown-body"
-    v-bind:class="{ 'fade': !exportMode, 'not-full-screen': !isFullScreen, 'full-screen': isFullScreen}">
+    v-bind:class="{ 'fade': !exportMode, 'not-full-screen': !fullScreenMode, 'full-screen': fullScreenMode}">
     <div>
   </section>
 </template>
@@ -11,16 +11,16 @@
     props: ['slide'],
     data () {
       return {
-        isFullScreen: false,
+        fullScreenMode: false,
         exportMode: false
       }
     },
     events: {
       enterFullScreen: function () {
-        this.isFullScreen = true
+        this.fullScreenMode = true
       },
       exitFullScreen: function () {
-        this.isFullScreen = false
+        this.fullScreenMode = false
       },
       startExportMode: function () {
         this.exportMode = true

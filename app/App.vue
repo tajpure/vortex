@@ -1,14 +1,14 @@
 <template>
   <div class="row">
-    <div class="editor" v-show="!isPreviewFullScreen"
-      v-bind:class="{ 'full-screen': isEditorFullScreen }">
+    <div class="editor" v-show="!previewFullScreenMode"
+      v-bind:class="{ 'full-screen': editorFullScreenMode }">
       <editor></editor>
     </div>
-    <div class="preview" v-show="!isEditorFullScreen"
-      v-bind:class="{ 'full-screen': isPreviewFullScreen }">
-      <textpreview v-show='!isSlideMode'
-      v-bind:class="{ 'overflow-y': !isPreviewFullScreen }"></textpreview>
-      <slidepreview v-show='isSlideMode'></slidepreview>
+    <div class="preview" v-show="!editorFullScreenMode"
+      v-bind:class="{ 'full-screen': previewFullScreenMode }">
+      <textpreview v-show='!slideMode'
+      v-bind:class="{ 'overflow-y': !previewFullScreenMode }"></textpreview>
+      <slidepreview v-show='slideMode'></slidepreview>
     </div>
   </div>
 </template>
@@ -22,9 +22,9 @@
   export default {
     data () {
       return {
-        isSlideMode: true,
-        isPreviewFullScreen: false,
-        isEditorFullScreen: false
+        slideMode: true,
+        previewFullScreenMode: false,
+        editorFullScreenMode: false
       }
     },
     components: {
@@ -41,11 +41,11 @@
       ipcRenderer.on('end-export-mode', (event, data) => {
         self.endExportMode()
       })
-      ipcRenderer.once('set-slide-mode', (event, isSlideMode) => {
-        self.isSlideMode = isSlideMode
+      ipcRenderer.once('set-slide-mode', (event, slideMode) => {
+        self.slideMode = slideMode
       })
       ipcRenderer.once('set-visibility', (event, visibility) => {
-        self.isEditorFullScreen = !visibility
+        self.editorFullScreenMode = !visibility
       })
       ipcRenderer.on('set-window-id', (event, id) => {
         this.winId = id
@@ -53,8 +53,8 @@
     },
     methods: {
       startExportMode () {
-        this.isPreviewFullScreen = true
-        if (this.isSlideMode) {
+        this.previewFullScreenMode = true
+        if (this.slideMode) {
           this.$broadcast('enterFullScreen')
           this.$broadcast('startExportMode')
           ipcRenderer.send('export-to-pdf', {
@@ -68,18 +68,18 @@
         }
       },
       endExportMode () {
-        if (this.isSlideMode) {
+        if (this.slideMode) {
           this.$broadcast('endExportMode')
-          this.isPreviewFullScreen = false
+          this.previewFullScreenMode = false
           this.$broadcast('exitFullScreen')
         } else {
-          this.isPreviewFullScreen = false
+          this.previewFullScreenMode = false
         }
       }
     },
     events: {
       update: function (data, index) {
-        if (this.isSlideMode) {
+        if (this.slideMode) {
           this.$broadcast('updateSlides', data, index)
         } else {
           this.$broadcast('updateMarkdown', data)
@@ -89,24 +89,24 @@
         this.$broadcast(action, data)
       },
       enterPreviewFullScreen: function () {
-        this.isPreviewFullScreen = true
+        this.previewFullScreenMode = true
         this.$broadcast('enterFullScreen')
       },
       exitPreviewFullScreen: function () {
-        this.isPreviewFullScreen = false
+        this.previewFullScreenMode = false
         this.$broadcast('exitFullScreen')
       },
       closePreview: function () {
-        this.isEditorFullScreen = true
+        this.editorFullScreenMode = true
       },
       openPreview: function () {
-        this.isEditorFullScreen = false
+        this.editorFullScreenMode = false
       },
       openTextMode: function () {
-        this.isSlideMode = false
+        this.slideMode = false
       },
       openSlideMode: function () {
-        this.isSlideMode = true
+        this.slideMode = true
       }
     }
   }
