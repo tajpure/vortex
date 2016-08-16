@@ -46,5 +46,6 @@
   top: 10px;
   color: #9E9E9E;
   font-size: 20px;
+  z-index: 999;
 }
 </style>

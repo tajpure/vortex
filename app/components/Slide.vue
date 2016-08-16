@@ -1,7 +1,7 @@
 <template>
-  <section class="slide" v-show="slide.current">
+  <section class="slide" v-show="slide.current" v-bind:class="[theme]">
     <div v-html="slide.content" class="markdown-body animated"
-    v-bind:class="[animate, fullScreenMode ? 'full-screen': 'not-full-screen']">
+    v-bind:class="[animate, theme, fullScreenMode ? 'full-screen': 'not-full-screen']">
     <div>
   </section>
 </template>
@@ -62,7 +62,7 @@
         const metaRegex = /<!--.*?-->/g
         const curIndex = this.slide.index
         if (metaRegex.test(value)) {
-          const metadata = this.parseMetadata(value.match(metaRegex)[0])
+          const metadata = this.parseMetadata(curIndex, value.match(metaRegex)[0])
           this.animate = metadata.animate
           this.theme = metadata.theme
           window.vortex_metadata[curIndex] = metadata
@@ -73,7 +73,8 @@
         }
       },
       extendMetadataFromLast () {
-        let pastIndex = this.slide.index - 1
+        const curIndex = this.slide.index
+        let pastIndex = curIndex - 1
         while (pastIndex >= 0) {
           if (window.vortex_metadata[pastIndex]) {
             break
@@ -90,25 +91,39 @@
           }
         }
       },
-      parseMetadata (metadata) {
+      parseMetadata (index, metadata) {
+        const pastMetadata = window.vortex_metadata[index - 1]
         if (metadata) {
           let metaObj = {animate: '', theme: ''}
           const obj = this.metadataToJson(metadata)
           if (obj.animate) {
             metaObj.animate = obj.animate
+          } else {
+            if (pastMetadata) {
+              metaObj.animate = pastMetadata.animate
+            }
           }
           if (obj.theme) {
             metaObj.theme = obj.theme
+          } else {
+            if (pastMetadata) {
+              metaObj.animate = pastMetadata.animate
+            }
           }
           return metaObj
         } else {
-          return {animate: '', theme: ''}
+          return pastMetadata
         }
       },
       metadataToJson (metadata) {
         const trimData = metadata.slice(4, -3).trim()
-        const jsonStr = '{"' + trimData.split(':').join('":"').split(' ').join('","') + '"}'
-        return JSON.parse(jsonStr)
+        const jsonStr = '{"' + trimData.split(/\s*:\s*/g).join('":"').split(/\s+/g).join('","') + '"}'
+        try {
+          return JSON.parse(jsonStr)
+        } catch (e) {
+          console.error('parse error!')
+          return {animate: '', theme: ''}
+        }
       }
     }
   }
@@ -119,7 +134,6 @@
   height: 100%;
   width: 100%;
   display: table;
-  background-color: #EEEEEE;
 
   .markdown-body {
     display: table-cell;

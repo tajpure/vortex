@@ -1,0 +1,16 @@
+.dark {
+  background-color: #212121;
+  color: white;
+}
+
+.dark pre, code {
+  background-color: #424242;
+}
+
+.dark .mermaid {
+  background-color: #E0E0E0;
+}
+
+.dark table {
+  color: black;
+}
