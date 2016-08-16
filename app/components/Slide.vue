@@ -1,7 +1,7 @@
 <template>
-  <section class="step slide" v-show="slide.current">
+  <section class="slide" v-show="slide.current">
     <div v-html="slide.content" class="markdown-body"
-    v-bind:class="{ 'fade': !exportMode, 'not-full-screen': !fullScreenMode, 'full-screen': fullScreenMode}">
+    v-bind:class="{ 'animated': !exportMode, 'not-full-screen': !fullScreenMode, 'full-screen': fullScreenMode}">
     <div>
   </section>
 </template>
@@ -61,31 +61,14 @@
   }
 
   .full-screen {
-    width: 80%;
+    width: 60%;
     font-size: 32px;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 20%;
+    padding-right: 20%;
 
     .mermaid {
       font-size: 18px;
     }
   }
-}
-
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
 }
 </style>

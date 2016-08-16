@@ -42,10 +42,10 @@
     },
     events: {
       updateSlides: function (value, index) {
-        const slideArray = (value === null) ? [] : value.split('\n---')
+        const slideArray = this.parseSlideArray(value)
         let slides = []
         for (let i in slideArray) {
-          slides.push({index: i, content: marked(slideArray[i]), current: false})
+          slides.push({index: i, content: slideArray[i], current: false})
         }
         this.slides = slides
         if (typeof index !== 'undefined') {
@@ -76,7 +76,9 @@
       },
       show (index) {
         this.hiddenAll()
-        this.slides[index].current = true
+        if (this.slides[index]) {
+          this.slides[index].current = true
+        }
       },
       keyup (e) {
         if (window.isEditorOnFocus) {
@@ -102,6 +104,9 @@
         }
         this.show(this.pageinfo.index)
       },
+      exit () {
+        this.$dispatch('exitPreviewFullScreen')
+      },
       isPrevious (code) {
         const codes = ['ArrowLeft', 'ArrowUp']
         return codes.indexOf(code) !== -1
@@ -114,8 +119,9 @@
         const codes = ['Escape']
         return codes.indexOf(code) !== -1
       },
-      exit () {
-        this.$dispatch('exitPreviewFullScreen')
+      parseSlideArray (value) {
+        const html = marked(value)
+        return (value === null) ? [] : html.split('<hr>')
       }
     }
   }

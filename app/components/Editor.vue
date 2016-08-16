@@ -84,16 +84,20 @@
     },
     methods: {
       curIndex (value) {
-        const curLine = this.editor.getCursor().line
         const lines = value.split('\n')
+        const curLine = this.editor.getCursor().line
         let index = 0
+        let preLine = null
+        let isCodeBlock = false
         for (let i in lines) {
           if (curLine < i) {
             break
-          }
-          if (lines[i].startsWith('---')) {
+          } if (lines[i].startsWith('```')) {
+            isCodeBlock = !isCodeBlock
+          } else if (lines[i].startsWith('---') && !preLine && !isCodeBlock) {
             index++
           }
+          preLine = lines[i]
         }
         return index
       }
