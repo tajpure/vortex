@@ -6,7 +6,8 @@
     </div>
     <div class="preview" v-show="!editorFullScreenMode"
       v-bind:class="{ 'full-screen': previewFullScreenMode }">
-      <textpreview v-show='!slideMode' class='overflow-y'></textpreview>
+      <textpreview v-show='!slideMode'
+      v-bind:class="{ 'overflow-y': !previewFullScreenMode }"></textpreview>
       <slidepreview v-show='slideMode'></slidepreview>
     </div>
   </div>
