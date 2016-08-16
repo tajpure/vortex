@@ -116,7 +116,6 @@
     height: 100%;
     padding: 0;
     margin: 0;
-    overflow: hidden;
   }
 
   .row {
@@ -156,5 +155,9 @@
     .overflow-y {
       overflow-y: scroll;
     }
+  }
+
+  .mermaidTooltip {
+    display: none;
   }
 </style>
