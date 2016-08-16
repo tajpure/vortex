@@ -12,28 +12,12 @@
     watch: {
       'slide.content': {
         handler: function (val, oldVal) {
-          const metaRegex = /<!--.*?-->/g
-          if (metaRegex.test(val)) {
-            const metadata = this.parseMetadata(val.match(metaRegex)[0])
-            this.animate = metadata.animate
-            this.theme = metadata.theme
-          } else {
-            this.animate = ''
-            this.theme = ''
-          }
+          this.updateMetadata(val)
         }
       },
       'slide.current': {
         handler: function (val, oldVal) {
-          if (window.vortex_metadata) {
-            const metadata = window.vortex_metadata
-            if (this.animate === '') {
-              this.animate = metadata.animate
-            }
-            if (this.theme === '') {
-              this.theme = metadata.theme
-            }
-          }
+          this.updateMetadata(this.slide.content)
         }
       },
       'exportMode': {
@@ -65,6 +49,45 @@
       }
     },
     methods: {
+      updateMetadata (value) {
+        if (!window.vortex_metadata) {
+          window.vortex_metadata = []
+        }
+        this.searchMetadataInContent(value)
+        this.extendMetadataFromLast()
+      },
+      searchMetadataInContent (value) {
+        const metaRegex = /<!--.*?-->/g
+        const curIndex = this.slide.index
+        if (metaRegex.test(value)) {
+          const metadata = this.parseMetadata(value.match(metaRegex)[0])
+          this.animate = metadata.animate
+          this.theme = metadata.theme
+          window.vortex_metadata[curIndex] = metadata
+        } else {
+          this.animate = ''
+          this.theme = ''
+          window.vortex_metadata[curIndex] = window.vortex_metadata[curIndex - 1]
+        }
+      },
+      extendMetadataFromLast () {
+        let pastIndex = this.slide.index - 1
+        while (pastIndex >= 0) {
+          if (window.vortex_metadata[pastIndex]) {
+            break
+          }
+          pastIndex--
+        }
+        if (window.vortex_metadata[pastIndex]) {
+          const metadata = window.vortex_metadata[pastIndex]
+          if (this.animate === '') {
+            this.animate = metadata.animate
+          }
+          if (this.theme === '') {
+            this.theme = metadata.theme
+          }
+        }
+      },
       parseMetadata (metadata) {
         if (metadata) {
           let metaObj = {animate: '', theme: ''}
@@ -75,7 +98,6 @@
           if (obj.theme) {
             metaObj.theme = obj.theme
           }
-          window.vortex_metadata = metaObj
           return metaObj
         } else {
           return {animate: '', theme: ''}
