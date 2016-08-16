@@ -93,7 +93,7 @@ module.exports = (fileName) => {
         buttons: ['Save', 'Cancel', "Don't Save"],
         title: 'Save File',
         message: "'" + fileName + "' has changes, do you want to save them?",
-        detail: 'Your changes will be lost if you close this item without saving.'
+        detail: 'Your changes will be lost if you close this window without saving.'
       },
       (result) => {
         switch (result) {

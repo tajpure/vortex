@@ -1,7 +1,7 @@
 <template>
   <section class="slide" v-show="slide.current">
-    <div v-html="slide.content" class="markdown-body"
-    v-bind:class="{ 'animated': !exportMode, 'not-full-screen': !fullScreenMode, 'full-screen': fullScreenMode}">
+    <div v-html="slide.content" class="markdown-body animated"
+    v-bind:class="[animate, fullScreenMode ? 'full-screen': 'not-full-screen']">
     <div>
   </section>
 </template>
@@ -9,10 +9,45 @@
 <script>
   export default {
     props: ['slide'],
+    watch: {
+      'slide.content': {
+        handler: function (val, oldVal) {
+          const metaRegex = /<!--.*?-->/g
+          if (metaRegex.test(val)) {
+            const metadata = this.parseMetadata(val.match(metaRegex)[0])
+            this.animate = metadata.animate
+            this.theme = metadata.theme
+          } else {
+            this.animate = ''
+            this.theme = ''
+          }
+        }
+      },
+      'slide.current': {
+        handler: function (val, oldVal) {
+          if (window.vortex_metadata) {
+            const metadata = window.vortex_metadata
+            if (this.animate === '') {
+              this.animate = metadata.animate
+            }
+            if (this.theme === '') {
+              this.theme = metadata.theme
+            }
+          }
+        }
+      },
+      'exportMode': {
+        handler: function (val, oldVal) {
+          this.animate = val ? '' : this.animate
+        }
+      }
+    },
     data () {
       return {
         fullScreenMode: false,
-        exportMode: false
+        exportMode: false,
+        animate: '',
+        theme: ''
       }
     },
     events: {
@@ -27,6 +62,29 @@
       },
       endExportMode: function () {
         this.exportMode = false
+      }
+    },
+    methods: {
+      parseMetadata (metadata) {
+        if (metadata) {
+          let metaObj = {animate: '', theme: ''}
+          const obj = this.metadataToJson(metadata)
+          if (obj.animate) {
+            metaObj.animate = obj.animate
+          }
+          if (obj.theme) {
+            metaObj.theme = obj.theme
+          }
+          window.vortex_metadata = metaObj
+          return metaObj
+        } else {
+          return {animate: '', theme: ''}
+        }
+      },
+      metadataToJson (metadata) {
+        const trimData = metadata.slice(4, -3).trim()
+        const jsonStr = '{"' + trimData.split(':').join('":"').split(' ').join('","') + '"}'
+        return JSON.parse(jsonStr)
       }
     }
   }
