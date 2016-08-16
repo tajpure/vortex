@@ -17,6 +17,8 @@
       },
       'slide.current': {
         handler: function (val, oldVal) {
+          // avoid animation cause html or body overflow
+          document.getElementsByTagName('html')[0].style.overflow = 'hidden'
           this.updateMetadata(this.slide.content)
         }
       },
