@@ -1,6 +1,6 @@
 .light {
   background-color: #EEEEEE;
-  color: black;
+  color: #424242;
 }
 
 .light pre {
@@ -18,10 +18,6 @@
   color: white;
 }
 
-.dark .mermaid {
-  background-color: #E0E0E0;
-}
-
 .dark table {
   color: black;
 }
@@ -31,8 +27,20 @@
   color: white;
 }
 
+.red a {
+  color: #81D4FA;
+}
+
+.red blockquote {
+  color: #EEEEEE;
+}
+
 .red pre {
   background-color: white;
+  color: #424242;
+}
+
+.red table {
   color: #424242;
 }
 
@@ -41,8 +49,20 @@
   color: white;
 }
 
+.pink a {
+  color: #039BE5;
+}
+
+.pink blockquote {
+  color: #E0E0E0;
+}
+
 .pink pre {
   background-color: white;
+  color: #424242;
+}
+
+.pink table {
   color: #424242;
 }
 
@@ -51,8 +71,20 @@
   color: white;
 }
 
+.purple a {
+  color: #039BE5;
+}
+
+.purple blockquote {
+  color: #E0E0E0;
+}
+
 .purple pre {
   background-color: white;
+  color: #424242;
+}
+
+.purple table {
   color: #424242;
 }
 
@@ -61,8 +93,20 @@
   color: white;
 }
 
+.blue a {
+  color: #FFC107;
+}
+
+.blue blockquote {
+  color: #E0E0E0;
+}
+
 .blue pre {
   background-color: white;
+  color: #424242;
+}
+
+.blue table {
   color: #424242;
 }
 
@@ -71,8 +115,20 @@
   color: white;
 }
 
+.green a {
+  color: #039BE5;
+}
+
+.green blockquote {
+  color: #E0E0E0;
+}
+
 .green pre {
   background-color: white;
+  color: #424242;
+}
+
+.green table {
   color: #424242;
 }
 
@@ -81,8 +137,20 @@
   color: white;
 }
 
+.lightgreen a {
+  color: #039BE5;
+}
+
+.lightgreen blockquote {
+  color: #E0E0E0;
+}
+
 .lightgreen pre {
   background-color: white;
+  color: #424242;
+}
+
+.lightgreen table {
   color: #424242;
 }
 
@@ -91,8 +159,20 @@
   color: white;
 }
 
+.lime a {
+  color: #039BE5;
+}
+
+.lime blockquote {
+  color: #F5F5F5;
+}
+
 .lime pre {
   background-color: white;
+  color: #424242;
+}
+
+.lime table {
   color: #424242;
 }
 
@@ -101,8 +181,20 @@
   color: white;
 }
 
+.yellow a {
+  color: #039BE5;
+}
+
+.yellow blockquote {
+  color: #E0E0E0;
+}
+
 .yellow pre {
   background-color: white;
+  color: #424242;
+}
+
+.yellow table {
   color: #424242;
 }
 
@@ -111,8 +203,20 @@
   color: white;
 }
 
+.amber a {
+  color: #039BE5;
+}
+
+.amber blockquote {
+  color: #E0E0E0;
+}
+
 .amber pre {
   background-color: white;
+  color: #424242;
+}
+
+.amber table {
   color: #424242;
 }
 
@@ -121,7 +225,41 @@
   color: white;
 }
 
+.orange a {
+  color: #039BE5;
+}
+
+.orange blockquote {
+  color: #E0E0E0;
+}
+
 .orange pre {
   background-color: white;
+  color: #424242;
+}
+
+.orange table {
+  color: #424242;
+}
+
+.brown {
+  background-color: #795548;
+  color: white;
+}
+
+.brown a {
+  color: #81D4FA;
+}
+
+.brown blockquote {
+  color: #E0E0E0;
+}
+
+.brown pre {
+  background-color: white;
+  color: #424242;
+}
+
+.brown table {
   color: #424242;
 }

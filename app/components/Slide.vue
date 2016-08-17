@@ -95,8 +95,8 @@
         while (pastIndex >= 0) {
           const lastMatedata = window.vortex_metadata[pastIndex]
           if (lastMatedata) {
-            lastAnimate = lastMatedata.animateInOut
-            lastTheme = lastMatedata.theme
+            lastAnimate = (lastAnimate === '') ? lastMatedata.animateInOut : lastAnimate
+            lastTheme = (lastTheme === '') ? lastMatedata.theme : lastTheme
           }
           if (lastAnimate !== '' && lastTheme !== '') {
             break
@@ -196,6 +196,10 @@
     .mermaid {
       font-size: 18px;
     }
+  }
+
+  .mermaid {
+    background-color: #EEEEEE;
   }
 }
 </style>
