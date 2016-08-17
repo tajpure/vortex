@@ -50,9 +50,7 @@
       editor.on('drop', function (editor, e) {
         const file = e.dataTransfer.files[0]
         const extension = file.name.substring(file.name.lastIndexOf('.'))
-        console.log(extension)
         if (imageType.indexOf(extension) >= 0) {
-          console.log(file.path)
           editor.replaceSelection('![](' + file.path + ')')
           e.preventDefault()
         }
@@ -124,8 +122,8 @@
         this.editor.focus()
       },
       updateEditorValue: function () {
-        this.editor.setValue(this.editor.getValue())
         this.isUpdating = true
+        this.editor.setValue(this.editor.getValue())
       }
     }
   }
