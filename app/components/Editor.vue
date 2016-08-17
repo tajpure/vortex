@@ -44,11 +44,13 @@
         matchBrackets: true
       })
       this.editor = editor
-      const imageType = '.jpg, .jpeg, .png, .bmp'
+      const imageType = ['.jpg', '.jpeg', '.png', '.bmp', '.gif']
       editor.on('drop', function (editor, e) {
         const file = e.dataTransfer.files[0]
         const extension = file.name.substring(file.name.lastIndexOf('.'))
-        if (imageType.indexOf(extension) > 0) {
+        console.log(extension)
+        if (imageType.indexOf(extension) >= 0) {
+          console.log(file.path)
           editor.replaceSelection('![](' + file.path + ')')
           e.preventDefault()
         }
