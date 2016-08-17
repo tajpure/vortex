@@ -32,7 +32,8 @@
       return {
         editor: null,
         isScolling: false,
-        winId: null
+        winId: null,
+        isUpdating: false
       }
     },
     ready () {
@@ -43,6 +44,7 @@
         theme: '3024-day',
         matchBrackets: true
       })
+      window.editor = editor
       this.editor = editor
       const imageType = ['.jpg', '.jpeg', '.png', '.bmp', '.gif']
       editor.on('drop', function (editor, e) {
@@ -63,7 +65,11 @@
       })
       const self = this
       editor.on('change', () => {
-        ipcRenderer.send('content-changed', self.winId)
+        if (!this.isUpdating) {
+          ipcRenderer.send('content-changed', self.winId)
+        } else {
+          this.isUpdating = false
+        }
       })
       editor.on('scroll', function () {
         self.isScolling = true
@@ -116,6 +122,10 @@
       },
       focusEditor: function () {
         this.editor.focus()
+      },
+      updateEditorValue: function () {
+        this.editor.setValue(this.editor.getValue())
+        this.isUpdating = true
       }
     }
   }

@@ -98,9 +98,11 @@
       },
       closePreview: function () {
         this.editorFullScreenMode = true
+        this.$broadcast('updateEditorValue')
       },
       openPreview: function () {
         this.editorFullScreenMode = false
+        this.$broadcast('updateEditorValue')
       },
       openTextMode: function () {
         this.slideMode = false
