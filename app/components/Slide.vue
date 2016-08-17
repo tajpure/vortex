@@ -32,7 +32,8 @@
       'exportMode': {
         handler: function (val, oldVal) {
           this.animate = val ? '' : this.animate
-          this.show = val
+          // Show all the slides when under export mode.
+          this.show = val ? true : this.show
         }
       }
     },
