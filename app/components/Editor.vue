@@ -134,7 +134,7 @@
   font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   height: calc(100% - 31.5px);
   line-height: 1.5em;
-  font-size: 1em;
+  font-size: 16px;
 }
 .cm-link {
   text-decoration: none;
