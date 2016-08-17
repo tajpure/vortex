@@ -27,7 +27,7 @@
   export default {
     data () {
       return {
-        slides: [{index: 0, content: '', current: true}],
+        slides: [{index: 0, content: '', show: true}],
         revert: false,
         pageinfo: {index: 0, total: 0},
         exportMode: false
@@ -45,7 +45,7 @@
         const slideArray = this.parseSlideArray(value)
         let slides = []
         for (let i in slideArray) {
-          slides.push({index: i, content: slideArray[i], current: false})
+          slides.push({index: i, content: slideArray[i], show: false})
         }
         this.slides = slides
         if (typeof index !== 'undefined') {
@@ -56,7 +56,7 @@
       },
       startExportMode: function () {
         this.slides.forEach((slide) => {
-          slide.current = true
+          slide.show = true
         })
         this.$broadcast('startExportMode')
         this.exportMode = true
@@ -71,13 +71,13 @@
     methods: {
       hiddenAll () {
         this.slides.forEach((slide) => {
-          slide.current = false
+          slide.show = false
         })
       },
       show (index) {
         this.hiddenAll()
         if (this.slides[index]) {
-          this.slides[index].current = true
+          this.slides[index].show = true
         }
       },
       keyup (e) {

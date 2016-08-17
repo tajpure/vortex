@@ -1,5 +1,5 @@
 <template>
-  <div class="slide-index">
+  <div class="slide-index" v-bind:class="[theme]">
     {{ slideIndex }}/{{ totalPage }}
   </div>
 </template>
@@ -18,7 +18,8 @@
     data () {
       return {
         slideIndex: 0,
-        totalPage: 0
+        totalPage: 0,
+        theme: ''
       }
     },
     ready () {
@@ -35,6 +36,11 @@
         this.slideIndex = parseInt(this.pageinfo.index) + 1
         this.totalPage = this.pageinfo.total
       }
+    },
+    events: {
+      updateTheme (theme) {
+        this.theme = theme
+      }
     }
   }
 </script>
@@ -42,9 +48,9 @@
 <style>
 .slide-index {
   position: absolute;
+  background-color: rgba(255, 255, 255, 0);
   right: 10px;
   top: 10px;
-  color: #9E9E9E;
   font-size: 20px;
   z-index: 999;
 }

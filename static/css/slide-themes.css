@@ -1,0 +1,50 @@
+.dark {
+  background-color: #212121;
+  color: white;
+}
+
+.dark pre, code {
+  background-color: #424242;
+}
+
+.dark .mermaid {
+  background-color: #E0E0E0;
+}
+
+.dark table {
+  color: black;
+}
+
+.red {
+  background-color: #F44336;
+  color: white;
+}
+
+.red pre, code {
+  background-color: white;
+}
+
+.red .mermaid {
+  background-color: #E0E0E0;
+}
+
+.red table {
+  color: black;
+}
+
+.pink {
+  background-color: #E91E63;
+  color: white;
+}
+
+.pink pre, code {
+  background-color: white;
+}
+
+.pink .mermaid {
+  background-color: #E0E0E0;
+}
+
+.pink table {
+  color: black;
+}

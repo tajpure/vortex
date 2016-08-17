@@ -1,5 +1,5 @@
 <template>
-  <section class="slide" v-show="slide.current" v-bind:class="[theme]">
+  <section class="slide" v-show="show" v-bind:class="[theme]">
     <div v-html="slide.content" class="markdown-body animated"
     v-bind:class="[animate, theme, fullScreenMode ? 'full-screen': 'not-full-screen']">
     <div>
@@ -7,6 +7,8 @@
 </template>
 
 <script>
+  import animate from '../vortex/animate.js'
+
   export default {
     props: ['slide'],
     watch: {
@@ -15,16 +17,20 @@
           this.updateMetadata(val)
         }
       },
-      'slide.current': {
+      'slide.show': {
         handler: function (val, oldVal) {
-          // avoid animation cause html or body overflow
-          document.getElementsByTagName('html')[0].style.overflow = 'hidden'
           this.updateMetadata(this.slide.content)
+          this.triggerAnimate(val)
         }
       },
       'exportMode': {
         handler: function (val, oldVal) {
           this.animate = val ? '' : this.animate
+        }
+      },
+      'theme': {
+        handler: function (val, oldVal) {
+          this.$dispatch('transferTo', 'updateTheme', val)
         }
       }
     },
@@ -33,8 +39,16 @@
         fullScreenMode: false,
         exportMode: false,
         animate: '',
-        theme: ''
+        animateInOut: {in: '', out: ''},
+        theme: '',
+        show: false
       }
+    },
+    ready () {
+      // avoid animation cause html or body overflow
+      document.getElementsByTagName('html')[0].style.overflow = 'hidden'
+      this.show = this.slide.show
+      this.triggerAnimate(this.show)
     },
     events: {
       enterFullScreen: function () {
@@ -63,11 +77,11 @@
         const curIndex = this.slide.index
         if (metaRegex.test(value)) {
           const metadata = this.parseMetadata(curIndex, value.match(metaRegex)[0])
-          this.animate = metadata.animate
+          this.animateInOut = this.getAnimateInOut(metadata.animate)
           this.theme = metadata.theme
           window.vortex_metadata[curIndex] = metadata
         } else {
-          this.animate = ''
+          this.animateInOut = {in: '', out: ''}
           this.theme = ''
           window.vortex_metadata[curIndex] = window.vortex_metadata[curIndex - 1]
         }
@@ -123,6 +137,27 @@
         } catch (e) {
           console.error('parse error!')
           return {animate: '', theme: ''}
+        }
+      },
+      getAnimateInOut (name) {
+        if (animate[name]) {
+          return animate[name]
+        } else {
+          return {in: '', out: ''}
+        }
+      },
+      triggerAnimate (show) {
+        let self = this
+        if (show) {
+          self.animate = this.animateInOut.in
+          window.setTimeout(() => {
+            self.show = true
+          }, 300)
+        } else {
+          self.animate = this.animateInOut.out
+          window.setTimeout(() => {
+            self.show = false
+          }, 300)
         }
       }
     }
