@@ -1,14 +1,14 @@
 <template>
   <ul class='menu'>
-    <li v-on:click='switchMode' title='Mode' class='yellow'>
+    <li v-on:click='switchMode' title='Mode' class='topbar-yellow'>
       <i class='material-icons' v-show='isSlideMode'>computer</i>
       <i class='material-icons' v-show='!isSlideMode'>mode_edit</i>
     </li>
-    <li v-on:click='switchPreview' title='Preview' class='purple'>
+    <li v-on:click='switchPreview' title='Preview' class='topbar-purple'>
       <i class='material-icons' v-show='!visibility'>visibility_off</i>
       <i class='material-icons' v-show='visibility'>visibility</i>
     </li>
-    <li v-on:click='enterPreviewFullScreen' title='Start' class='blue'>
+    <li v-on:click='enterPreviewFullScreen' title='Start' class='topbar-blue'>
       <i class='material-icons'>slideshow</i>
     </li>
   </ul>
@@ -96,27 +96,27 @@
     cursor: pointer;
   }
 
-  .green {
+  .topbar-green {
     color: #8BC34A;
   }
 
-  .red {
+  .topbar-red {
     color: #F44336;
   }
 
-  .yellow {
+  .topbar-yellow {
     color: #FFEB3B;
   }
 
-  .pink {
+  .topbar-pink {
     color: #E91E63;
   }
 
-  .purple {
+  .topbar-purple {
     color: #9C27B0;
   }
 
-  .blue {
+  .topbar-blue {
     color: #2196F3;
   }
 }

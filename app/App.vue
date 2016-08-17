@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="wrapper">
     <div class="editor" v-show="!previewFullScreenMode"
       v-bind:class="{ 'full-screen': editorFullScreenMode }">
       <editor></editor>
@@ -119,7 +119,7 @@
     margin: 0;
   }
 
-  .row {
+  .wrapper {
     display: flex;
     flex-direction: row;
     height: 100%;

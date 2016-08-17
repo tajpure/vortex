@@ -63,9 +63,9 @@
       },
       endExportMode: function () {
         this.hiddenAll()
-        this.show(this.pageinfo.index)
         this.$broadcast('endExportMode')
         this.exportMode = false
+        this.show(this.pageinfo.index)
       }
     },
     methods: {

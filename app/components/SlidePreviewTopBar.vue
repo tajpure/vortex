@@ -38,7 +38,7 @@
       }
     },
     events: {
-      updateTheme (theme) {
+      updateTopBarTheme (theme) {
         this.theme = theme
       }
     }

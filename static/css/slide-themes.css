@@ -1,10 +1,21 @@
+.light {
+  background-color: #EEEEEE;
+  color: black;
+}
+
+.light pre {
+  background-color: white;
+  color: #424242;
+}
+
 .dark {
   background-color: #212121;
   color: white;
 }
 
-.dark pre, code {
+.dark pre {
   background-color: #424242;
+  color: white;
 }
 
 .dark .mermaid {
@@ -20,16 +31,9 @@
   color: white;
 }
 
-.red pre, code {
+.red pre {
   background-color: white;
-}
-
-.red .mermaid {
-  background-color: #E0E0E0;
-}
-
-.red table {
-  color: black;
+  color: #424242;
 }
 
 .pink {
@@ -37,14 +41,87 @@
   color: white;
 }
 
-.pink pre, code {
+.pink pre {
   background-color: white;
+  color: #424242;
 }
 
-.pink .mermaid {
-  background-color: #E0E0E0;
+.purple {
+  background-color: #9C27B0;
+  color: white;
 }
 
-.pink table {
-  color: black;
+.purple pre {
+  background-color: white;
+  color: #424242;
+}
+
+.blue {
+  background-color: #2196F3;
+  color: white;
+}
+
+.blue pre {
+  background-color: white;
+  color: #424242;
+}
+
+.green {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.green pre {
+  background-color: white;
+  color: #424242;
+}
+
+.lightgreen {
+  background-color: #8BC34A;
+  color: white;
+}
+
+.lightgreen pre {
+  background-color: white;
+  color: #424242;
+}
+
+.lime {
+  background-color: #CDDC39;
+  color: white;
+}
+
+.lime pre {
+  background-color: white;
+  color: #424242;
+}
+
+.yellow {
+  background-color: #FFEB3B;
+  color: white;
+}
+
+.yellow pre {
+  background-color: white;
+  color: #424242;
+}
+
+.amber {
+  background-color: #FFC107;
+  color: white;
+}
+
+.amber pre {
+  background-color: white;
+  color: #424242;
+}
+
+.orange {
+  background-color: #FF9800;
+  color: white;
+}
+
+.orange pre {
+  background-color: white;
+  color: #424242;
 }

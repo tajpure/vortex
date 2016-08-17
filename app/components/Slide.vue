@@ -15,22 +15,24 @@
       'slide.content': {
         handler: function (val, oldVal) {
           this.updateMetadata(val)
+          if (this.show) {
+            this.$dispatch('transferTo', 'updateTopBarTheme', this.theme)
+          }
         }
       },
       'slide.show': {
         handler: function (val, oldVal) {
           this.updateMetadata(this.slide.content)
           this.triggerAnimate(val)
+          if (val) {
+            this.$dispatch('transferTo', 'updateTopBarTheme', this.theme)
+          }
         }
       },
       'exportMode': {
         handler: function (val, oldVal) {
           this.animate = val ? '' : this.animate
-        }
-      },
-      'theme': {
-        handler: function (val, oldVal) {
-          this.$dispatch('transferTo', 'updateTheme', val)
+          this.show = val
         }
       }
     },
@@ -77,7 +79,7 @@
         const curIndex = this.slide.index
         if (metaRegex.test(value)) {
           const metadata = this.parseMetadata(curIndex, value.match(metaRegex)[0])
-          this.animateInOut = this.getAnimateInOut(metadata.animate)
+          this.animateInOut = this.getAnimateInOut(metadata.animateInOut)
           this.theme = metadata.theme
           window.vortex_metadata[curIndex] = metadata
         } else {
@@ -87,47 +89,35 @@
         }
       },
       extendMetadataFromLast () {
-        const curIndex = this.slide.index
-        let pastIndex = curIndex - 1
+        let pastIndex = this.slide.index - 1
+        let lastAnimate = ''
+        let lastTheme = ''
         while (pastIndex >= 0) {
-          if (window.vortex_metadata[pastIndex]) {
+          const lastMatedata = window.vortex_metadata[pastIndex]
+          if (lastMatedata) {
+            lastAnimate = lastMatedata.animateInOut
+            lastTheme = lastMatedata.theme
+          }
+          if (lastAnimate !== '' && lastTheme !== '') {
             break
           }
           pastIndex--
         }
-        if (window.vortex_metadata[pastIndex]) {
-          const metadata = window.vortex_metadata[pastIndex]
-          if (this.animate === '') {
-            this.animate = metadata.animate
-          }
-          if (this.theme === '') {
-            this.theme = metadata.theme
-          }
+        if (this.animateInOut.in === '') {
+          this.animateInOut = this.getAnimateInOut(lastAnimate)
+        }
+        if (this.theme === '') {
+          this.theme = lastTheme
         }
       },
       parseMetadata (index, metadata) {
-        const pastMetadata = window.vortex_metadata[index - 1]
+        let metaObj = {animateInOut: '', theme: ''}
         if (metadata) {
-          let metaObj = {animate: '', theme: ''}
           const obj = this.metadataToJson(metadata)
-          if (obj.animate) {
-            metaObj.animate = obj.animate
-          } else {
-            if (pastMetadata) {
-              metaObj.animate = pastMetadata.animate
-            }
-          }
-          if (obj.theme) {
-            metaObj.theme = obj.theme
-          } else {
-            if (pastMetadata) {
-              metaObj.animate = pastMetadata.animate
-            }
-          }
-          return metaObj
-        } else {
-          return pastMetadata
+          metaObj.animateInOut = obj.animate ? obj.animate : ''
+          metaObj.theme = obj.theme ? obj.theme : ''
         }
+        return metaObj
       },
       metadataToJson (metadata) {
         const trimData = metadata.slice(4, -3).trim()
@@ -135,7 +125,6 @@
         try {
           return JSON.parse(jsonStr)
         } catch (e) {
-          console.error('parse error!')
           return {animate: '', theme: ''}
         }
       },
@@ -150,14 +139,22 @@
         let self = this
         if (show) {
           self.animate = this.animateInOut.in
-          window.setTimeout(() => {
+          if (!self.animate) {
             self.show = true
-          }, 300)
+          } else {
+            window.setTimeout(() => {
+              self.show = true
+            }, 300)
+          }
         } else {
           self.animate = this.animateInOut.out
-          window.setTimeout(() => {
+          if (!self.animate) {
             self.show = false
-          }, 300)
+          } else {
+            window.setTimeout(() => {
+              self.show = false
+            }, 300)
+          }
         }
       }
     }
