@@ -59,7 +59,7 @@
           this.$broadcast('startExportMode')
           ipcRenderer.send('export-to-pdf', {
             marginsType: 1,
-            pageSize: 'Letter',
+            pageSize: 'A4',
             printBackground: true,
             landscape: true
           })
