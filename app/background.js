@@ -7,7 +7,6 @@ const VortexMenu = require('./vortex/menu.js')
 const WindowManager = require('./vortex/window_manager.js')
 const WindowStat = require('./vortex/window_state.js')
 
-
 function openFile (fileName) {
   let newWindow = WindowManager.newWindow(fileName)
   newWindow.webContents.on('did-finish-load', () => {
