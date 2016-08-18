@@ -7,6 +7,21 @@ const VortexMenu = require('./vortex/menu.js')
 const WindowManager = require('./vortex/window_manager.js')
 const WindowStat = require('./vortex/window_state.js')
 
+
+function openFile (fileName) {
+  let newWindow = WindowManager.newWindow(fileName)
+  newWindow.webContents.on('did-finish-load', () => {
+    fs.readFile(fileName, 'utf-8', (err, data) => {
+      if (err) {
+        console.error(err)
+        dialog.showErrorBox('File Read Error', err.message)
+      } else {
+        newWindow.webContents.send('open-file', data)
+      }
+    })
+  })
+}
+
 app.on('ready', () => {
   const state = WindowStat('Untitled', {
     height: 600,
@@ -14,24 +29,9 @@ app.on('ready', () => {
     x: 180,
     y: 380
   })
-  if (state.lastItem) {
+  if (state.lastItem && state.lastItem !== 'Untitled') {
     const fileName = state.lastItem
-    console.log(fileName)
-    let newWindow = WindowManager.newWindow(fileName)
-    newWindow.webContents.on('did-finish-load', () => {
-      try {
-        fs.readFile(fileName, 'utf-8', (err, data) => {
-          if (err) {
-            console.error(err)
-            dialog.showErrorBox('File Read Error', err.message)
-          } else {
-            newWindow.webContents.send('open-file', data)
-          }
-        })
-      } catch (e) {
-        console.log(fileName + ' not exists.')
-      }
-    })
+    openFile(fileName)
   } else {
     WindowManager.newWindow('Untitled')
   }
@@ -43,16 +43,7 @@ app.on('ready', () => {
     openFile: (fileNames, focusedWindow) => {
       if (!fileNames || !focusedWindow) return
       const fileName = fileNames[0]
-      let newWindow = WindowManager.newWindow(fileName)
-      newWindow.webContents.on('did-finish-load', () => {
-        fs.readFile(fileName, 'utf-8', (err, data) => {
-          if (err) {
-            console.error(err)
-            dialog.showErrorBox('File Read Error', err.message)
-          }
-          newWindow.webContents.send('open-file', data)
-        })
-      })
+      openFile(fileName)
     },
     saveFile: (fileName, focusedWindow) => {
       if (!fileName || !focusedWindow) return
