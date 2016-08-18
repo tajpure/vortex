@@ -1,6 +1,6 @@
 {
-  "name": "vortex-editor",
-  "version": "0.1.0",
-  "description": "A presentation editor.",
+  "name": "vortex",
+  "version": "1.0.0",
+  "description": "A powerful presentation tool.",
   "main": "background.js"
 }
