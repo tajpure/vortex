@@ -5,9 +5,35 @@ const dialog = electron.dialog
 const fs = require('fs')
 const VortexMenu = require('./vortex/menu.js')
 const WindowManager = require('./vortex/window_manager.js')
+const WindowStat = require('./vortex/window_state.js')
 
 app.on('ready', () => {
-  WindowManager.newWindow('Untitled')
+  const state = WindowStat('Untitled', {
+    height: 600,
+    width: 1200,
+    x: 180,
+    y: 380
+  })
+  if (state.lastItem) {
+    const fileName = state.lastItem
+    console.log(fileName)
+    let newWindow = WindowManager.newWindow(fileName)
+    newWindow.webContents.on('did-finish-load', () => {
+      try {
+        fs.readFile(fileName, 'utf-8', (err, data) => {
+          if (err) {
+            console.error(err)
+            dialog.showErrorBox('File Read Error', err.message)
+          }
+          newWindow.webContents.send('open-file', data)
+        })
+      } catch (e) {
+        console.log(fileName + ' not exists.')
+      }
+    })
+  } else {
+    WindowManager.newWindow('Untitled')
+  }
 
   VortexMenu({
     newWindow: () => {

@@ -1,13 +1,15 @@
 const app = require('electron').app
 const fs = require('fs')
 
-module.exports = (name, defaults) => {
+module.exports = (filename, defaults) => {
   let isSaved = false
   let userDataDir = app.getPath('userData')
   const stateStoreFile = userDataDir + '/window-state.json'
   let state = {
     width: defaults.width,
-    height: defaults.height
+    height: defaults.height,
+    x: defaults.x,
+    y: defaults.y
   }
 
   try {
@@ -26,6 +28,7 @@ module.exports = (name, defaults) => {
       state.width = size[0]
       state.height = size[1]
     }
+    state.lastItem = filename
     state.isMaximized = win.isMaximized()
     fs.writeFileSync(stateStoreFile, JSON.stringify(state))
   }
@@ -41,6 +44,7 @@ module.exports = (name, defaults) => {
     get visibility () { return state.visibility },
     set visibility (val) { state.visibility = val },
     saveState: saveState,
-    get isSaved () { return isSaved }
+    get isSaved () { return isSaved },
+    get lastItem () { return state.lastItem }
   }
 }

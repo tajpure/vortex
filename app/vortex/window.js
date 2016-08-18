@@ -4,16 +4,18 @@ const shell = electron.shell
 const dialog = electron.dialog
 const path = require('path')
 const util = require('./util.js')
-const windowStat = require('./window_state.js')
+const WindowStat = require('./window_state.js')
 // const locale = require('./locale.js')
 
 module.exports = (fileName) => {
   let isSaved = true
   const title = util.fileNameToTitle(fileName)
 
-  const state = windowStat(fileName, {
+  const state = WindowStat(fileName, {
     height: 600,
-    width: 1200
+    width: 1200,
+    x: 180,
+    y: 380
   })
 
   let curWindow = new BrowserWindow({
