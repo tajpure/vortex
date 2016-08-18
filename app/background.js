@@ -24,8 +24,9 @@ app.on('ready', () => {
           if (err) {
             console.error(err)
             dialog.showErrorBox('File Read Error', err.message)
+          } else {
+            newWindow.webContents.send('open-file', data)
           }
-          newWindow.webContents.send('open-file', data)
         })
       } catch (e) {
         console.log(fileName + ' not exists.')

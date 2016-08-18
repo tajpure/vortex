@@ -9,7 +9,9 @@ module.exports = (filename, defaults) => {
     width: defaults.width,
     height: defaults.height,
     x: defaults.x,
-    y: defaults.y
+    y: defaults.y,
+    isSlideMode: true,
+    visibility: true
   }
 
   try {
