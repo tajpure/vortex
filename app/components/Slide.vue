@@ -69,46 +69,18 @@
     },
     methods: {
       updateMetadata (value) {
-        if (!window.vortex_metadata) {
-          window.vortex_metadata = []
-        }
-        this.searchMetadataInContent(value)
-        this.extendMetadataFromLast()
+        this.parseMetadataInContent(value)
       },
-      searchMetadataInContent (value) {
+      parseMetadataInContent (value) {
         const metaRegex = /<!--.*?-->/g
         const curIndex = this.slide.index
         if (metaRegex.test(value)) {
           const metadata = this.parseMetadata(curIndex, value.match(metaRegex)[0])
           this.animateInOut = this.getAnimateInOut(metadata.animateInOut)
           this.theme = metadata.theme
-          window.vortex_metadata[curIndex] = metadata
         } else {
           this.animateInOut = {in: '', out: ''}
           this.theme = ''
-          window.vortex_metadata[curIndex] = window.vortex_metadata[curIndex - 1]
-        }
-      },
-      extendMetadataFromLast () {
-        let pastIndex = this.slide.index - 1
-        let lastAnimate = ''
-        let lastTheme = ''
-        while (pastIndex >= 0) {
-          const lastMatedata = window.vortex_metadata[pastIndex]
-          if (lastMatedata) {
-            lastAnimate = (lastAnimate === '') ? lastMatedata.animateInOut : lastAnimate
-            lastTheme = (lastTheme === '') ? lastMatedata.theme : lastTheme
-          }
-          if (lastAnimate !== '' && lastTheme !== '') {
-            break
-          }
-          pastIndex--
-        }
-        if (this.animateInOut.in === '') {
-          this.animateInOut = this.getAnimateInOut(lastAnimate)
-        }
-        if (this.theme === '') {
-          this.theme = lastTheme
         }
       },
       parseMetadata (index, metadata) {

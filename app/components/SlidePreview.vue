@@ -44,7 +44,14 @@
       updateSlides: function (value, index) {
         const slideArray = this.parseSlideArray(value)
         let slides = []
+        let lastMatedata = ''
         for (let i in slideArray) {
+          const matedata = this.getMetadata(slideArray[i])
+          if (!matedata) {
+            slideArray[i] = lastMatedata + slideArray[i]
+          } else {
+            lastMatedata = matedata
+          }
           slides.push({index: i, content: slideArray[i], show: false})
         }
         this.slides = slides
@@ -122,6 +129,11 @@
       parseSlideArray (value) {
         const html = marked(value)
         return (value === null) ? [] : html.split('<hr>')
+      },
+      getMetadata (value) {
+        const metaRegex = /<!--.*?-->/g
+        if (!metaRegex.test(value) || !value) return
+        return value.match(metaRegex)[0]
       }
     }
   }

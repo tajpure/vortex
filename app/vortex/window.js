@@ -2,14 +2,13 @@ const electron = require('electron')
 const BrowserWindow = electron.BrowserWindow
 const shell = electron.shell
 const dialog = electron.dialog
-const ipcMain = electron.ipcMain
 const path = require('path')
 const util = require('./util.js')
 const windowStat = require('./window_state.js')
 // const locale = require('./locale.js')
 
 module.exports = (fileName) => {
-  let contentChanged = false
+  let isSaved = true
   const title = util.fileNameToTitle(fileName)
 
   const state = windowStat(fileName, {
@@ -45,38 +44,6 @@ module.exports = (fileName) => {
     shell.openExternal(url)
   })
 
-  ipcMain.on('content-changed', (e, winId) => {
-    if (!curWindow) return
-    const title = curWindow.getTitle()
-    if (curWindow.id === winId) {
-      curWindow.setTitle(util.addStarOnTitle(title))
-      contentChanged = true
-    }
-  })
-
-  ipcMain.on('content-saved', (e, winId) => {
-    if (!curWindow) return
-    const title = curWindow.getTitle()
-    if (curWindow.id === winId) {
-      curWindow.setTitle(util.removeStarOnTitle(title))
-      contentChanged = false
-    }
-  })
-
-  ipcMain.on('update-slide-mode', (e, winId, isSlideMode) => {
-    if (!curWindow) return
-    if (curWindow.id === winId) {
-      state.isSlideMode = isSlideMode
-    }
-  })
-
-  ipcMain.on('update-visibility', (e, winId, visibility) => {
-    if (!curWindow) return
-    if (curWindow.id === winId) {
-      state.visibility = visibility
-    }
-  })
-
   curWindow.webContents.on('did-finish-load', () => {
     curWindow.webContents.send('set-window-id', curWindow.id)
     curWindow.webContents.send('set-slide-mode', state.isSlideMode)
@@ -84,7 +51,7 @@ module.exports = (fileName) => {
   })
 
   curWindow.on('close', (event) => {
-    if (contentChanged) {
+    if (!isSaved) {
       event.preventDefault()
       const title = curWindow.getTitle()
       const fileName = util.titleToFileBase(title)
@@ -138,9 +105,15 @@ module.exports = (fileName) => {
     }
   })
 
-  curWindow.on('closed', () => {
+  curWindow.on('closed', (event) => {
+    event.preventDefault()
     curWindow = null
   })
 
-  return curWindow
+  return {
+    get window () { return curWindow },
+    state: state,
+    get needToSave () { return !isSaved },
+    set needToSave (val) { isSaved = !val }
+  }
 }

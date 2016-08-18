@@ -4,28 +4,19 @@ const ipcMain = electron.ipcMain
 const dialog = electron.dialog
 const fs = require('fs')
 const VortexMenu = require('./vortex/menu.js')
-const VortexWindow = require('./vortex/window.js')
+const WindowManager = require('./vortex/window_manager.js')
 
 app.on('ready', () => {
-  VortexWindow('Untitled')
-
-  ipcMain.on('save-file', (event, fileName, data) => {
-    fs.writeFile(fileName, data, (err) => {
-      if (err) {
-        console.error(err)
-        dialog.showErrorBox('File Save Error', err.message)
-      }
-    })
-  })
+  WindowManager.newWindow('Untitled')
 
   VortexMenu({
     newWindow: () => {
-      VortexWindow('Untitled')
+      WindowManager.newWindow('Untitled')
     },
     openFile: (fileNames, focusedWindow) => {
       if (!fileNames || !focusedWindow) return
       const fileName = fileNames[0]
-      let newWindow = VortexWindow(fileName)
+      let newWindow = WindowManager.newWindow(fileName)
       newWindow.webContents.on('did-finish-load', () => {
         fs.readFile(fileName, 'utf-8', (err, data) => {
           if (err) {
