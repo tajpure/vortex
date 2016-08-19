@@ -24,7 +24,8 @@ module.exports = (fileName) => {
     width: state.width,
     x: state.x,
     y: state.y,
-    icon: path.join(__dirname, '/../assets/icon.png')
+    icon: path.join(__dirname, '/../assets/icon.ico'),
+    autoHideMenuBar: true
   })
 
   if (state.isMaximized) {
