@@ -1,5 +1,6 @@
 const app = require('electron').app
 const fs = require('fs')
+const locale = require('./locale.js')
 
 module.exports = (filename, defaults) => {
   let isSaved = false
@@ -11,14 +12,17 @@ module.exports = (filename, defaults) => {
     x: defaults.x,
     y: defaults.y,
     isSlideMode: true,
-    visibility: true,
-    lastItem: filename
+    visibility: true
   }
 
   try {
     state = JSON.parse(fs.readFileSync(stateStoreFile, 'utf8'))
   } catch (e) {
     console.log('create ' + stateStoreFile)
+  }
+
+  if (filename && filename !== locale.Untitled) {
+    state.lastItem = filename
   }
 
   const saveState = (win) => {
