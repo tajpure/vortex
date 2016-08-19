@@ -11,7 +11,8 @@ module.exports = (filename, defaults) => {
     x: defaults.x,
     y: defaults.y,
     isSlideMode: true,
-    visibility: true
+    visibility: true,
+    lastItem: filename
   }
 
   try {
@@ -30,7 +31,6 @@ module.exports = (filename, defaults) => {
       state.width = size[0]
       state.height = size[1]
     }
-    state.lastItem = filename
     state.isMaximized = win.isMaximized()
     fs.writeFileSync(stateStoreFile, JSON.stringify(state))
   }
@@ -45,8 +45,9 @@ module.exports = (filename, defaults) => {
     set isSlideMode (val) { state.isSlideMode = val },
     get visibility () { return state.visibility },
     set visibility (val) { state.visibility = val },
-    saveState: saveState,
     get isSaved () { return isSaved },
-    get lastItem () { return state.lastItem }
+    get lastItem () { return state.lastItem },
+    set lastItem (val) { state.lastItem = val },
+    saveState: saveState
   }
 }

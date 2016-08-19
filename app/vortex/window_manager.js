@@ -51,7 +51,10 @@ class WindowManager {
       })
     })
 
-    ipcMain.on('save-file', (event, fileName, data) => {
+    ipcMain.on('save-file', (e, winId, fileName, data) => {
+      self.findWindow(winId, (curWindow) => {
+        curWindow.state.lastItem = fileName
+      })
       fs.writeFile(fileName, data, (err) => {
         if (err) {
           console.error(err)

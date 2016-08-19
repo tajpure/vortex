@@ -83,7 +83,7 @@
       })
       ipcRenderer.on('trigger-save-file', (event, fileName) => {
         const content = this.editor.getValue()
-        ipcRenderer.send('save-file', fileName, content)
+        ipcRenderer.send('save-file', this.winId, fileName, content)
         ipcRenderer.send('content-saved', self.winId)
       })
       this.$dispatch('transferTo', 'focusEditor')
