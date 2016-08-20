@@ -35,6 +35,16 @@
           // Show all the slides when under export mode.
           this.show = val ? true : this.show
         }
+      },
+      'show': {
+        handler: function (val, oldVal) {
+          if (val) {
+            try {
+              window.mermaid.init()
+            } catch (e) {
+            }
+          }
+        }
       }
     },
     data () {

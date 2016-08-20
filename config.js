@@ -8,7 +8,7 @@ module.exports = {
     productionSourceMap: true
   },
   release: {
-    platform: 'linux'
+    platform: 'all'
   },
   dev: {
     port: 8080,

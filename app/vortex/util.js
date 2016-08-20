@@ -100,7 +100,6 @@ module.exports = {
     let originCode = renderer.code.bind(renderer)
     renderer.code = (code, language) => {
       if (code.match(/^sequenceDiagram/) || code.match(/^graph/) || code.match(/^gantt/) || code.match(/^classDiagram/)) {
-        window.mermaid.init()
         return '<div class="mermaid">' + code + '</div>'
       } else {
         return originCode(code, language)
