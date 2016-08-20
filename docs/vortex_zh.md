@@ -1,4 +1,4 @@
-<!-- animate:zoom theme:light-->
+<!-- animate:zoom theme:light -->
 # Vortex
  一款使用 Markdown 进行幻灯片制作与演示的开源软件， **“通过易读易写的纯文本格式编写简洁的幻灯片”**
 
@@ -77,7 +77,7 @@ def fib(n):
 ---
 ## 流程图
 ```
-graph LR
+graph TD
  A[Hard edge] -->|Link text| B(Round edge)
     B --> C{Decision}
     C -->|One| D[Result one]
