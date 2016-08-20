@@ -1,4 +1,4 @@
-<!-- animate:zoom theme:dark-->
+<!-- animate:zoom theme:light-->
 # Vortex
  一款使用 Markdown 进行幻灯片制作与演示的开源软件， **“通过易读易写的纯文本格式编写简洁的幻灯片”**
 
@@ -13,14 +13,14 @@
 * 全平台支持，包括 Linux、OSX、Windows
 
 ---
-<!-- animate:rotateDownLeft theme:dark -->
+<!-- animate:rotateDownLeft theme:light -->
 ## Markdown 语法
 
 
 > Markdown 语法可以参考：http://wowubuntu.com/markdown/
 
 ---
-<!-- animate:rotateUpLeft theme:dark -->
+<!-- animate:rotateUpLeft theme:light -->
 ## 切分幻灯片
 通过三条中划线进行切分
 ```
@@ -34,7 +34,7 @@
 
 ---
 ## 动画与主题
-<!-- animate:rotateDownRight theme:dark -->
+<!-- animate:rotateDownRight theme:light -->
 
 * 内置了丰富的动画效果和主题，参考 https://github.com/tajpure/vortex#metadata
 
@@ -44,7 +44,7 @@
 ```
 
 ---
-<!-- animate:rotateUpRight theme:dark -->
+<!-- animate:rotateUpRight theme:light -->
 ## 部分编辑器快捷键
 * Alt，显示默认隐藏菜单 `其它快捷键可以在菜单里找到`
 * Ctrl + F 文本搜索
@@ -55,7 +55,7 @@
 * F11 进入或退出全屏
 
 ---
-<!-- animate:zoom theme:dark -->
+<!-- animate:zoom theme:light -->
 ## 代码高亮
 ``` python
 def fib(n):
@@ -84,8 +84,9 @@ graph LR
     C -->|Two| E[Result two]
 ```
 
+
 ---
-<!-- animate:rotateUpLeft  theme:dark -->
+<!-- animate:rotateUpLeft theme:light -->
 ## 序列图
 ```
 sequenceDiagram
@@ -94,7 +95,7 @@ sequenceDiagram
 ```
 
 ---
-<!-- animate:rotateUpLeft theme:dark -->
+<!-- animate:rotateUpLeft theme:light -->
 ## 甘特图
 ```
 gantt

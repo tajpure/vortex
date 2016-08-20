@@ -1,5 +1,5 @@
 <template>
-  <section class="slide" v-show="show" v-bind:class="[theme]">
+  <section class="slide" v-bind:class="[theme, show ? 'show' : 'hidden']">
     <div v-html="slide.content" class="markdown-body animated"
     v-bind:class="[animate, theme, fullScreenMode ? 'full-screen': 'not-full-screen']">
     <div>
@@ -34,16 +34,6 @@
           this.animate = val ? '' : this.animate
           // Show all the slides when under export mode.
           this.show = val ? true : this.show
-        }
-      },
-      'show': {
-        handler: function (val, oldVal) {
-          if (val) {
-            try {
-              window.mermaid.init()
-            } catch (e) {
-            }
-          }
         }
       }
     },
@@ -127,7 +117,7 @@
           } else {
             window.setTimeout(() => {
               self.show = true
-            }, 300)
+            }, 500)
           }
         } else {
           self.animate = this.animateInOut.out
@@ -184,5 +174,14 @@
   .mermaid {
     background-color: #EEEEEE;
   }
+}
+
+.show {
+  visibility: visible;
+}
+
+.hidden {
+  position: fixed;
+  visibility: hidden;
 }
 </style>
