@@ -7,7 +7,7 @@
     <div class="preview" v-show="!editorFullScreenMode"
       v-bind:class="{ 'full-screen': previewFullScreenMode }">
       <textpreview v-show='!slideMode'
-      v-bind:class="{ 'overflow-y': !previewFullScreenMode }"></textpreview>
+      v-bind:class="{ 'overflow-y': !exportMode }"></textpreview>
       <slidepreview v-show='slideMode'></slidepreview>
     </div>
   </div>
@@ -24,7 +24,8 @@
       return {
         slideMode: true,
         previewFullScreenMode: false,
-        editorFullScreenMode: false
+        editorFullScreenMode: false,
+        exportMode: false
       }
     },
     components: {
@@ -53,6 +54,7 @@
     },
     methods: {
       startExportMode () {
+        this.exportMode = true
         this.previewFullScreenMode = true
         if (this.slideMode) {
           this.$broadcast('enterFullScreen')
@@ -68,6 +70,7 @@
         }
       },
       endExportMode () {
+        this.exportMode = false
         if (this.slideMode) {
           this.$broadcast('endExportMode')
           this.previewFullScreenMode = false
