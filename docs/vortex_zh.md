@@ -40,7 +40,7 @@
 
 * 通过在帧内声明如下注释来定义动画与主题
 ```
-<!-- animate:rotateDownLeft theme:dark -->
+<!-- animate:rotateDownLeft theme:light -->
 ```
 
 ---

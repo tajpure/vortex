@@ -1,3 +1,4 @@
+'use stricts'
 const app = require('electron').app
 const fs = require('fs')
 const locale = require('./locale.js')

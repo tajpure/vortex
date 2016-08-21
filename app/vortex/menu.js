@@ -1,3 +1,4 @@
+'use stricts'
 const electron = require('electron')
 const Menu = electron.Menu
 const dialog = electron.dialog

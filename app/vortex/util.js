@@ -1,3 +1,4 @@
+'use stricts'
 const path = require('path')
 const locale = require('./locale.js')
 

@@ -112,10 +112,22 @@
         let self = this
         if (show) {
           self.animate = this.animateInOut.in
-          self.show = true
+          if (!self.animate) {
+            self.show = true
+          } else {
+            window.setTimeout(() => {
+              self.show = true
+            }, 300)
+          }
         } else {
           self.animate = this.animateInOut.out
-          self.show = false
+          if (!self.animate) {
+            self.show = false
+          } else {
+            window.setTimeout(() => {
+              self.show = false
+            }, 300)
+          }
         }
       }
     }

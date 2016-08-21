@@ -1,3 +1,4 @@
+'use stricts'
 const electron = require('electron')
 const BrowserWindow = electron.BrowserWindow
 const shell = electron.shell

@@ -7,6 +7,7 @@ var packager = require('electron-packager')
 var appManifest = require('../app/package.json')
 var devManifest = require('../package.json')
 var config = require('../config')
+var path = require('path')
 
 function getElectronVersion () {
   var v = config.release.electronVersion ||
@@ -35,7 +36,8 @@ var packagerConfig = {
   overwrite: true,
   ignore: Object.keys((appManifest.devDependencies || {})).map(function (name) {
     return '/node_modules/' + name + '($|/)'
-  })
+  }),
+  icon:  path.join(__dirname, 'resources/windows/icon.ico')
 }
 
 packager(packagerConfig, function (err, appPath) {

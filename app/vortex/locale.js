@@ -1,3 +1,4 @@
+'use stricts'
 module.exports = {
   lang: 'en',
   langArray: ['en'],

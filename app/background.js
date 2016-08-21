@@ -1,3 +1,4 @@
+'use stricts'
 const electron = require('electron')
 const app = electron.app
 const ipcMain = electron.ipcMain
