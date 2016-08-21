@@ -15,7 +15,7 @@ A powerful markdown presentation tool.
 
 # Getting Started
 You can open this [file](https://raw.githubusercontent.com/tajpure/vortex/master/docs/introduction.md)
-by Vortex to know how to use it.
+by Vortex to learn how to use it.
 
 # Animates
 * flash
@@ -75,7 +75,7 @@ by Vortex to know how to use it.
 * orange
 * brown
 
-Acknowledgements:
+# Acknowledgements:
 * [Electron](http://electron.atom.io/)
 * [Vue](http://vuejs.org/)
 * [Katex](https://github.com/Khan/KaTeX)
