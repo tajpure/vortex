@@ -14,7 +14,7 @@ A powerful markdown presentation tool.
 * Support Linux, OSX, Windows
 
 # Getting Started
-You can open this [file](https://raw.githubusercontent.com/tajpure/vortex/master/docs/introduction.md)
+You can open this [file](https://raw.githubusercontent.com/tajpure/vortex/master/docs/Introduction.md)
 by Vortex to know how to use it.
 
 # Animates
