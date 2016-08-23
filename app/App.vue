@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
-    <div class="editor" v-show="!previewFullScreenMode"
+    <div class="editor animated fadeIn" v-show="!previewFullScreenMode"
       v-bind:class="{ 'full-screen': editorFullScreenMode }">
       <editor></editor>
     </div>
-    <div class="preview" v-show="!editorFullScreenMode"
+    <div class="preview animated fadeIn" v-show="!editorFullScreenMode"
       v-bind:class="{ 'full-screen': previewFullScreenMode }">
       <textpreview v-show='!slideMode'
       v-bind:class="{ 'overflow-y': !exportMode }"></textpreview>
@@ -94,10 +94,16 @@
       enterPreviewFullScreen: function () {
         this.previewFullScreenMode = true
         this.$broadcast('enterFullScreen')
+        window.setTimeout(() => {
+          ipcRenderer.send('set-full-screen', this.winId, true)
+        }, 200)
       },
       exitPreviewFullScreen: function () {
         this.previewFullScreenMode = false
         this.$broadcast('exitFullScreen')
+        window.setTimeout(() => {
+          ipcRenderer.send('set-full-screen', this.winId, false)
+        }, 200)
       },
       closePreview: function () {
         this.editorFullScreenMode = true

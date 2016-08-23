@@ -52,6 +52,12 @@ class WindowManager {
       })
     })
 
+    ipcMain.on('set-full-screen', (e, winId, isFullScreen) => {
+      self.findWindow(winId, (curWindow) => {
+        curWindow.window.setFullScreen(isFullScreen)
+      })
+    })
+
     ipcMain.on('save-file', (e, winId, fileName, data) => {
       self.findWindow(winId, (curWindow) => {
         curWindow.state.lastItem = fileName
