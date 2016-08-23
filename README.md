@@ -1,9 +1,6 @@
 # Vortex
 A powerful markdown presentation tool.
 
-# Screenshot
-![Demo](./docs/images/mac.png)
-
 # Features
 * Markdown Syntax
 * Beautiful Animates & Themes
@@ -17,66 +14,32 @@ A powerful markdown presentation tool.
 https://github.com/tajpure/vortex/releases
 
 # Getting Started
-You can open this [file](https://raw.githubusercontent.com/tajpure/vortex/master/docs/Introduction.md)
-by Vortex to know how to use it.
+Visit [here](https://github.com/tajpure/vortex/wiki) to kown how to use Vortex.
 
-# Animates
-* flash
-* rubberBand
-* shake
-* headShake
-* swing
-* tada
-* wobble
-* jello
-* bounce
-* bounceDown
-* bounceLeft
-* bounceRight
-* bounceUp
-* fade
-* fadeDown
-* fadeDownBig
-* fadeLeft
-* fadeLeftBig
-* fadeRight
-* fadeRightBig
-* fadeUp
-* fadeUpBig
-* flipX
-* flipY
-* lightSpeed
-* rotate
-* rotateDownLeft
-* rotateDownRight
-* rotateUpLeft
-* rotateUpRight
-* hinge
-* roll
-* zoom
-* zoomDown
-* zoomLeft
-* zoomRight
-* zoomUp
-* slideDown
-* slideLeft
-* slideRight
-* slideUp
+# Screenshots
+## Presentation Mode
+![Demo](./docs/images/presentation.png)
 
-# Themes
-* light
-* dark
-* red
-* pink
-* purple
-* blue
-* green
-* lightgreen
-* lime
-* yellow
-* amber
-* orange
-* brown
+## Markdown Mode
+![Demo](./docs/images/markdown.png)
+
+## Without Preview
+![Demo](./docs/images/without_preview.png)
+
+# Contribute
+## Install dependencies
+```
+npm install
+```
+## Start
+```
+npm start
+```
+## Package
+You can change the release platform in config.js.
+```
+npm run release
+```
 
 # Acknowledgements:
 * [Electron](http://electron.atom.io/)

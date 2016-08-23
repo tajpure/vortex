@@ -29,7 +29,7 @@ Slide 1
 ---
 ## Animates & Themes
 
-* You can find all the animates and themes from https://github.com/tajpure/vortex
+* You can find all the animates and themes from [here](https://github.com/tajpure/vortex)
 
 * After declare this statement in the slides, the effect will be applied.
 ```
@@ -38,9 +38,9 @@ Slide 1
 
 ---
 ## Some useful shortcuts
-* Alt : Show the menu
-* Ctrl + F : Search
-* Ctrl + Shift + R : Replace
+* Alt : Show the menu (For Windows)
+* CmdOrCtrl + F : Search
+* (Ctrl + Shift + R) or (Cmd + Opt + F) : Replace
 * Alt + G : Jump to line
 * Esc : Exit preview full screen
 * ArrowLeft，ArrowUp : Previous slide
@@ -49,7 +49,7 @@ Slide 1
 > Other shortcuts you can find in the menu.
 
 ---
-## Syntax Highdark
+## Syntax Highlight
 ``` python
 def fib(n):
     a, b = 0, 1
@@ -70,7 +70,7 @@ Support TeX math，eg:
 ---
 ## Flowchart
 ```
-graph LR
+graph TD
  A[Hard edge] -->|Link text| B(Round edge)
     B --> C{Decision}
     C -->|One| D[Result one]
