@@ -42,6 +42,7 @@
     },
     events: {
       updateSlides: function (value, index) {
+        if (!window.isEditorOnFocus) return
         const slideArray = this.parseSlideArray(value)
         let slides = []
         let lastMatedata = ''
