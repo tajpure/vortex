@@ -185,7 +185,7 @@ module.exports = (options) => {
     }
   ]
   if (process.platform === 'darwin') {
-    const name = require('electron').remote.app.getName()
+    const name = require('electron').app.getName()
     template.unshift({
       label: name,
       submenu: [
