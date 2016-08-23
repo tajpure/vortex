@@ -1,46 +1,42 @@
-<!-- animate:zoom theme:light -->
+<!-- animate:zoom theme:dark -->
 # Vortex
-#### A powerful markdown presentation tool.
- <i class="material-icons">build</i>  with <i style="color:red" class="material-icons">favorite</i> by [tajpure](https://github.com/tajpure)
+A powerful markdown presentation tool.
 
 ---
 ## Features
 * Markdown Syntax
 * Beautiful Animates & Themes
 * PDF Export
-* Syntax Highlight
+* Syntax Highdark
 * Flowchart & Sequence Diagram & Gant Diagram
 * Customize By CSS
 * Support Linux, OSX, Windows
 
 ---
-<!-- animate:rotateUpLeft theme:light -->
 ## Syntax
 Using [Markdown](https://daringfireball.net/projects/markdown/) write slides
 
 Split Slides
 ```
-Slide0
+Slide 0
 
 ---
 
-Slide1
+Slide 1
 ```
 > A blank line before `---` is needed.
 
 ---
 ## Animates & Themes
-<!-- animate:rotateDownRight theme:light -->
 
 * You can find all the animates and themes from https://github.com/tajpure/vortex
 
 * After declare this statement in the slides, the effect will be applied.
 ```
-<!-- animate:rotateDownRight theme:light -->
+<!-- animate:rotateDownRight theme:dark -->
 ```
 
 ---
-<!-- animate:rotateUpRight theme:light -->
 ## Some useful shortcuts
 * Alt : Show the menu
 * Ctrl + F : Search
@@ -53,8 +49,7 @@ Slide1
 > Other shortcuts you can find in the menu.
 
 ---
-<!-- animate:zoom theme:light -->
-## Syntax Highlight
+## Syntax Highdark
 ``` python
 def fib(n):
     a, b = 0, 1
@@ -84,7 +79,6 @@ graph LR
 
 
 ---
-<!-- animate:rotateUpLeft theme:light -->
 ## Sequence Diagram
 ```
 sequenceDiagram
@@ -93,7 +87,6 @@ sequenceDiagram
 ```
 
 ---
-<!-- animate:rotateUpLeft theme:light -->
 ## Gant Diagram
 ```
 gantt

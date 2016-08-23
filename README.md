@@ -1,8 +1,8 @@
 # Vortex
 A powerful markdown presentation tool.
 
-# Screenshots
-![Demo](./docs/images/demo.png)
+# Screenshot
+![Demo](./docs/images/mac.png)
 
 # Features
 * Markdown Syntax
@@ -12,6 +12,9 @@ A powerful markdown presentation tool.
 * Flowchart & Sequence Diagram & Gant diagram
 * Customize By CSS
 * Support Linux, OSX, Windows
+
+# Installation
+https://github.com/tajpure/vortex/releases
 
 # Getting Started
 You can open this [file](https://raw.githubusercontent.com/tajpure/vortex/master/docs/Introduction.md)
