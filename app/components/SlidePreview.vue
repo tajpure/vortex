@@ -110,6 +110,8 @@
         if (this.pageinfo.index > 0) {
           this.pageinfo.index--
         }
+        this.$broadcast('setReverse', this.pageinfo.index, true)
+        this.$broadcast('setReverse', this.pageinfo.index + 1, true)
         this.show(this.pageinfo.index)
       },
       exit () {

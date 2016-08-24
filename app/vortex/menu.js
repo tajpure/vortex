@@ -221,25 +221,28 @@ module.exports = (options) => {
     })
     template[3].submenu = [
       {
-        label: 'Close',
-        accelerator: 'CmdOrCtrl+W',
-        role: 'close'
+        label: 'Reload',
+        accelerator: 'CmdOrCtrl+R',
+        click (item, focusedWindow) {
+          if (focusedWindow) focusedWindow.reload()
+        }
       },
       {
-        label: 'Minimize',
-        accelerator: 'CmdOrCtrl+M',
-        role: 'minimize'
+        label: 'Toggle Developer Tools',
+        accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+        click (item, focusedWindow) {
+          if (focusedWindow) focusedWindow.webContents.toggleDevTools()
+        }
       },
       {
-        label: 'Zoom',
-        role: 'zoom'
-      },
-      {
-        type: 'separator'
-      },
-      {
-        label: 'Bring All to Front',
-        role: 'front'
+        label: 'Toggle Full Screen',
+        accelerator: 'F11',
+        click (item, focusedWindow) {
+          if (focusedWindow) {
+            isFullScreen = !isFullScreen
+            focusedWindow.setFullScreen(isFullScreen)
+          }
+        }
       }
     ]
   }

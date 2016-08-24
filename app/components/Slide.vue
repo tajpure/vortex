@@ -44,7 +44,8 @@
         animate: '',
         animateInOut: {in: '', out: ''},
         theme: '',
-        show: false
+        show: false,
+        reverse: false
       }
     },
     ready () {
@@ -65,6 +66,11 @@
       },
       endExportMode: function () {
         this.exportMode = false
+      },
+      setReverse: function (index, val) {
+        if (parseInt(this.slide.index) === index) {
+          this.reverse = val
+        }
       }
     },
     methods: {
@@ -110,25 +116,27 @@
       },
       triggerAnimate (show) {
         let self = this
-        if (show) {
-          self.animate = this.animateInOut.in
-          if (!self.animate) {
-            self.show = true
-          } else {
-            window.setTimeout(() => {
-              self.show = true
-            }, 300)
-          }
+        self.animate = this.getCurrentAnimate(show)
+        if (!self.animate) {
+          self.show = show
         } else {
-          self.animate = this.animateInOut.out
-          if (!self.animate) {
-            self.show = false
-          } else {
-            window.setTimeout(() => {
-              self.show = false
-            }, 300)
-          }
+          window.setTimeout(() => {
+            self.show = show
+          }, 300)
         }
+      },
+      getCurrentAnimate (show) {
+        let animate = null
+        if (this.reverse) {
+          animate = show ? this.animateInOut.rIn : this.animateInOut.rOut
+          if (!animate) {
+            animate = show ? this.animateInOut.in : this.animateInOut.out
+          }
+          this.reverse = false
+        } else {
+          animate = show ? this.animateInOut.in : this.animateInOut.out
+        }
+        return animate
       }
     }
   }
