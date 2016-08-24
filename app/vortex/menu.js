@@ -185,40 +185,6 @@ module.exports = (options) => {
     }
   ]
   if (process.platform === 'darwin') {
-    const name = require('electron').app.getName()
-    template.unshift({
-      label: name,
-      submenu: [
-        {
-          role: 'about'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          role: 'services',
-          submenu: []
-        },
-        {
-          type: 'separator'
-        },
-        {
-          role: 'hide'
-        },
-        {
-          role: 'hideothers'
-        },
-        {
-          role: 'unhide'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          role: 'quit'
-        }
-      ]
-    })
     template[3].submenu = [
       {
         label: 'Reload',

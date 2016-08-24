@@ -1,4 +1,4 @@
-<!-- animate:zoom theme:dark -->
+<!-- animate:fadeUp theme:light -->
 # Vortex
 A powerful markdown presentation tool.
 
@@ -32,6 +32,7 @@ Slide 1
 * You can find all the animates and themes from [here](https://github.com/tajpure/vortex)
 
 * After declare this statement in the slides, the effect will be applied.
+
 ```
 <!-- animate:rotateDownRight theme:dark -->
 ```
