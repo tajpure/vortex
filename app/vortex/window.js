@@ -19,13 +19,19 @@ module.exports = (fileName) => {
     y: 380
   })
 
+  const getIconPath = () => {
+    return process.platform === 'win32'
+      ? path.join(__dirname, '/../assets/icon.ico')
+      : path.join(__dirname, '/../assets/icon.png')
+  }
+
   let curWindow = new BrowserWindow({
     title: title,
     height: state.height,
     width: state.width,
     x: state.x,
     y: state.y,
-    icon: path.join(__dirname, '/../assets/icon.ico'),
+    icon: getIconPath(),
     autoHideMenuBar: true
   })
 
