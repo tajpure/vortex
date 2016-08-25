@@ -1,12 +1,12 @@
 # Vortex
-A powerful markdown presentation tool.
+A markdown presentation tool.
 
 # Features
 * Markdown Syntax
 * Beautiful Animates & Themes
 * PDF Export
 * Syntax Highlight
-* Flowchart & Sequence Diagram & Gant Diagram
+* Flowchart & Sequence Diagram & Gant diagram
 * Customize By CSS
 * Support Linux, OSX, Windows
 
