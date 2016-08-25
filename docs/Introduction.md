@@ -1,13 +1,13 @@
 <!-- animate:fadeUp theme:light -->
 # Vortex
-A powerful markdown presentation tool.
+A markdown presentation tool.
 
 ---
 ## Features
 * Markdown Syntax
 * Beautiful Animates & Themes
 * PDF Export
-* Syntax Highdark
+* Syntax Highlight
 * Flowchart & Sequence Diagram & Gant Diagram
 * Customize By CSS
 * Support Linux, OSX, Windows
