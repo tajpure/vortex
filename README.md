@@ -6,7 +6,7 @@ A markdown presentation tool.
 * Beautiful Animates & Themes
 * PDF Export
 * Syntax Highlight
-* Flowchart & Sequence Diagram & Gant Diagram
+* Flowchart & Sequence Diagram & Gantt Diagram
 * Customize By CSS
 * Support Linux, OSX, Windows
 
