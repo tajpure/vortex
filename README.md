@@ -9,7 +9,7 @@ A markdown presentation tool.
 * TeX Math
 * Flowchart & Sequence Diagram & Gantt Chart
 * Customize By CSS
-* Support Linux, OSX, Windows
+* Support Linux, macOS, Windows
 
 # Installation
 https://github.com/tajpure/vortex/releases
