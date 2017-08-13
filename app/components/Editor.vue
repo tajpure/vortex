@@ -127,11 +127,11 @@
 <style>
 .CodeMirror {
   font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  height: calc(100% - 31.5px);
+  height: 100%;
   line-height: 1.5em;
   font-size: 15px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 20px 0 20px;
+  background-color: white !important;
 }
 .cm-link {
   text-decoration: none;

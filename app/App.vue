@@ -135,30 +135,41 @@
     height: 100%;
     padding: 0;
     margin: 0;
-    -webkit-backface-visibility: hidden;
   }
 
   .wrapper {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    height: 100%;
+
+    .title {
+      height: 32px;
+      width: 100%;
+      margin-top: 0;
+      -webkit-app-region: drag;
+    }
 
     .content {
         display: flex;
         flex-direction: row;
+        height: calc(100%);
+        width: 100%;
 
         .editor {
           width: 50%;
 
           ::-webkit-scrollbar-track {
-            background-color: #f5f5f5;
+            background-color: white;
           }
+
           ::-webkit-scrollbar {
-            width: 12px;
-            background-color: #f5f5f5;
+            width: 6px;
+            background-color: white;
           }
+
           ::-webkit-scrollbar-thumb {
             background-color: #616161;
+            border-radius: 20px;
           }
         }
 

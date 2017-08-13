@@ -1,27 +1,14 @@
 <template>
-  <ul class='title'>
-    <li v-on:click='switchMode' title='Mode' class='topbar-yellow'>
+  <ul class='menu'>
+    <li v-on:click='switchMode' title='Mode'>
       <i class='material-icons' v-show='isSlideMode'>computer</i>
       <i class='material-icons' v-show='!isSlideMode'>mode_edit</i>
     </li>
-    <li v-on:click='switchPreview' title='Preview' class='topbar-purple'>
+    <li v-on:click='switchPreview' title='Preview'>
       <i class='material-icons' v-show='!visibility'>visibility_off</i>
       <i class='material-icons' v-show='visibility'>visibility</i>
     </li>
-    <li v-on:click='enterPreviewFullScreen' title='Start' class='topbar-blue'>
-      <i class='material-icons'>slideshow</i>
-    </li>
-  </ul>
-  <ul class='menu' hidden="true">
-    <li v-on:click='switchMode' title='Mode' class='topbar-yellow'>
-      <i class='material-icons' v-show='isSlideMode'>computer</i>
-      <i class='material-icons' v-show='!isSlideMode'>mode_edit</i>
-    </li>
-    <li v-on:click='switchPreview' title='Preview' class='topbar-purple'>
-      <i class='material-icons' v-show='!visibility'>visibility_off</i>
-      <i class='material-icons' v-show='visibility'>visibility</i>
-    </li>
-    <li v-on:click='enterPreviewFullScreen' title='Start' class='topbar-blue'>
+    <li v-on:click='enterPreviewFullScreen' title='Start'>
       <i class='material-icons'>slideshow</i>
     </li>
   </ul>
@@ -93,22 +80,12 @@
 </script>
 
 <style lang="scss">
-.title {
-  background-color: white;
-  list-style: none;
-  padding: 3px;
-  margin: 0;
-  height: 18px;
-  width: 100%;
-  -webkit-app-region: drag;
-}
-
 .menu {
   background-color: white;
   list-style: none;
-  padding: 3px;
-  margin: 0;
-  height: 24px;
+  margin-top: 0;
+  float: right;
+  -webkit-app-region: drag;
 
   li {
     user-select: none;
@@ -116,30 +93,8 @@
     display: inline;
     color: #616161;
     cursor: pointer;
+    font-size: 12px;
   }
 
-  .topbar-green {
-    color: #8BC34A;
-  }
-
-  .topbar-red {
-    color: #F44336;
-  }
-
-  .topbar-yellow {
-    color: #FFEB3B;
-  }
-
-  .topbar-pink {
-    color: #E91E63;
-  }
-
-  .topbar-purple {
-    color: #9C27B0;
-  }
-
-  .topbar-blue {
-    color: #2196F3;
-  }
 }
 </style>
