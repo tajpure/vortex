@@ -1,5 +1,4 @@
 <template>
-  <toolbar></toolbar>
   <textarea id='editor'></textarea>
 </template>
 
@@ -11,7 +10,6 @@
   import '../../static/codemirror/addon/search/jump-to-line.js'
   import '../../static/codemirror/addon/search/matchesonscrollbar.js'
   import '../../static/codemirror/addon/dialog/dialog.js'
-  import toolbar from './ToolBar'
   import { ipcRenderer } from 'electron'
 
   export default {
@@ -24,9 +22,6 @@
         },
         deep: true
       }
-    },
-    components: {
-      toolbar
     },
     data () {
       return {
@@ -135,6 +130,8 @@
   height: calc(100% - 31.5px);
   line-height: 1.5em;
   font-size: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .cm-link {
   text-decoration: none;

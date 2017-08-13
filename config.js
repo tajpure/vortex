@@ -11,7 +11,7 @@ module.exports = {
     platform: 'all'
   },
   dev: {
-    port: 8080,
+    port: 2048,
     proxyTable: {
     },
     vueDevTools: false

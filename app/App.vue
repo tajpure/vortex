@@ -1,14 +1,19 @@
 <template>
   <div class="wrapper">
-    <div class="editor" v-show="!previewFullScreenMode"
-      v-bind:class="{ 'full-screen': editorFullScreenMode }">
-      <editor></editor>
+    <div class="title">
+      <toolbar></toolbar>
     </div>
-    <div class="preview" v-show="!editorFullScreenMode"
-      v-bind:class="{ 'full-screen': previewFullScreenMode }">
-      <textpreview v-show='!slideMode'
-      v-bind:class="{ 'overflow-y': !exportMode }"></textpreview>
-      <slidepreview v-show='slideMode'></slidepreview>
+    <div class="content">
+      <div class="editor" v-show="!previewFullScreenMode"
+        v-bind:class="{ 'full-screen': editorFullScreenMode }">
+        <editor></editor>
+      </div>
+      <div class="preview" v-show="!editorFullScreenMode"
+        v-bind:class="{ 'full-screen': previewFullScreenMode }">
+        <textpreview v-show='!slideMode'
+        v-bind:class="{ 'overflow-y': !exportMode }"></textpreview>
+        <slidepreview v-show='slideMode'></slidepreview>
+      </div>
     </div>
   </div>
 </template>
@@ -17,6 +22,7 @@
   import editor from './components/Editor'
   import slidepreview from './components/SlidePreview'
   import textpreview from './components/TextPreview'
+  import toolbar from './components/ToolBar'
   import { ipcRenderer } from 'electron'
 
   export default {
@@ -32,6 +38,7 @@
       editor,
       slidepreview,
       textpreview,
+      toolbar,
       winId: null
     },
     ready () {
@@ -128,36 +135,41 @@
     height: 100%;
     padding: 0;
     margin: 0;
+    -webkit-backface-visibility: hidden;
   }
 
   .wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: 100%;
 
-    .editor {
-      width: 50%;
+    .content {
+        display: flex;
+        flex-direction: row;
 
-      ::-webkit-scrollbar-track {
-        background-color: #f5f5f5;
-      }
-      ::-webkit-scrollbar {
-        width: 12px;
-        background-color: #f5f5f5;
-      }
-      ::-webkit-scrollbar-thumb {
-        background-color: #616161;
-      }
-    }
+        .editor {
+          width: 50%;
 
-    .preview {
-      width: 50%;
-      height: 100%;
-      background-color: #EEEEEE;
+          ::-webkit-scrollbar-track {
+            background-color: #f5f5f5;
+          }
+          ::-webkit-scrollbar {
+            width: 12px;
+            background-color: #f5f5f5;
+          }
+          ::-webkit-scrollbar-thumb {
+            background-color: #616161;
+          }
+        }
 
-      ::-webkit-scrollbar {
-          display: none;
-      }
+        .preview {
+          width: 50%;
+          height: 100%;
+
+          ::-webkit-scrollbar {
+              display: none;
+          }
+        }
     }
 
     .full-screen {

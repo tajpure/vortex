@@ -29,6 +29,8 @@ module.exports = (fileName) => {
     title: title,
     height: state.height,
     width: state.width,
+    transparent: true,
+    frame: false,
     x: state.x,
     y: state.y,
     icon: getIconPath(),

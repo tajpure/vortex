@@ -1,5 +1,18 @@
 <template>
-  <ul class='menu'>
+  <ul class='title'>
+    <li v-on:click='switchMode' title='Mode' class='topbar-yellow'>
+      <i class='material-icons' v-show='isSlideMode'>computer</i>
+      <i class='material-icons' v-show='!isSlideMode'>mode_edit</i>
+    </li>
+    <li v-on:click='switchPreview' title='Preview' class='topbar-purple'>
+      <i class='material-icons' v-show='!visibility'>visibility_off</i>
+      <i class='material-icons' v-show='visibility'>visibility</i>
+    </li>
+    <li v-on:click='enterPreviewFullScreen' title='Start' class='topbar-blue'>
+      <i class='material-icons'>slideshow</i>
+    </li>
+  </ul>
+  <ul class='menu' hidden="true">
     <li v-on:click='switchMode' title='Mode' class='topbar-yellow'>
       <i class='material-icons' v-show='isSlideMode'>computer</i>
       <i class='material-icons' v-show='!isSlideMode'>mode_edit</i>
@@ -80,13 +93,22 @@
 </script>
 
 <style lang="scss">
+.title {
+  background-color: white;
+  list-style: none;
+  padding: 3px;
+  margin: 0;
+  height: 18px;
+  width: 100%;
+  -webkit-app-region: drag;
+}
+
 .menu {
   background-color: white;
   list-style: none;
   padding: 3px;
   margin: 0;
   height: 24px;
-  border-bottom: 1px solid #E0E0E0;
 
   li {
     user-select: none;
