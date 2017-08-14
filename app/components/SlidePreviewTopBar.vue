@@ -50,7 +50,7 @@
   position: absolute;
   background-color: rgba(255, 255, 255, 0);
   right: 10px;
-  top: 32px;
+  top: 12px;
   font-size: 20px;
   z-index: 999;
 }

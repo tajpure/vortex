@@ -57,6 +57,7 @@
 <style lang="scss">
 .text {
   height: 100%;
+  -webkit-app-region: drag;
 
   .markdown-body {
     font-size: 15px;

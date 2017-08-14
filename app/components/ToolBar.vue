@@ -1,12 +1,11 @@
 <template>
   <ul class='menu'>
     <li v-on:click='switchMode' title='Mode'>
-      <i class='material-icons' v-show='isSlideMode'>computer</i>
-      <i class='material-icons' v-show='!isSlideMode'>mode_edit</i>
+      <i class='material-icons' v-show='isSlideMode'>keyboard_voice</i>
+      <i class='material-icons' v-show='!isSlideMode'>text_fields</i>
     </li>
     <li v-on:click='switchPreview' title='Preview'>
-      <i class='material-icons' v-show='!visibility'>visibility_off</i>
-      <i class='material-icons' v-show='visibility'>visibility</i>
+      <i class='material-icons'>crop_original</i>
     </li>
     <li v-on:click='enterPreviewFullScreen' title='Start'>
       <i class='material-icons'>slideshow</i>
@@ -83,8 +82,9 @@
 .menu {
   background-color: white;
   list-style: none;
-  margin-top: 0;
-  float: right;
+  margin-top: 5px;
+  margin-left: 60px;
+  height: 16px;
   -webkit-app-region: drag;
 
   li {
@@ -93,7 +93,7 @@
     display: inline;
     color: #616161;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 2px;
   }
 
 }

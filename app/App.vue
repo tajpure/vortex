@@ -1,19 +1,14 @@
 <template>
   <div class="wrapper">
-    <div class="title">
-      <toolbar></toolbar>
+    <div class="editor" v-show="!previewFullScreenMode"
+      v-bind:class="{ 'full-screen': editorFullScreenMode }">
+      <editor></editor>
     </div>
-    <div class="content">
-      <div class="editor" v-show="!previewFullScreenMode"
-        v-bind:class="{ 'full-screen': editorFullScreenMode }">
-        <editor></editor>
-      </div>
-      <div class="preview" v-show="!editorFullScreenMode"
-        v-bind:class="{ 'full-screen': previewFullScreenMode }">
-        <textpreview v-show='!slideMode'
-        v-bind:class="{ 'overflow-y': !exportMode }"></textpreview>
-        <slidepreview v-show='slideMode'></slidepreview>
-      </div>
+    <div class="preview" v-show="!editorFullScreenMode"
+      v-bind:class="{ 'full-screen': previewFullScreenMode }">
+      <textpreview v-show='!slideMode'
+      v-bind:class="{ 'overflow-y': !exportMode }"></textpreview>
+      <slidepreview v-show='slideMode'></slidepreview>
     </div>
   </div>
 </template>
@@ -22,7 +17,6 @@
   import editor from './components/Editor'
   import slidepreview from './components/SlidePreview'
   import textpreview from './components/TextPreview'
-  import toolbar from './components/ToolBar'
   import { ipcRenderer } from 'electron'
 
   export default {
@@ -38,7 +32,6 @@
       editor,
       slidepreview,
       textpreview,
-      toolbar,
       winId: null
     },
     ready () {
@@ -140,47 +133,33 @@
   .wrapper {
     height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 
-    .title {
-      height: 32px;
-      width: 100%;
-      margin-top: 0;
-      -webkit-app-region: drag;
+    .editor {
+      width: 50%;
+
+      ::-webkit-scrollbar-track {
+        background-color: white;
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+        background-color: white;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: #616161;
+        border-radius: 20px;
+      }
     }
 
-    .content {
-        display: flex;
-        flex-direction: row;
-        height: calc(100%);
-        width: 100%;
+    .preview {
+      width: 50%;
+      height: 100%;
 
-        .editor {
-          width: 50%;
-
-          ::-webkit-scrollbar-track {
-            background-color: white;
-          }
-
-          ::-webkit-scrollbar {
-            width: 6px;
-            background-color: white;
-          }
-
-          ::-webkit-scrollbar-thumb {
-            background-color: #616161;
-            border-radius: 20px;
-          }
-        }
-
-        .preview {
-          width: 50%;
-          height: 100%;
-
-          ::-webkit-scrollbar {
-              display: none;
-          }
-        }
+      ::-webkit-scrollbar {
+          display: none;
+      }
     }
 
     .full-screen {

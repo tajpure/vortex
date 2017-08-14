@@ -1,4 +1,5 @@
 <template>
+  <toolbar></toolbar>
   <textarea id='editor'></textarea>
 </template>
 
@@ -10,6 +11,7 @@
   import '../../static/codemirror/addon/search/jump-to-line.js'
   import '../../static/codemirror/addon/search/matchesonscrollbar.js'
   import '../../static/codemirror/addon/dialog/dialog.js'
+  import toolbar from './ToolBar'
   import { ipcRenderer } from 'electron'
 
   export default {
@@ -22,6 +24,9 @@
         },
         deep: true
       }
+    },
+    components: {
+      toolbar
     },
     data () {
       return {
@@ -36,7 +41,7 @@
       const editor = CodeMirror.fromTextArea(textarea, {
         lineWrapping: true,
         mode: 'markdown',
-        theme: '3024-day',
+        theme: 'twilight',
         matchBrackets: true
       })
       window.editor = editor
@@ -127,7 +132,7 @@
 <style>
 .CodeMirror {
   font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  height: 100%;
+  height: calc(100% - 32px);
   line-height: 1.5em;
   font-size: 15px;
   padding: 0 20px 0 20px;
