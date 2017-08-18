@@ -58,6 +58,20 @@ class WindowManager {
       })
     })
 
+    ipcMain.on('show-preview', (e, winId) => {
+      self.findWindow(winId, (curWindow) => {
+        const sizeArray = curWindow.window.getSize()
+        curWindow.window.setSize(sizeArray[0] * 2, sizeArray[1], true)
+      })
+    })
+
+    ipcMain.on('close-preview', (e, winId) => {
+      self.findWindow(winId, (curWindow) => {
+        const sizeArray = curWindow.window.getSize()
+        curWindow.window.setSize(sizeArray[0] / 2, sizeArray[1], true)
+      })
+    })
+
     ipcMain.on('save-file', (e, winId, fileName, data) => {
       self.findWindow(winId, (curWindow) => {
         curWindow.state.lastItem = fileName

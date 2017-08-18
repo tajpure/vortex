@@ -106,12 +106,12 @@
         }, 200)
       },
       closePreview: function () {
+        ipcRenderer.send('close-preview', this.winId)
         this.editorFullScreenMode = true
-        // this.$broadcast('updateEditorValue')
       },
       openPreview: function () {
+        ipcRenderer.send('show-preview', this.winId)
         this.editorFullScreenMode = false
-        // this.$broadcast('updateEditorValue')
       },
       openTextMode: function () {
         this.slideMode = false

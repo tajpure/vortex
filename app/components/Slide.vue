@@ -180,7 +180,7 @@
   }
 
   .mermaid {
-    background-color: white;
+    background-color: transparent;
   }
 }
 

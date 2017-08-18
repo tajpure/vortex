@@ -30,7 +30,6 @@ module.exports = (fileName) => {
     height: state.height,
     width: state.width,
     frame: false,
-    // transparent: true,
     titleBarStyle: 'hidden-inset',
     x: state.x,
     y: state.y,
