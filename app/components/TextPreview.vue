@@ -57,11 +57,11 @@
 <style lang="scss">
 .text {
   height: 100%;
+  -webkit-app-region: drag;
 
   .markdown-body {
     font-size: 15px;
     padding: 24px 32px;
-    background-color: #EEEEEE;
     overflow-y: hidden;
 
     ::-webkit-scrollbar {

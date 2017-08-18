@@ -41,7 +41,7 @@
       const editor = CodeMirror.fromTextArea(textarea, {
         lineWrapping: true,
         mode: 'markdown',
-        theme: '3024-day',
+        theme: 'twilight',
         matchBrackets: true
       })
       window.editor = editor
@@ -132,9 +132,11 @@
 <style>
 .CodeMirror {
   font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  height: calc(100% - 31.5px);
+  height: calc(100% - 32px);
   line-height: 1.5em;
   font-size: 15px;
+  padding: 0 20px 0 20px;
+  background-color: white !important;
 }
 .cm-link {
   text-decoration: none;

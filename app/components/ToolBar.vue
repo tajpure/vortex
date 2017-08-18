@@ -1,14 +1,13 @@
 <template>
   <ul class='menu'>
-    <li v-on:click='switchMode' title='Mode' class='topbar-yellow'>
-      <i class='material-icons' v-show='isSlideMode'>computer</i>
-      <i class='material-icons' v-show='!isSlideMode'>mode_edit</i>
+    <li v-on:click='switchMode' title='Mode'>
+      <i class='material-icons' v-show='isSlideMode'>keyboard_voice</i>
+      <i class='material-icons' v-show='!isSlideMode'>text_fields</i>
     </li>
-    <li v-on:click='switchPreview' title='Preview' class='topbar-purple'>
-      <i class='material-icons' v-show='!visibility'>visibility_off</i>
-      <i class='material-icons' v-show='visibility'>visibility</i>
+    <li v-on:click='switchPreview' title='Preview'>
+      <i class='material-icons'>crop_original</i>
     </li>
-    <li v-on:click='enterPreviewFullScreen' title='Start' class='topbar-blue'>
+    <li v-on:click='enterPreviewFullScreen' title='Start'>
       <i class='material-icons'>slideshow</i>
     </li>
   </ul>
@@ -83,10 +82,10 @@
 .menu {
   background-color: white;
   list-style: none;
-  padding: 3px;
-  margin: 0;
-  height: 24px;
-  border-bottom: 1px solid #E0E0E0;
+  margin-top: 5px;
+  margin-left: 60px;
+  height: 16px;
+  -webkit-app-region: drag;
 
   li {
     user-select: none;
@@ -94,30 +93,8 @@
     display: inline;
     color: #616161;
     cursor: pointer;
+    font-size: 2px;
   }
 
-  .topbar-green {
-    color: #8BC34A;
-  }
-
-  .topbar-red {
-    color: #F44336;
-  }
-
-  .topbar-yellow {
-    color: #FFEB3B;
-  }
-
-  .topbar-pink {
-    color: #E91E63;
-  }
-
-  .topbar-purple {
-    color: #9C27B0;
-  }
-
-  .topbar-blue {
-    color: #2196F3;
-  }
 }
 </style>
