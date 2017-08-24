@@ -106,12 +106,12 @@
         }, 200)
       },
       closePreview: function () {
+        ipcRenderer.send('close-preview', this.winId)
         this.editorFullScreenMode = true
-        // this.$broadcast('updateEditorValue')
       },
       openPreview: function () {
+        ipcRenderer.send('show-preview', this.winId)
         this.editorFullScreenMode = false
-        // this.$broadcast('updateEditorValue')
       },
       openTextMode: function () {
         this.slideMode = false
@@ -131,29 +131,31 @@
   }
 
   .wrapper {
+    height: 100%;
     display: flex;
     flex-direction: row;
-    height: 100%;
 
     .editor {
       width: 50%;
 
       ::-webkit-scrollbar-track {
-        background-color: #f5f5f5;
+        background-color: white;
       }
+
       ::-webkit-scrollbar {
-        width: 12px;
-        background-color: #f5f5f5;
+        width: 6px;
+        background-color: white;
       }
+
       ::-webkit-scrollbar-thumb {
         background-color: #616161;
+        border-radius: 20px;
       }
     }
 
     .preview {
       width: 50%;
       height: 100%;
-      background-color: #EEEEEE;
 
       ::-webkit-scrollbar {
           display: none;

@@ -29,6 +29,8 @@ module.exports = (fileName) => {
     title: title,
     height: state.height,
     width: state.width,
+    frame: false,
+    titleBarStyle: 'hidden-inset',
     x: state.x,
     y: state.y,
     icon: getIconPath(),
