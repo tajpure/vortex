@@ -96,5 +96,8 @@
     "webpack-externals-plugin": "1.0.0",
     "webpack-hot-middleware": "^2.6.0",
     "webpack-merge": "^0.8.3"
+  },
+  "dependencies": {
+    "chart.js": "^2.6.0"
   }
 }
