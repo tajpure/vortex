@@ -29,7 +29,7 @@ module.exports = (fileName) => {
     title: title,
     height: state.height,
     width: state.width,
-    frame: false,
+    frame: true,
     titleBarStyle: 'hidden-inset',
     x: state.x,
     y: state.y,
@@ -60,6 +60,7 @@ module.exports = (fileName) => {
     curWindow.webContents.send('set-window-id', curWindow.id)
     curWindow.webContents.send('set-slide-mode', state.isSlideMode)
     curWindow.webContents.send('set-visibility', state.visibility)
+    curWindow.webContents.send('set-file-name', title)
   })
 
   curWindow.on('close', (event) => {
