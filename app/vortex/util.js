@@ -32,8 +32,6 @@ module.exports = {
     fileName = fileInfo.base
     if (fileInfo.dir) {
       fileName = fileName + ' - ' + fileInfo.dir
-    } else {
-      fileName = fileName
     }
     return fileName
   },
