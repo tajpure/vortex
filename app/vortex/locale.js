@@ -16,7 +16,7 @@ module.exports = {
   },
   get TitleSuffix () {
     const data = {
-      'en': ''
+      'en': ' - Vortex'
     }
     return data[this.lang]
   }
