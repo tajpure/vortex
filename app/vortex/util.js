@@ -31,7 +31,7 @@ module.exports = {
     const fileInfo = path.parse(fileName)
     fileName = fileInfo.base
     if (fileInfo.dir) {
-      fileName = fileName + ' - ' + fileInfo.dir + locale.TitleSuffix
+      fileName = fileName + ' — ' + fileInfo.dir + locale.TitleSuffix
     } else {
       fileName = fileName + locale.TitleSuffix
     }

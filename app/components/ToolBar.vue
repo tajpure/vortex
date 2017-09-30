@@ -1,16 +1,19 @@
 <template>
-  <ul class='menu'>
-    <li v-on:click='switchMode' title='Mode'>
-      <i class='material-icons' v-show='isSlideMode'>keyboard_voice</i>
-      <i class='material-icons' v-show='!isSlideMode'>text_fields</i>
-    </li>
-    <li v-on:click='switchPreview' title='Preview'>
-      <i class='material-icons'>crop_original</i>
-    </li>
-    <li v-on:click='enterPreviewFullScreen' title='Start'>
-      <i class='material-icons'>slideshow</i>
-    </li>
-  </ul>
+  <div class='header'>
+    <ul class='menu'>
+      <li v-on:click='switchMode' title='Mode'>
+        <i class='material-icons' v-show='isSlideMode'>keyboard_voice</i>
+        <i class='material-icons' v-show='!isSlideMode'>text_fields</i>
+      </li>
+      <li v-on:click='switchPreview' title='Preview'>
+        <i class='material-icons'>crop_original</i>
+      </li>
+      <li v-on:click='enterPreviewFullScreen' title='Start'>
+        <i class='material-icons'>slideshow</i>
+      </li>
+    </ul>
+    <div class="file-name">{{ fileName }}</div>
+  </div>
 </template>
 
 <script>
@@ -40,12 +43,16 @@
       ipcRenderer.on('set-window-id', (event, id) => {
         this.winId = id
       })
+      ipcRenderer.on('set-file-name', (event, fileName) => {
+        this.fileName = fileName
+      })
     },
     data () {
       return {
         visibility: true,
         isSlideMode: true,
-        winId: null
+        winId: null,
+        fileName: 'Untitled'
       }
     },
     methods: {
@@ -79,13 +86,18 @@
 </script>
 
 <style lang="scss">
-.menu {
+.header {
   background-color: white;
-  list-style: none;
-  margin-top: 5px;
-  margin-left: 60px;
-  height: 16px;
+  display: flex;
+  flex-direction: row;
   -webkit-app-region: drag;
+}
+
+.menu {
+  margin: 5px 0 0 80px;
+  padding: 0;
+  list-style: none;
+  height: 24px;
 
   li {
     user-select: none;
@@ -95,6 +107,11 @@
     cursor: pointer;
     font-size: 2px;
   }
+}
 
+.file-name {
+  margin: 10px 0 0 0px;
+  color: #616161;
+  font-size: 12px;
 }
 </style>
