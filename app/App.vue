@@ -128,7 +128,7 @@
     height: 100%;
     padding: 0;
     margin: 0;
-    font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-family: Helvetica, Tahoma, "Source Sans Pro", "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   }
 
   .wrapper {
