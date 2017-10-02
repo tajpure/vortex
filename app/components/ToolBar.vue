@@ -44,7 +44,9 @@
         this.winId = id
       })
       ipcRenderer.on('set-file-name', (event, fileName) => {
-        this.fileName = fileName
+        if (fileName) {
+          this.fileName = fileName
+        }
       })
     },
     data () {
