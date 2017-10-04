@@ -133,10 +133,10 @@
 .CodeMirror {
   font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   height: calc(100% - 32px);
-  line-height: 2em;
+  line-height: 1.6em;
   color: #757575;
   font-size: 15px;
-  padding: 0 20px 0 20px;
+  padding: 10px 20px 0 20px;
   background-color: white !important;
 }
 .cm-link {

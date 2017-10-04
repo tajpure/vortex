@@ -31,9 +31,7 @@ module.exports = {
     const fileInfo = path.parse(fileName)
     fileName = fileInfo.base
     if (fileInfo.dir) {
-      fileName = fileName + ' - ' + fileInfo.dir + locale.TitleSuffix
-    } else {
-      fileName = fileName + locale.TitleSuffix
+      fileName = fileName + ' - ' + fileInfo.dir
     }
     return fileName
   },
@@ -41,9 +39,6 @@ module.exports = {
     if (!title) return
     if (title.startsWith('* ')) {
       title = title.substr(2)
-    }
-    if (title.endsWith(locale.TitleSuffix)) {
-      title = title.slice(0, -(locale.TitleSuffix.length))
     }
     if (title === locale.Untitled) return
     const titleInfo = title.split(' - ')
@@ -54,9 +49,6 @@ module.exports = {
     if (!title) return
     if (title.startsWith('* ')) {
       title = title.substr(2)
-    }
-    if (title.endsWith(locale.TitleSuffix)) {
-      title = title.slice(0, -(locale.TitleSuffix.length))
     }
     if (title === locale.Untitled) return
     const titleInfo = title.split(' - ')
