@@ -93,6 +93,7 @@
   display: flex;
   flex-direction: row;
   -webkit-app-region: drag;
+  min-width: 640px;
 }
 
 .menu {
@@ -114,6 +115,8 @@
 .file-name {
   margin: 10px 0 0 0px;
   color: #616161;
+  height: 24px;
   font-size: 12px;
+  overflow: hidden;
 }
 </style>

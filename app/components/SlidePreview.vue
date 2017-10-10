@@ -146,5 +146,6 @@
 .slides {
   height: 100%;
   font-size: 32px;
+  -webkit-app-region: drag;
 }
 </style>
