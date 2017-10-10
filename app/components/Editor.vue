@@ -130,9 +130,12 @@
 </script>
 
 <style>
+.editor {
+  margin-bottom: 16px;
+}
 .CodeMirror {
   font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  height: calc(100% - 32px);
+  height: calc(100% - 24px);
   line-height: 1.6em;
   color: #757575;
   font-size: 15px;

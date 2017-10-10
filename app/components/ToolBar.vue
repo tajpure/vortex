@@ -97,7 +97,7 @@
 }
 
 .menu {
-  margin: 5px 0 0 80px;
+  margin: 6px 0 0 80px;
   padding: 0;
   list-style: none;
   height: 24px;
@@ -115,7 +115,6 @@
 .file-name {
   margin: 10px 0 0 0px;
   color: #616161;
-  height: 24px;
   font-size: 12px;
   overflow: hidden;
 }
