@@ -7,7 +7,7 @@
 .cm-s-twilight .CodeMirror-guttermarker { color: white; }
 .cm-s-twilight .CodeMirror-guttermarker-subtle { color: #aaa; }
 .cm-s-twilight .CodeMirror-linenumber { color: #aaa; }
-.cm-s-twilight .CodeMirror-cursor { border-left: 2px solid #616161; }
+.cm-s-twilight .CodeMirror-cursor { border-left: 2px solid #616161; height: 18px !important; margin-top: 3px;}
 
 .cm-s-twilight .cm-keyword { color: #f9ee98; } /**/
 .cm-s-twilight .cm-atom { color: #FC0; }
