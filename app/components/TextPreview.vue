@@ -57,7 +57,7 @@
 <style lang="scss">
 .text {
   height: 100%;
-  -webkit-app-region: drag;
+  margin-top: 20px;
 
   .markdown-body {
     font-size: 15px;
@@ -69,14 +69,18 @@
     }
 
     ::-webkit-scrollbar-track {
-      background-color: #f5f5f5;
+      background-color: white;
     }
+
     ::-webkit-scrollbar {
-      width: 12px;
-      background-color: #f5f5f5;
+      width: 3px;
+      height: 6px;
+      background-color: white;
     }
+
     ::-webkit-scrollbar-thumb {
       background-color: #616161;
+      border-radius: 20px;
     }
 
     hr {
