@@ -1,0 +1,238 @@
+.dark {
+    background-color: #212121;
+    color: white;
+  }
+  .dark pre {
+    background-color: #424242;
+    color: white;
+  }
+  .dark table {
+    color: black;
+  }
+  .dark a {
+    color: #9E9E9E;
+  }
+  .dark blockquote {
+      color: #E0E0E0;
+  }
+  .dark .mermaid .label {
+    color: #323d47;
+  }
+  .dark .node rect, .dark .node circle, .dark .node ellipse, .dark .node polygon {
+    fill: #bdd5ea;
+    stroke: #81b1db;
+    stroke-width: 1px;
+  }
+  .dark .edgePath .path {
+    stroke: lightgrey;
+  }
+  .dark .edgeLabel {
+    background-color: #e8e8e8;
+  }
+  .dark .cluster rect {
+    fill: #6d6d65 !important;
+    rx: 4 !important;
+    stroke: rgba(255, 255, 255, 0.25) !important;
+    stroke-width: 1px !important;
+  }
+  .dark .cluster text {
+    fill: #f9fffe;
+  }
+  .dark .actor {
+    stroke: #81b1db;
+    fill: #bdd5ea;
+  }
+  .dark text.actor {
+    fill: black;
+    stroke: none;
+  }
+  .dark .actor-line {
+    stroke: lightgrey;
+  }
+  .dark .messageLine0 {
+    stroke-width: 1.5;
+    stroke-dasharray: "2 2";
+    marker-end: "url(#arrowhead)";
+    stroke: lightgrey;
+  }
+  .dark .messageLine1 {
+    stroke-width: 1.5;
+    stroke-dasharray: "2 2";
+    stroke: lightgrey;
+  }
+  .dark #arrowhead {
+    fill: lightgrey !important;
+  }
+  .dark #crosshead path {
+    fill: lightgrey !important;
+    stroke: lightgrey !important;
+  }
+  .dark .messageText {
+    fill: lightgrey;
+    stroke: none;
+  }
+  .dark .labelBox {
+    stroke: #81b1db;
+    fill: #bdd5ea;
+  }
+  .dark .labelText {
+    fill: #323d47;
+    stroke: none;
+  }
+  .dark .loopText {
+    fill: lightgrey;
+    stroke: none;
+  }
+  .dark .loopLine {
+    stroke-width: 2;
+    stroke-dasharray: "2 2";
+    marker-end: "url(#arrowhead)";
+    stroke: #81b1db;
+  }
+  .dark .note {
+    stroke: rgba(255, 255, 255, 0.25);
+    fill: #fff5ad;
+  }
+  .dark .noteText {
+    fill: black;
+    stroke: none;
+    font-family: 'trebuchet ms', verdana, arial;
+    font-size: 14px;
+  }
+  .dark .section {
+    stroke: none;
+    opacity: 0.2;
+  }
+  .dark .section0 {
+    fill: rgba(255, 255, 255, 0.3);
+  }
+  .dark .section2 {
+    fill: #eae8b9;
+  }
+  .dark .section1, .dark .section3 {
+    fill: white;
+    opacity: 0.2;
+  }
+  .dark .sectionTitle0 {
+    fill: #f9fffe;
+  }
+  .dark .sectionTitle1 {
+    fill: #f9fffe;
+  }
+  .dark .sectionTitle2 {
+    fill: #f9fffe;
+  }
+  .dark .sectionTitle3 {
+    fill: #f9fffe;
+  }
+  .dark .sectionTitle {
+    text-anchor: start;
+    font-size: 11px;
+    text-height: 14px;
+  }
+  .dark .grid .tick {
+    stroke: rgba(255, 255, 255, 0.3);
+    opacity: 0.3;
+    shape-rendering: crispEdges;
+  }
+  .dark .grid .tick text {
+    fill: lightgrey;
+    opacity: 0.5;
+  }
+  .dark .grid path {
+    stroke-width: 0;
+  }
+  .dark .today {
+    fill: none;
+    stroke: #db5757;
+    stroke-width: 2px;
+  }
+  .dark .task {
+    stroke-width: 1;
+  }
+  .dark .taskText {
+    text-anchor: middle;
+    font-size: 11px;
+  }
+  .dark .taskTextOutsideRight {
+    fill: #323d47;
+    text-anchor: start;
+    font-size: 11px;
+  }
+  .dark .taskTextOutsideLeft {
+    fill: #323d47;
+    text-anchor: end;
+    font-size: 11px;
+  }
+  .dark .taskText0, .dark .taskText1, .dark .taskText2, .dark .taskText3 {
+    fill: #323d47;
+  }
+  .dark .task0, .dark .task1, .dark .task2, .dark .task3 {
+    fill: #bdd5ea;
+    stroke: rgba(255, 255, 255, 0.5);
+  }
+  .dark .taskTextOutside0, .dark .taskTextOutside2 {
+    fill: lightgrey;
+  }
+  .dark .taskTextOutside1, .dark .taskTextOutside3 {
+    fill: lightgrey;
+  }
+  .dark .active0, .dark .active1, .dark .active2, .dark .active3 {
+    fill: #81b1db;
+    stroke: rgba(255, 255, 255, 0.5);
+  }
+  .dark .activeText0, .dark .activeText1, .dark .activeText2, .dark .activeText3 {
+    fill: #323d47 !important;
+  }
+  .dark .done0, .dark .done1, .dark .done2, .dark .done3 {
+    fill: lightgrey;
+  }
+  .dark .doneText0, .dark .doneText1, .dark .doneText2, .dark .doneText3 {
+    fill: #323d47 !important;
+  }
+  .dark .crit0, .dark .crit1, .dark .crit2, .dark .crit3 {
+    stroke: #e83737;
+    fill: #e83737;
+    stroke-width: 2;
+  }
+  .dark .activeCrit0, .dark .activeCrit1, .dark .activeCrit2, .dark .activeCrit3 {
+    stroke: #e83737;
+    fill: #81b1db;
+    stroke-width: 2;
+  }
+  .dark .doneCrit0, .dark .doneCrit1, .dark .doneCrit2, .dark .doneCrit3 {
+    stroke: #e83737;
+    fill: lightgrey;
+    stroke-width: 1;
+    cursor: pointer;
+    shape-rendering: crispEdges;
+  }
+  .dark .doneCritText0, .dark .doneCritText1, .dark .doneCritText2, .dark .doneCritText3 {
+    fill: lightgrey !important;
+  }
+  .dark .activeCritText0, .dark .activeCritText1, .dark .activeCritText2, .dark .activeCritText3 {
+    fill: #323d47 !important;
+  }
+  .dark .titleText {
+    text-anchor: middle;
+    font-size: 18px;
+    fill: lightgrey;
+  }
+  .dark .node text {
+    font-family: 'trebuchet ms', verdana, arial;
+    font-size: 14px;
+  }
+  .dark div.mermaidTooltip {
+    position: absolute;
+    text-align: center;
+    max-width: 200px;
+    padding: 2px;
+    font-family: 'trebuchet ms', verdana, arial;
+    font-size: 12px;
+    background: #6d6d65;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 100;
+  }
+  

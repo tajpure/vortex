@@ -1,5 +1,5 @@
 <template>
-  <section class="slide" v-bind:class="[theme, show ? 'show' : 'hidden']">
+  <section class="slide" v-bind:class="[theme, align, show ? 'show' : 'hidden']">
     <div v-html="slide.content" class="markdown-body animated"
     v-bind:class="[animate, theme, fullScreenMode ? 'full-screen': 'not-full-screen']">
     <div>
@@ -44,6 +44,7 @@
         animate: '',
         animateInOut: {in: '', out: ''},
         theme: '',
+        align: 'left',
         show: false,
         reverse: false
       }
@@ -84,9 +85,11 @@
           const metadata = this.parseMetadata(curIndex, value.match(metaRegex)[0])
           this.animateInOut = this.getAnimateInOut(metadata.animateInOut)
           this.theme = metadata.theme
+          this.align = metadata.align
         } else {
           this.animateInOut = {in: '', out: ''}
           this.theme = ''
+          this.align = 'left'
         }
       },
       parseMetadata (index, metadata) {
@@ -95,6 +98,7 @@
           const obj = this.metadataToJson(metadata)
           metaObj.animateInOut = obj.animate ? obj.animate : ''
           metaObj.theme = obj.theme ? obj.theme : ''
+          metaObj.align = obj.align ? obj.align : 'left'
         }
         return metaObj
       },
@@ -181,6 +185,18 @@
 
   .mermaid {
     background-color: transparent;
+  }
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+
+  ul, pre, blockquote {
+    text-align: left;
   }
 }
 

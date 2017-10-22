@@ -8,20 +8,6 @@
   color: #424242;
 }
 
-.dark {
-  background-color: #212121;
-  color: white;
-}
-
-.dark pre {
-  background-color: #424242;
-  color: white;
-}
-
-.dark table {
-  color: black;
-}
-
 .red {
   background-color: #F44336;
   color: white;
