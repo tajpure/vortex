@@ -42,7 +42,7 @@ module.exports = (options) => {
           label: 'Save',
           accelerator: 'CmdOrCtrl+S',
           click (item, focusedWindow) {
-            const fileName = util.titleToFileName(focusedWindow.getTitle())
+            const fileName = focusedWindow.fileName
             if (!fileName) {
               dialog.showSaveDialog({
                 title: 'Save File',
@@ -52,8 +52,6 @@ module.exports = (options) => {
               (fileName) => {
                 if (!fileName) return
                 options.saveFile(fileName, focusedWindow)
-                const title = util.fileNameToTitle(fileName)
-                focusedWindow.setTitle(title)
               })
             } else {
               options.saveFile(fileName, focusedWindow)

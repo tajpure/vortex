@@ -37,6 +37,8 @@ module.exports = (fileName) => {
     autoHideMenuBar: true
   })
 
+  curWindow.fileName = util.titleToFileName(title)
+
   if (state.isMaximized) {
     curWindow.maximize()
   }
@@ -77,7 +79,7 @@ module.exports = (fileName) => {
       (result) => {
         switch (result) {
           case 0: {
-            const fileName = util.titleToFileName(curWindow.getTitle())
+            const fileName = util.titleToFileName(title)
             if (!fileName) {
               dialog.showSaveDialog({
                 title: 'Save File',
@@ -125,7 +127,10 @@ module.exports = (fileName) => {
   return {
     get window () { return curWindow },
     get title () { return title },
-    set title (value) { title = value },
+    set title (value) {
+      title = value
+      curWindow.fileName = util.titleToFileName(title)
+    },
     state: state,
     get needToSave () { return !isSaved },
     set needToSave (value) { isSaved = !value }
