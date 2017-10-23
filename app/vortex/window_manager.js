@@ -26,18 +26,16 @@ class WindowManager {
     const self = this
     ipcMain.on('content-changed', (e, winId) => {
       self.findWindow(winId, (curWindow) => {
-        const title = curWindow.window.getTitle()
-        curWindow.window.setTitle(util.addStarOnTitle(title))
-        curWindow.window.webContents.send('set-file-name', util.addStarOnTitle(title))
+        curWindow.title = util.addStarOnTitle(curWindow.title)
+        curWindow.window.webContents.send('set-file-name', curWindow.title)
         curWindow.needToSave = true
       })
     })
 
     ipcMain.on('content-saved', (e, winId) => {
       self.findWindow(winId, (curWindow) => {
-        const title = curWindow.window.getTitle()
-        curWindow.window.webContents.send('set-file-name', util.removeStarOnTitle(title))
-        curWindow.window.setTitle(util.removeStarOnTitle(title))
+        curWindow.title = util.removeStarOnTitle(curWindow.title)
+        curWindow.window.webContents.send('set-file-name', curWindow.title)
         curWindow.needToSave = false
       })
     })

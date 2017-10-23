@@ -10,7 +10,7 @@ const WindowStat = require('./window_state.js')
 
 module.exports = (fileName) => {
   let isSaved = true
-  const title = util.fileNameToTitle(fileName)
+  let title = util.fileNameToTitle(fileName)
 
   const state = WindowStat(fileName, {
     height: 600,
@@ -66,7 +66,6 @@ module.exports = (fileName) => {
   curWindow.on('close', (event) => {
     if (!isSaved) {
       event.preventDefault()
-      const title = curWindow.getTitle()
       const fileName = util.titleToFileBase(title)
       dialog.showMessageBox({
         type: 'question',
@@ -125,8 +124,10 @@ module.exports = (fileName) => {
 
   return {
     get window () { return curWindow },
+    get title () { return title },
+    set title (value) { title = value },
     state: state,
     get needToSave () { return !isSaved },
-    set needToSave (val) { isSaved = !val }
+    set needToSave (value) { isSaved = !value }
   }
 }
