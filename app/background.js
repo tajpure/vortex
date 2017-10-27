@@ -4,14 +4,14 @@ const app = electron.app
 const ipcMain = electron.ipcMain
 const dialog = electron.dialog
 const fs = require('fs')
-const VortexMenu = require('./vortex/menu.js')
-const WindowManager = require('./vortex/window_manager.js')
-const WindowStat = require('./vortex/window_state.js')
+const VortexMenu = require('./lib/menu.js')
+const WindowManager = require('./lib/window_manager.js')
+const WindowStat = require('./lib/window_state.js')
 
-function openFile (fileName) {
-  let newWindow = WindowManager.newWindow(fileName)
+function openFile (filename) {
+  let newWindow = WindowManager.newWindow(filename)
   newWindow.webContents.on('did-finish-load', () => {
-    fs.readFile(fileName, 'utf-8', (err, data) => {
+    fs.readFile(filename, 'utf-8', (err, data) => {
       if (err) {
         console.error(err)
         dialog.showErrorBox('File Read Error', err.message)
@@ -30,8 +30,8 @@ app.on('ready', () => {
     y: 380
   })
   if (state.lastItem && state.lastItem !== 'Untitled') {
-    const fileName = state.lastItem
-    openFile(fileName)
+    const filename = state.lastItem
+    openFile(filename)
   } else {
     WindowManager.newWindow('Untitled')
   }
@@ -40,24 +40,24 @@ app.on('ready', () => {
     newWindow: () => {
       WindowManager.newWindow('Untitled')
     },
-    openFile: (fileNames, focusedWindow) => {
-      if (!fileNames || !focusedWindow) return
-      const fileName = fileNames[0]
-      openFile(fileName)
+    openFile: (filenames, focusedWindow) => {
+      if (!filenames || !focusedWindow) return
+      const filename = filenames[0]
+      openFile(filename)
     },
-    saveFile: (fileName, focusedWindow) => {
-      if (!fileName || !focusedWindow) return
-      focusedWindow.webContents.send('trigger-save-file', fileName)
+    saveFile: (filename, focusedWindow) => {
+      if (!filename || !focusedWindow) return
+      focusedWindow.webContents.send('trigger-save-file', filename)
     },
-    exportPDF: (fileName, focusedWindow) => {
-      if (!fileName) return
+    exportPDF: (filename, focusedWindow) => {
+      if (!filename) return
       ipcMain.once('export-to-pdf', (event, options) => {
         focusedWindow.webContents.printToPDF(options, (err, data) => {
           if (err) {
             console.error(err)
             return
           }
-          fs.writeFile(fileName, data, (err) => {
+          fs.writeFile(filename, data, (err) => {
             if (err) {
               console.error(err)
               dialog.showErrorBox('File Export Error', err.message)

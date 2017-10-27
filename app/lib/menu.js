@@ -2,7 +2,6 @@
 const electron = require('electron')
 const Menu = electron.Menu
 const dialog = electron.dialog
-const util = require('./util.js')
 
 module.exports = (options) => {
   let isFullScreen = false

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import animate from '../vortex/animate.js'
+  import animate from '../lib/animate.js'
 
   export default {
     props: ['slide'],

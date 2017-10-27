@@ -10,7 +10,7 @@
   import slide from './Slide'
   import marked from '../../node_modules/marked/lib/marked.js'
   import topbar from './SlidePreviewTopBar'
-  import util from '../vortex/util.js'
+  import util from '../lib/util.js'
   import katex from '../../node_modules/katex/katex.js'
 
   const renderer = new marked.Renderer()
