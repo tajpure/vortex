@@ -49,6 +49,13 @@
             }
           }
         }
+      },
+      'bgimg': {
+        handler: function (val, oldVal) {
+          if (val) {
+            this.styleObject.backgroundImage = 'url(' + val + ')'
+          }
+        }
       }
     },
     data () {
@@ -63,8 +70,10 @@
         styleObject: {
           width: '80%',
           paddingLeft: '10%',
-          paddingRight: '10%'
+          paddingRight: '10%',
+          backgroundImage: ''
         },
+        bgimg: '',
         show: false,
         reverse: false
       }
@@ -107,11 +116,13 @@
           this.theme = metadata.theme
           this.align = metadata.align
           this.width = metadata.width
+          this.bgimg = metadata.bgimg
         } else {
           this.animateInOut = {in: '', out: ''}
           this.theme = ''
           this.align = 'left'
           this.width = '80%'
+          this.bgimg = ''
         }
       },
       parseMetadata (index, metadata) {
@@ -122,6 +133,7 @@
           metaObj.theme = obj.theme ? obj.theme : ''
           metaObj.align = obj.align ? obj.align : 'left'
           metaObj.width = obj.width ? obj.width : '80%'
+          metaObj.bgimg = obj.bgimg ? obj.bgimg : ''
         }
         return metaObj
       },

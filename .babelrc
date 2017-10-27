@@ -3,7 +3,6 @@
   "plugins": ["transform-runtime"],
   "comments": false,
   "ignore": [
-    "static/**/*.js",
-    "app/lib/*.js"
+    "static/**/*.js"
   ]
 }
