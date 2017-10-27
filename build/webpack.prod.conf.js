@@ -27,7 +27,7 @@ module.exports = merge(baseWebpackConfig, {
     new CopyWebpackPlugin([
       { from: './app/background.js', to: '.' },
       { from: './app/package.json', to: '.' },
-      { from: './app/vortex', to: 'vortex' },
+      { from: './app/lib', to: 'lib' },
       { from: './app/assets', to: 'assets' },
       { from: './static', to: 'static' },
       { from: './app/node_modules', to: 'node_modules' }
