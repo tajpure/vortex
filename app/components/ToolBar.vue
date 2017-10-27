@@ -12,7 +12,7 @@
         <i class='material-icons'>slideshow</i>
       </li>
     </ul>
-    <div class="file-name">{{ fileName }}</div>
+    <div class="filename">{{ filename }}</div>
   </div>
 </template>
 
@@ -43,9 +43,9 @@
       ipcRenderer.on('set-window-id', (event, id) => {
         this.winId = id
       })
-      ipcRenderer.on('set-file-name', (event, fileName) => {
-        if (fileName) {
-          this.fileName = fileName
+      ipcRenderer.on('set-file-name', (event, filename) => {
+        if (filename) {
+          this.filename = filename
         }
       })
     },
@@ -54,7 +54,7 @@
         visibility: true,
         isSlideMode: true,
         winId: null,
-        fileName: 'Untitled'
+        filename: 'Untitled'
       }
     },
     methods: {
@@ -112,7 +112,7 @@
   }
 }
 
-.file-name {
+.filename {
   margin: 10px 0 0 0px;
   color: #616161;
   font-size: 12px;

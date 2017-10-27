@@ -74,11 +74,13 @@ class WindowManager {
       })
     })
 
-    ipcMain.on('save-file', (e, winId, fileName, data) => {
+    ipcMain.on('save-file', (e, winId, filename, data) => {
       self.findWindow(winId, (curWindow) => {
-        curWindow.state.lastItem = fileName
+        curWindow.state.lastItem = filename
+        curWindow.window.webContents.send('set-file-name', curWindow.title)
+        console.log(filename)
       })
-      fs.writeFile(fileName, data, (err) => {
+      fs.writeFile(filename, data, (err) => {
         if (err) {
           console.error(err)
           dialog.showErrorBox('File Save Error', err.message)
@@ -87,9 +89,9 @@ class WindowManager {
     })
   }
 
-  newWindow (fileName) {
+  newWindow (filename) {
     const self = this
-    const window = VortexWindow(fileName)
+    const window = VortexWindow(filename)
     window.window.on('closed', () => {
       self.removeWindow()
     })

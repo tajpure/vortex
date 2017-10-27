@@ -81,9 +81,9 @@
         this.editor.setValue(data)
         ipcRenderer.send('content-saved', self.winId)
       })
-      ipcRenderer.on('trigger-save-file', (event, fileName) => {
+      ipcRenderer.on('trigger-save-file', (event, filename) => {
         const content = this.editor.getValue()
-        ipcRenderer.send('save-file', this.winId, fileName, content)
+        ipcRenderer.send('save-file', this.winId, filename, content)
         ipcRenderer.send('content-saved', self.winId)
       })
       this.$dispatch('transferTo', 'focusEditor')

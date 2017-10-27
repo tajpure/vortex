@@ -29,9 +29,9 @@ module.exports = (options) => {
               ],
               properties: ['openFile', 'multiSelections']
             },
-            (fileNames) => {
-              if (!fileNames) return
-              options.openFile(fileNames, focusedWindow)
+            (filenames) => {
+              if (!filenames) return
+              options.openFile(filenames, focusedWindow)
             })
           }
         },
@@ -42,19 +42,19 @@ module.exports = (options) => {
           label: 'Save',
           accelerator: 'CmdOrCtrl+S',
           click (item, focusedWindow) {
-            const fileName = focusedWindow.fileName
-            if (!fileName) {
+            const filename = focusedWindow.filename
+            if (!filename) {
               dialog.showSaveDialog({
                 title: 'Save File',
                 filters: [{ name: 'Markdown', extensions: ['md'] }],
                 defaultPath: 'Untitled.md'
               },
-              (fileName) => {
-                if (!fileName) return
-                options.saveFile(fileName, focusedWindow)
+              (filename) => {
+                if (!filename) return
+                options.saveFile(filename, focusedWindow)
               })
             } else {
-              options.saveFile(fileName, focusedWindow)
+              options.saveFile(filename, focusedWindow)
             }
           }
         },
@@ -67,11 +67,9 @@ module.exports = (options) => {
               filters: [{ name: 'All Files', extensions: ['*'] }],
               defaultPath: 'Untitled'
             },
-            (fileName) => {
-              if (!fileName) return
-              options.saveFile(fileName, focusedWindow)
-              const title = util.fileNameToTitle(fileName)
-              focusedWindow.setTitle(title)
+            (filename) => {
+              if (!filename) return
+              options.saveFile(filename, focusedWindow)
             })
           }
         },
@@ -87,9 +85,9 @@ module.exports = (options) => {
               filters: [{ name: 'PDF', extensions: ['pdf'] }],
               defaultPath: 'Untitled.pdf'
             },
-            (fileName) => {
-              if (!fileName) return
-              options.exportPDF(fileName, focusedWindow)
+            (filename) => {
+              if (!filename) return
+              options.exportPDF(filename, focusedWindow)
             })
           }
         },

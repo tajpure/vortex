@@ -26,16 +26,16 @@ function renderMathsExpression (katex, expr) {
 }
 
 module.exports = {
-  fileNameToTitle: (fileName) => {
-    if (!fileName) return locale.AppName
-    const fileInfo = path.parse(fileName)
-    fileName = fileInfo.base
+  filenameToTitle: (filename) => {
+    if (!filename) return locale.AppName
+    const fileInfo = path.parse(filename)
+    filename = fileInfo.base
     if (fileInfo.dir) {
-      fileName = fileName + ' - ' + fileInfo.dir
+      filename = filename + ' - ' + fileInfo.dir
     }
-    return fileName
+    return filename
   },
-  titleToFileName: (title) => {
+  titleToFilename: (title) => {
     if (!title) return
     if (title.startsWith('* ')) {
       title = title.substr(2)

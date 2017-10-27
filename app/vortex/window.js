@@ -8,11 +8,11 @@ const util = require('./util.js')
 const WindowStat = require('./window_state.js')
 // const locale = require('./locale.js')
 
-module.exports = (fileName) => {
+module.exports = (filename) => {
   let isSaved = true
-  let title = util.fileNameToTitle(fileName)
+  let title = util.filenameToTitle(filename)
 
-  const state = WindowStat(fileName, {
+  const state = WindowStat(filename, {
     height: 600,
     width: 1200,
     x: 180,
@@ -37,7 +37,7 @@ module.exports = (fileName) => {
     autoHideMenuBar: true
   })
 
-  curWindow.fileName = util.titleToFileName(title)
+  curWindow.filename = util.titleToFilename(title)
 
   if (state.isMaximized) {
     curWindow.maximize()
@@ -68,32 +68,32 @@ module.exports = (fileName) => {
   curWindow.on('close', (event) => {
     if (!isSaved) {
       event.preventDefault()
-      const fileName = util.titleToFileBase(title)
+      const filename = util.titleToFileBase(title)
       dialog.showMessageBox({
         type: 'question',
         buttons: ['Save', 'Cancel', "Don't Save"],
         title: 'Save File',
-        message: "'" + fileName + "' has changes, do you want to save them?",
+        message: "'" + filename + "' has changes, do you want to save them?",
         detail: 'Your changes will be lost if you close this window without saving.'
       },
       (result) => {
         switch (result) {
           case 0: {
-            const fileName = util.titleToFileName(title)
-            if (!fileName) {
+            const filename = util.titleToFilename(title)
+            if (!filename) {
               dialog.showSaveDialog({
                 title: 'Save File',
                 filters: [{ name: 'Markdown', extensions: ['md'] }],
                 defaultPath: 'Untitled.md'
               },
-              (fileName) => {
-                if (!fileName) return
-                curWindow.webContents.send('trigger-save-file', fileName)
-                const title = util.fileNameToTitle(fileName)
+              (filename) => {
+                if (!filename) return
+                curWindow.webContents.send('trigger-save-file', filename)
+                const title = util.filenameToTitle(filename)
                 curWindow.setTitle(title)
               })
             } else {
-              curWindow.webContents.send('trigger-save-file', fileName)
+              curWindow.webContents.send('trigger-save-file', filename)
             }
             break
           }
@@ -129,7 +129,7 @@ module.exports = (fileName) => {
     get title () { return title },
     set title (value) {
       title = value
-      curWindow.fileName = util.titleToFileName(title)
+      curWindow.filename = util.titleToFilename(title)
     },
     state: state,
     get needToSave () { return !isSaved },
