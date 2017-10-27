@@ -1,7 +1,8 @@
 <template>
   <section class="slide" v-bind:class="[theme, align, show ? 'show' : 'hidden']">
     <div v-html="slide.content" class="markdown-body animated"
-    v-bind:class="[animate, theme, fullScreenMode ? 'full-screen': 'not-full-screen']">
+    v-bind:class="[animate, theme, fullScreenMode ? 'full-screen': 'not-full-screen']"
+    v-bind:style="styleObject">
     <div>
   </section>
 </template>
@@ -35,6 +36,19 @@
           // Show all the slides when under export mode.
           this.show = val ? true : this.show
         }
+      },
+      'width': {
+        handler: function (val, oldVal) {
+          if (val) {
+            const width = parseInt(val.replace('%', ''))
+            const paddind = (100 - width) / 2
+            if (paddind >= 0) {
+              this.styleObject.width = width + '%'
+              this.styleObject.paddingLeft = paddind + '%'
+              this.styleObject.paddingRight = paddind + '%'
+            }
+          }
+        }
       }
     },
     data () {
@@ -45,6 +59,12 @@
         animateInOut: {in: '', out: ''},
         theme: '',
         align: 'left',
+        width: '80%',
+        styleObject: {
+          width: '80%',
+          paddingLeft: '10%',
+          paddingRight: '10%'
+        },
         show: false,
         reverse: false
       }
@@ -86,10 +106,12 @@
           this.animateInOut = this.getAnimateInOut(metadata.animateInOut)
           this.theme = metadata.theme
           this.align = metadata.align
+          this.width = metadata.width
         } else {
           this.animateInOut = {in: '', out: ''}
           this.theme = ''
           this.align = 'left'
+          this.width = '80%'
         }
       },
       parseMetadata (index, metadata) {
@@ -99,6 +121,7 @@
           metaObj.animateInOut = obj.animate ? obj.animate : ''
           metaObj.theme = obj.theme ? obj.theme : ''
           metaObj.align = obj.align ? obj.align : 'left'
+          metaObj.width = obj.width ? obj.width : '80%'
         }
         return metaObj
       },
@@ -166,17 +189,11 @@
   }
 
   .not-full-screen {
-    width: 80%;
     font-size: 18px;
-    padding-left: 10%;
-    padding-right: 10%;
   }
 
   .full-screen {
-    width: 60%;
     font-size: 32px;
-    padding-left: 20%;
-    padding-right: 20%;
 
     .mermaid {
       font-size: 18px;
