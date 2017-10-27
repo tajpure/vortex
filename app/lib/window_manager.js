@@ -77,8 +77,8 @@ class WindowManager {
     ipcMain.on('save-file', (e, winId, filename, data) => {
       self.findWindow(winId, (curWindow) => {
         curWindow.state.lastItem = filename
+        curWindow.title = util.filenameToTitle(filename)
         curWindow.window.webContents.send('set-file-name', curWindow.title)
-        console.log(filename)
       })
       fs.writeFile(filename, data, (err) => {
         if (err) {
