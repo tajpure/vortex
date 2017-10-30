@@ -118,14 +118,14 @@
           this.align = metadata.align
           this.width = metadata.width
           this.bgImg = metadata.bgImg
-          this.fontSize = metadata.fontSize
+          this.styleObject.fontSize = metadata.fontSize
         } else {
           this.animateInOut = {in: '', out: ''}
           this.theme = ''
           this.align = 'left'
           this.width = '80%'
           this.bgImg = ''
-          this.fontSize = '32px'
+          this.styleObject.fontSize = '32px'
         }
       },
       parseMetadata (index, metadata) {
