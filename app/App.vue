@@ -24,7 +24,7 @@
       return {
         slideMode: true,
         previewFullScreenMode: false,
-        editorFullScreenMode: false,
+        editorFullScreenMode: true,
         exportMode: false
       }
     },
