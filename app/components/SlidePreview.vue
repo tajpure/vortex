@@ -134,7 +134,7 @@
         return (value === null) ? [] : html.split('<hr>')
       },
       getMetadata (value) {
-        const metaRegex = /<!--.*?-->/g
+        const metaRegex = /<!--[^]+-->/g
         if (!metaRegex.test(value) || !value) return
         return value.match(metaRegex)[0]
       }

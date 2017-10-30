@@ -50,7 +50,7 @@
           }
         }
       },
-      'bgimg': {
+      'bgImg': {
         handler: function (val, oldVal) {
           if (val) {
             this.styleObject.backgroundImage = 'url(' + val + ')'
@@ -71,9 +71,10 @@
           width: '80%',
           paddingLeft: '10%',
           paddingRight: '10%',
-          backgroundImage: ''
+          backgroundImage: '',
+          fontSize: '32px'
         },
-        bgimg: '',
+        bgImg: '',
         show: false,
         reverse: false
       }
@@ -108,7 +109,7 @@
         this.parseMetadataInContent(value)
       },
       parseMetadataInContent (value) {
-        const metaRegex = /<!--.*?-->/g
+        const metaRegex = /<!--[^]+-->/g
         const curIndex = this.slide.index
         if (metaRegex.test(value)) {
           const metadata = this.parseMetadata(curIndex, value.match(metaRegex)[0])
@@ -116,13 +117,15 @@
           this.theme = metadata.theme
           this.align = metadata.align
           this.width = metadata.width
-          this.bgimg = metadata.bgimg
+          this.bgImg = metadata.bgImg
+          this.fontSize = metadata.fontSize
         } else {
           this.animateInOut = {in: '', out: ''}
           this.theme = ''
           this.align = 'left'
           this.width = '80%'
-          this.bgimg = ''
+          this.bgImg = ''
+          this.fontSize = '32px'
         }
       },
       parseMetadata (index, metadata) {
@@ -133,7 +136,8 @@
           metaObj.theme = obj.theme ? obj.theme : ''
           metaObj.align = obj.align ? obj.align : 'left'
           metaObj.width = obj.width ? obj.width : '80%'
-          metaObj.bgimg = obj.bgimg ? obj.bgimg : ''
+          metaObj.bgImg = obj.bgImg ? obj.bgImg : ''
+          metaObj.fontSize = obj.fontSize ? obj.fontSize : '32px'
         }
         return metaObj
       },
@@ -201,15 +205,7 @@
   }
 
   .not-full-screen {
-    font-size: 18px;
-  }
-
-  .full-screen {
-    font-size: 32px;
-
-    .mermaid {
-      font-size: 18px;
-    }
+    font-size: 18px !important;
   }
 
   .mermaid {
