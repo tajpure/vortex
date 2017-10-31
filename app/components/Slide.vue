@@ -136,8 +136,8 @@
           metaObj.theme = obj.theme ? obj.theme : ''
           metaObj.align = obj.align ? obj.align : 'left'
           metaObj.width = obj.width ? obj.width : '80%'
-          metaObj.bgImg = obj.bgImg ? obj.bgImg : ''
-          metaObj.fontSize = obj.fontSize ? obj.fontSize : '32px'
+          metaObj.bgImg = obj['bg-img'] ? obj['bg-img'] : ''
+          metaObj.fontSize = obj['font-size'] ? obj['font-size'] : '32px'
         }
         return metaObj
       },
